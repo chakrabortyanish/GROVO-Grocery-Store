@@ -1,0 +1,115 @@
+.client {
+  width: 100%;
+  background-color: rgb(247, 247, 247);
+  padding: 50px 10px;
+  margin: 80px 0;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.client-container {
+  width: 100%;
+  max-width: 999px;
+  margin: 0 auto;
+}
+
+.client-container .title {
+  text-align: center;
+}
+
+.client-feedback {
+  width: 100%;
+}
+
+.custom-slider {
+  width: 100%;
+}
+
+.client-feedback img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.client-feedback .clt {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 200px;
+  height: 100%;
+  height: auto;
+  background-color: white;
+  padding: 20px 40px;
+  border-bottom-right-radius: 60px;
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.client-feedback .clt:hover {
+  background-color: rgb(172, 255, 172);
+}
+
+.clt h3 {
+  font-size: 1rem;
+}
+
+.clt .job {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.clt .feedback {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+  line-height: 22px;
+}
+
+.client-feedback .profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .clt h3 {
+    font-size: 0.9rem;
+  }
+
+  .clt .job {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .clt .feedback {
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0.8;
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .client-feedback {
+  }
+
+  .client-feedback .clt {
+    padding: 20px 20px;
+    min-height: 150px;
+  }
+
+  .clt .job {
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .clt .feedback {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+    line-height: 18px;
+  }
+}

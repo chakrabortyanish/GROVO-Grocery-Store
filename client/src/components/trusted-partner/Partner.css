@@ -1,0 +1,23 @@
+.trusted-partner {
+  width: 100%;
+  padding: 20px 50px;
+}
+
+.logo-slider img {
+  width: 120px;
+  height: 40px;
+  margin-right: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .trusted-partner {
+    width: 100%;
+    padding: 20px 7px;
+  }
+
+  .logo-slider img {
+    width: 80px;
+    height: 30px;
+    margin-right: 20px;
+  }
+}

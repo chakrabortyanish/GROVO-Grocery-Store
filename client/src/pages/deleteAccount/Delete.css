@@ -1,0 +1,27 @@
+#del-h2 {
+  color: red;
+}
+
+.SignIn {
+  background-color: rgb(255, 67, 67);
+  margin-top: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  width: 100%;
+  color: white;
+  padding: 7px 0;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.SignIn:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+#go-back {
+  display: inline-block;
+  text-align: right;
+  font-style: italic;
+  padding: 5px 10px;
+}

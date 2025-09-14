@@ -1,0 +1,122 @@
+.login-container{
+    width: 320px;
+    margin: 30px auto;
+    border: 0;
+}
+
+.heading-login {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.heading-login img {
+  width: 40px;
+}
+
+.heading-login h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5rem;
+  background: linear-gradient(
+    90deg,
+    #ff4b1f,
+    #ff9068,
+    #ffed00,
+    #00c9ff,
+    #92fe9d,
+    #f953c6
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.login-box{
+    width: 100%;
+    padding: 20px;
+    border: 2px solid rgb(103, 103, 103);
+    border-radius: 10px;
+    text-align: left;
+}
+
+.login-box h2{
+    color: rgb(81, 14, 112);
+    text-decoration: underline;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.login-box input{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(0, 0, 0);
+    display: block;
+    width: 100%;
+    border: 1px solid rgb(40, 40, 40);
+    border-radius: 7px;
+    outline: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 5px 0px 5px 10px;
+    margin-top: 5px;
+}
+
+.login-box label{
+    color: rgb(43, 43, 43);
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#Signin{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 100%;
+    color: white;
+    background-color: rgb(81, 14, 112);
+    padding: 7px 0;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#Signin:hover{
+    background-color: rgb(103, 21, 141);
+}
+
+.email{
+    margin-bottom: 13px;
+}
+
+.error{
+    height: 10px;
+    font-size: 0.9rem;
+    color: red;
+    margin: 5px 0;
+}
+
+.success{
+    height: auto;
+    color: green;
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+.login-box a{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.9rem;
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    color: rgb(0, 23, 116);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-box a:hover{
+    text-decoration: underline;
+    color: rgb(103, 21, 141);
+}

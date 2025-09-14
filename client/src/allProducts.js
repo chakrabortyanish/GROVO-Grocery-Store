@@ -1,0 +1,117 @@
+import {
+  apple,
+  chili,
+  onion,
+  tamato,
+  patato,
+  garlic,
+  ginger,
+  cucumber,
+  pack1,
+  pack3,
+  pack2,
+} from "./assets/index.js";
+
+const products = [
+  {
+    id: 1,
+    img: onion,
+    name: "Onion",
+    weight: "KG",
+    quentity: 1,
+    price: 70,
+  },
+  {
+    id: 2,
+    img: apple,
+    name: "Apple",
+    weight: "KG",
+    quentity: 1,
+    price: 100,
+  },
+  {
+    id: 3,
+    img: chili,
+    name: "Chili",
+    weight: "KG",
+    quentity: 1,
+    price: 50,
+  },
+  {
+    id: 4,
+    img: tamato,
+    name: "Tomato",
+    weight: "KG",
+    quentity: 1,
+    price: 90,
+  },
+  {
+    id: 5,
+    img: patato,
+    name: "Potato",
+    weight: "KG",
+    quentity: 1,
+    price: 70,
+  },
+  {
+    id: 6,
+    img: garlic,
+    name: "Garlic",
+    weight: "KG",
+    quentity: 1,
+    price: 60,
+  },
+  {
+    id: 7,
+    img: cucumber,
+    name: "Cucumber",
+    weight: "KG",
+    quentity: 1,
+    price: 50,
+  },
+  {
+    id: 8,
+    img: ginger,
+    name: "Ginger",
+    weight: "KG",
+    quentity: 1,
+    price: 100,
+  },
+];
+
+const bundle_products = [
+  {
+    id: 11,
+    img: pack1,
+    name: "Small Pack",
+    quentity: 1,
+    price: 500,
+    des: "Lemon, Tomato, Potato,+2",
+  },
+  {
+    id: 12,
+    img: pack2,
+    name: "Large Pack",
+    quentity: 1,
+    price: 580,
+    des: "Lemon, Tomato, Potato,+3",
+  },
+  {
+    id: 13,
+    img: pack3,
+    name: "Big Pack",
+    quentity: 1,
+    price: 650,
+    des: "Lemon, Tomato, Potato,+10",
+  },
+  {
+    id: 14,
+    img: pack1,
+    name: "Small Pack",
+    quentity: 1,
+    price: 500,
+    des: "Lemon, Tomato, Potato,+2",
+  },
+];
+
+export { products, bundle_products };
