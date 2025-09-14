@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use(cors()); // Allows all origins
 // OR restrict to specific origin
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: 'https://grovo-grocery-store.vercel.app' }));
 
 dbConnection();
 
