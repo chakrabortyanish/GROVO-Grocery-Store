@@ -5,7 +5,7 @@ const signUpValidation = (req,res, next)=>{
         firstName: Joi.string().min(3).max(60).required(),
         lastName: Joi.string().min(3).max(60),
         email: Joi.string().email().required(),
-        password: Joi.string().min(4).max(60).required(),
+        password: Joi.string().min(6).max(60).required(),
     });
 
     const {error} = schema.validate(req.body); // destructure
@@ -20,7 +20,7 @@ const signUpValidation = (req,res, next)=>{
 const logInValidation = (req, res, next)=>{
     const schema = Joi.object({
         email: Joi.string().email().required(),
-        password: Joi.string().min(4).max(60).required(),
+        password: Joi.string().min(6).max(60).required(),
     });
 
     const {error} = schema.validate(req.body); // destructure

@@ -29,7 +29,7 @@ const SignUp = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = "First name is required.";
+    if (!formData.firstName) newErrors.firstName = "Fullname name is required.";
     if (!formData.email) newErrors.email = "Email is required.";
     if (!formData.password) newErrors.password = "Password is required.";
     else if (formData.password.length < 6)
