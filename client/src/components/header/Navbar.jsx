@@ -19,7 +19,6 @@ const Navbar = () => {
 
   const username = localStorage.getItem("Username");
   const { cartCount } = useContext(CartContext);
-  console.log(cartCount)
 
   const navigate = useNavigate();
   const handleLogout = () => {

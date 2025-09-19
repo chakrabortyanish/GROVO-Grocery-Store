@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Delete.css";
 import "../logIn/LogIn.css";
@@ -10,8 +10,12 @@ import Swal from "sweetalert2";
 
 import store_icon from "../../assets/image.png";
 
+import { CartContext } from "../../components/contextAPI/cartContext.jsx";
+
 const Delete = () => {
   const navigate = useNavigate();
+
+  const { setCartCount } = useContext(CartContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -58,6 +62,7 @@ const Delete = () => {
     if (success) {
       localStorage.removeItem("Username");
       localStorage.removeItem("items");
+      setCartCount(0); 
       toast.success(message, {
         position: "top-right",
         autoClose: 1000,
