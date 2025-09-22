@@ -164,6 +164,12 @@ header {
   text-decoration: none;
 }
 
+.username {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
 .account-container {
   position: relative;
   display: inline-block;

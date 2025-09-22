@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BsCart3 } from "react-icons/bs";
 import store_icon from "../../assets/image.png";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 
 import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 
@@ -121,7 +122,7 @@ const Navbar = () => {
       <div className="right-side">
         <div className="account-container">
           <div className="acc">
-            {username ? username : <Link to="/login">Sign In</Link>}
+            {username ? <div className="username">{username}<MdOutlineArrowDropDown size={20}/></div> : <Link to="/login">Sign In</Link>}
           </div>
           <div className="mg-acc">
             {username && (
