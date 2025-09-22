@@ -22,9 +22,7 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log(name, value, e.target)
     setFormData({ ...formData, [name]: value });
-    // console.log({ [name]: value })
   };
 
   const validate = () => {
@@ -39,7 +37,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", formData);
+    // console.log("Submitting:", formData);
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       console.log(validationErrors);
@@ -78,11 +76,14 @@ const SignUp = () => {
       }
     } else {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/signup`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/user/signup`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          }
+        );
         const result = await response.json();
         const { message, success } = result;
         if (success) {
@@ -120,7 +121,6 @@ const SignUp = () => {
           theme: "colored",
         });
       }
-      // console.log("Form Data Submitted:", formData);
     }
   };
   return (
@@ -139,7 +139,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   name="firstName"
-                  value={formData.firstName}
+                  value={formData.firstName.toLowerCase()}
                   onChange={handleChange}
                 />
               </div>
@@ -148,7 +148,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   name="lastName"
-                  value={formData.lastName}
+                  value={formData.lastName.toLowerCase()}
                   onChange={handleChange}
                 />
               </div>
