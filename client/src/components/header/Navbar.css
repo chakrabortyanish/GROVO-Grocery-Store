@@ -183,6 +183,15 @@ header {
   z-index: 999;
 }
 
+.mg-acc .fullname{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(0, 140, 0);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
 .account-container:hover .mg-acc {
   display: block; /* show only when .acc is hovered */
 }

@@ -18,7 +18,8 @@ const Navbar = () => {
   const menuRef = useRef(null);
   const iconRef = useRef(null);
 
-  const username = localStorage.getItem("Username");
+  const username = localStorage.getItem("Username") || "";
+  const [firstName, lastName] = username.split(" ");
   const { cartCount } = useContext(CartContext);
 
   const navigate = useNavigate();
@@ -122,11 +123,12 @@ const Navbar = () => {
       <div className="right-side">
         <div className="account-container">
           <div className="acc">
-            {username ? <div className="username">{username}<MdOutlineArrowDropDown size={20}/></div> : <Link to="/login">Sign In</Link>}
+            {username ? <div className="username">{firstName}<MdOutlineArrowDropDown size={20}/></div> : <Link to="/login">Sign In</Link>}
           </div>
           <div className="mg-acc">
             {username && (
               <div className="mg-content">
+                <div className="fullname">{username}</div>
                 <button id="logout" onClick={handleLogout}>
                   Logout
                 </button>
