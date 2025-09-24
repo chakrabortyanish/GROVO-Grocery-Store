@@ -27,7 +27,8 @@ const SignUp = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = "Fullname name is required.";
+    if (!formData.firstName) newErrors.firstName = "Firstname is required.";
+    if (!formData.lastName) newErrors.lastName = "Lastname is required.";
     if (!formData.email) newErrors.email = "Email is required.";
     if (!formData.password) newErrors.password = "Password is required.";
     else if (formData.password.length < 6)
@@ -40,9 +41,20 @@ const SignUp = () => {
     // console.log("Submitting:", formData);
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
-      console.log(validationErrors);
+      // console.log(validationErrors);
       if (validationErrors.firstName) {
         toast.warning(validationErrors.firstName, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+        });
+      }
+      if (validationErrors.lastName) {
+        toast.warning(validationErrors.lastName, {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
