@@ -25,7 +25,6 @@ const Products = () => {
     const storedItems = JSON.parse(localStorage.getItem("items")) || [];
 
     let validateItem = storedItems.find((item) => String(item.id) == productId);
-    console.log(validateItem);
     if (validateItem) {
       toast.warning("Product already added!", {
         position: "top-right",

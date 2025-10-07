@@ -9,6 +9,14 @@ import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 import "./Cart.css";
 
 const Cart = () => {
+  const [cartItems, setCartItems] = useState([]);
+
+  // Load data from localStorage when component mounts
+   useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("items")) || [];
+    setCartItems(stored);
+  }, []);
+
   const navigate = useNavigate();
   const { setCartCount } = useContext(CartContext);
 
@@ -19,16 +27,9 @@ const Cart = () => {
     }, 1000);
     return;
   }
-  const [cartItems, setCartItems] = useState([]);
-
-  // Load data from localStorage when component mounts
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("items")) || [];
-    setCartItems(stored);
-  }, []);
 
   const handleRemove = (id) => {
-    console.log(id.typeof);
+    // console.log(id.typeof);
     const updatedItems = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedItems);
     localStorage.setItem("items", JSON.stringify(updatedItems));

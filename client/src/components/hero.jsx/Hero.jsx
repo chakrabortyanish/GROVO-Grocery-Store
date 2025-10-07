@@ -4,8 +4,6 @@ import Navbar from "../header/Navbar";
 
 import Slider from "react-slick";
 
-import { toast, ToastContainer } from "react-toastify";
-
 import { IoSearch } from "react-icons/io5";
 import { bg1, bg2, bg } from "../../assets/index.js";
 
@@ -79,7 +77,6 @@ const Hero = () => {
           </div>
         </div>
       )}
-      <ToastContainer />
     </div>
   );
 };
