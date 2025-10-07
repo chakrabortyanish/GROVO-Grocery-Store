@@ -17,8 +17,8 @@ const SignUp = () => {
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
+  /* const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState(""); */
 
   const handleChange = (e) => {
     const { name, value } = e.target;

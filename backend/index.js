@@ -12,9 +12,12 @@ const PORT = process.env.PORT || 8000;
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
-app.use(cors()); // Allows all origins
-// OR restrict to specific origin
-app.use(cors({ origin: 'https://grovo-grocery-store.vercel.app' }));
+app.use(
+  cors({
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 dbConnection();
 
