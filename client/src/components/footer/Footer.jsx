@@ -45,12 +45,12 @@ const Footer = () => {
               <LuPhone /> +91 11067738422
             </li>
             <li className="flex-link">
-              <HiOutlineMail /> Grovo@gmail.com
+              <HiOutlineMail /> grovo@gmail.com
             </li>
             <li>Cities we serve</li>
           </ul>
         </div>
-        <div className="copy-right">Copyright ©2025 | All Rights Reserved</div>
+        <div className="copy-right">Copyright ©2025 | All Rights Reserved | Designed by <span style={{color: "yellow"}}>Anish Chakraborty</span></div>
       </div>
     </div>
   );
