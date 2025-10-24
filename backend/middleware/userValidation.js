@@ -1,3 +1,5 @@
+// I can use this code to validate user input for sign-up and log-in routes in an Express.js application. 
+
 import Joi  from "joi";
 
 const signUpValidation = (req,res, next)=>{
@@ -13,7 +15,7 @@ const signUpValidation = (req,res, next)=>{
     if(error){
         return res.status(400).json({ message : "Bad request", error})
     }
-
+ 
     next();
 }
 
