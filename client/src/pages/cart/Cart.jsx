@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+import { jwtDecode } from "jwt-decode";
+
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,8 +22,10 @@ const Cart = () => {
   const navigate = useNavigate();
   const { setCartCount } = useContext(CartContext);
 
-  const username = localStorage.getItem("Username");
-  if (!username) {
+  const token = localStorage.getItem("token");
+  const { firstName } = token ? jwtDecode(token) : {};
+
+  if (!token) {
     setTimeout(() => {
       navigate("/login");
     }, 1000);
@@ -187,7 +191,7 @@ const Cart = () => {
             <div className="checkout-box">
               <div className="checkout-info">
                 <h2>
-                  Name: <span>{username}</span>
+                  Name: <span>{firstName}</span>
                 </h2>
                 <p className="total-pro">
                   Total products: <span>{cartItems.length}</span>

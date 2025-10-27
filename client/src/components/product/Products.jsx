@@ -15,7 +15,7 @@ const Products = () => {
 
   let handleCart = (e) => {
     const productId = String(e.currentTarget.id);
-    const username = localStorage.getItem("Username");
+    const username = localStorage.getItem("token");
     if (!username) {
       setTimeout(() => {
         navigate("/login");

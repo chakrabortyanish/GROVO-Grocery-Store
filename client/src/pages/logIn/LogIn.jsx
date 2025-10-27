@@ -32,14 +32,15 @@ const LogIn = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
+      credentials: "include"
     });
     const result = await response.json();
-    // console.log(result);
-    const { message, success, Name } = result;
+    console.log('Result: ',result);
+    const { message, success , token} = result;
     // console.log(Name);
     // alert(message);
     if (success) {
-      localStorage.setItem("Username", Name);
+      localStorage.setItem("token", token);
       toast.success(message, {
         position: "top-right",
         autoClose: 1000,

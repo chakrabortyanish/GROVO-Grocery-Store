@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import "./Navbar.css";
 
+import { jwtDecode } from "jwt-decode";
+
 import { useNavigate, Link } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
@@ -18,13 +20,32 @@ const Navbar = () => {
   const menuRef = useRef(null);
   const iconRef = useRef(null);
 
-  const username = localStorage.getItem("Username") || "";
-  const [firstName, lastName] = username.split(" ");
+  const token = localStorage.getItem("token") || "";
+  if (token) {
+    var decodedToken = jwtDecode(token);
+  }
+  const { firstName, lastName } = decodedToken || {};
+  // const [firstName, lastName] = username.split(" ");
   const { cartCount } = useContext(CartContext);
 
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("Username");
+  const handleLogout = async () => {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
+      method: "POST",
+      credentials: "include"
+    });
+
+    const data = await res.json();
+    console.log("logout res: ",data);
+    const { message, success } = data;
+    if (!success) {
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 2000,  });
+      return;
+    }
+
+    localStorage.removeItem("token");
     toast.success("Logged out successfully", {
       position: "top-right",
       autoClose: 2000,
@@ -123,12 +144,19 @@ const Navbar = () => {
       <div className="right-side">
         <div className="account-container">
           <div className="acc">
-            {username ? <div className="username">{firstName}<MdOutlineArrowDropDown size={20}/></div> : <Link to="/login">Sign In</Link>}
+            {firstName ? (
+              <div className="username">
+                {firstName}
+                <MdOutlineArrowDropDown size={20} />
+              </div>
+            ) : (
+              <Link to="/login">Sign In</Link>
+            )}
           </div>
           <div className="mg-acc">
-            {username && (
+            {firstName && (
               <div className="mg-content">
-                <div className="fullname">{username}</div>
+                <div className="fullname">{`${firstName} ${lastName}`}</div>
                 <button id="logout" onClick={handleLogout}>
                   Logout
                 </button>

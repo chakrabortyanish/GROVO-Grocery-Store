@@ -60,7 +60,7 @@ const Delete = () => {
     // console.log(Name);
     // alert(message);
     if (success) {
-      localStorage.removeItem("Username");
+      localStorage.removeItem("token");
       localStorage.removeItem("items");
       setCartCount(0); 
       toast.success(message, {
