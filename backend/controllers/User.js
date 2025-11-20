@@ -62,8 +62,8 @@ const signInUser = async (req, res) => {
     const options = {
       httpOnly: true,
       /* secure: process.env.NODE_ENV === "production", // only true in production */
-      secure: false,
-      sameSite: "lax",
+      secure: true, // Required for HTTPS (Render)
+      sameSite: "none", // Required for cross-site cookies (Vercel -> Render)
     };
 
     return res.status(200).cookie("token", token, options).json({
@@ -71,14 +71,17 @@ const signInUser = async (req, res) => {
       success: true,
       token,
     });
-  } catch (error) { 
+  } catch (error) {
     return res.status(500).json({ message: "Internal server error", error });
   }
 };
 
 const logOutUser = (req, res) => {
   console.log("Verified User: ", req.user.firstName);
-  return res.status(200).clearCookie("token").json({ message: "Logout successful", success: true, });
+  return res
+    .status(200)
+    .clearCookie("token")
+    .json({ message: "Logout successful", success: true });
 };
 
 const deleteUser = async (req, res) => {
@@ -101,9 +104,9 @@ const deleteUser = async (req, res) => {
     await User.deleteOne({ email });
 
     return res
-    .status(200)
-    .clearCookie("token")
-    .json({ message: "Account deleted successfully!", success: true });
+      .status(200)
+      .clearCookie("token")
+      .json({ message: "Account deleted successfully!", success: true });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
