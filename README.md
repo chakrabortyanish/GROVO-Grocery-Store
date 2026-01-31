@@ -2,7 +2,7 @@
 Grovo Grocery Store is a modern, full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) that provides users with a smooth online grocery shopping experience. The platform allows customers to browse grocery items by category, search for products, add them to the cart, and manage their orders seamlessly.
 Designed with a clean and responsive user interface, Grovo Grocery Store ensures accessibility across desktop and mobile devices. User authentication is implemented with secure JWT-based login and signup, enabling personalized shopping. The backend is connected to MongoDB Atlas, and the entire application is deployed on Vercel for fast, reliable, and scalable performance.
 
-📌Project Link: https://grovo-grocery-store.vercel.app/
+## 📌Project Link: https://grovo-grocery-store.vercel.app/
 
 🚀 Technologies Used <br>
 💻 Frontend<br>
