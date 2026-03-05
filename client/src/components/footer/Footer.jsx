@@ -18,12 +18,12 @@ const Footer = () => {
               <img src={store_icon} alt="store_icon" />
               <span>Grovo</span>
             </li>
-            <li className="images-link">
+            <div className="images-link">
               <img src={twitter} alt="twitter" />
               <img src={instagram} alt="instragram" />
               <img src={facebook} alt="facebook" />
               <img src={youtube} alt="youtube" />
-            </li>
+            </div>
           </ul>
           <ul className="links">
             <li className="head">Product</li>
