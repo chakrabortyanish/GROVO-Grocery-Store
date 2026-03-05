@@ -102,9 +102,9 @@
   font-weight: 400;
   width: 100%;
   text-align: right;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: white;
-  margin-top: 25px;
+  margin-top: 60px;
 }
 
 @media screen and (max-width: 768px) {
