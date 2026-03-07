@@ -186,10 +186,11 @@ header {
 .mg-acc .fullname{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: rgb(0, 140, 0);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 8px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .account-container:hover .mg-acc {
@@ -197,7 +198,7 @@ header {
 }
 
 .account-container .mg-content {
-  width: 200px;
+  width: 250px;
   height: auto;
   padding: 20px;
   background-color: rgb(250, 250, 250);
@@ -211,7 +212,7 @@ header {
 
 .account-container button{
    width: 100%;
-   padding: 5px;
+   padding: 10px;
    font-size: 0.9rem;
    font-family: "Roboto", sans-serif;
    font-weight: 500;
