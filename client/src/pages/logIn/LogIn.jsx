@@ -35,7 +35,7 @@ const LogIn = () => {
       credentials: "include"
     });
     const result = await response.json();
-    console.log('Result: ',result);
+    // console.log('Result: ',result);
     const { message, success , token} = result;
     // console.log(Name);
     // alert(message);
@@ -54,7 +54,7 @@ const LogIn = () => {
         navigate("/");
       }, 1000);
     } else {
-      console.log("wrong", message);
+      // console.log("wrong", message);
       toast.warning(message, {
         position: "top-right",
         autoClose: 2000,

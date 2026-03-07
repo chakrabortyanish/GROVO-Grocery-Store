@@ -53,13 +53,26 @@
   width: 100%;
 }
 
-.product-container {
-  width: 700px;
-  padding: 20px 7px;
-  border-radius: 7px;
-  margin-bottom: 15px;
-  box-shadow: 0 0px 8px rgba(33, 33, 33, 0.2);
-  overflow: hidden;
+.product-container{
+  width:700px;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom: 10px;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+  0 8px 20px rgba(0,0,0,0.08);
+
+  transition:all .35s ease;
+}
+
+.product-container:hover{
+  transform:translateY(-8px);
+  box-shadow:
+  0 18px 35px rgba(0,0,0,0.15);
 }
 
 .product-container:hover .cart-item img{
@@ -91,53 +104,62 @@
   margin-top: 10px;
 }
 
-.right-box {
-  position: absolute;
-  right: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: end;
-  padding: 0 20px;
+.right-box{
+  position:absolute;
+  right:0;
+  top:0;
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:flex-end;
+  z-index: 50;
 }
 
-.right-box p {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
+.right-box p{
+  font-size:1.4rem;
+  font-weight:700;
 }
 
-.right-box button {
-  font-size: 0.8rem;
-  color: rgb(255, 255, 255);
-  padding: 3px 15px;
-  background-color: rgb(188, 0, 0);
-  border-radius: 5px;
-  cursor: pointer;
+
+/* start of delete button */
+.right-box button{
+  border:none;
+  padding:7px 16px;
+
+  background:#ef4444;
+  color:white;
+
+  border-radius:8px;
+  cursor:pointer;
+
+  transition:all .25s ease;
 }
 
-.right-box button:hover {
-  background-color: rgb(255, 0, 0);
+.right-box button:hover{
+  background:#dc2626;
+  transform:scale(1.1);
 }
 
-.product-info {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* end of delete button */
+
+.product-info{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:100%;
+  z-index: 100;
 }
 
-.product-info h3 {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.3rem;
-  margin-bottom: 5px;
+.product-info h3{
+  font-size:1.35rem;
+  font-weight:700;
 }
 
-.product-info p {
-  font-size: 0.8rem;
-  color: rgb(66, 66, 66);
-  font-weight: 500;
+.stock{
+  color:#16a34a;
+  font-weight:600;
 }
 
 .product-info .stock{
@@ -145,27 +167,37 @@
 }
 
 .checkout-box {
-  min-width: 250px;
-  height: 220px;
-  padding: 20px;
-  border: 3px dotted;
-  border-radius: 10px;
-  display: flex;
-  border-right-color: #00ffff;
-  border-left-color: #00ffff;
-  border-top-color: #f700ff;
-  border-bottom-color: #f700ff;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 30px;
+ min-width:260px;
+  height:240px;
+
+  border-radius:18px;
+  padding:25px;
+
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+
+  color:white;
+
+  box-shadow:0 15px 35px rgba(99,102,241,0.35);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  transition:all .35s ease;
 }
 
-.checkout-info h2 {
-  font-size: 1.5rem;
+.checkout-box:hover{
+  transform:translateY(-10px);
+  box-shadow:0 25px 50px rgba(99,102,241,0.45);
 }
 
-.checkout-info p {
-  font-size: 1.1rem;
+.checkout-info h2{
+  font-size:1.5rem;
+}
+
+.checkout-info p{
+  font-size:1.1rem;
+  margin-top:5px;
 }
 
 .total-pro {
@@ -180,11 +212,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid yellow;
   border-radius: 20px;
-  padding: 0 8px; /* spacing inside */
-  background: white; /* keep center clean */
+  padding: 0 10px; /* spacing inside */
+   background:#f1f5f9;
+/* keep center clean */
   margin-top: 10px;
+  box-shadow:
+  inset 2px 2px 4px rgba(0,0,0,0.1),
+  inset -2px -2px 4px rgba(255,255,255,0.7);
+  z-index: 100;
+
 }
 
 .set-qty button {
@@ -194,7 +231,7 @@
   height: 24px;
   width: 24px;
   font-size: 1.2rem;
-  box-shadow: 0 0px 2px rgba(20, 20, 20, 0.2);
+   box-shadow:0 3px 8px rgba(0,0,0,0.15);
   background: white;  /* ✅ no yellow fill */
   border-radius: 50%;
   cursor: pointer;
@@ -203,31 +240,42 @@
 }
 
 .set-qty button:hover {
-  background: yellow;
-  color: black;
-  transform: scale(1.1);
-  transition: 0.2s;
-  box-shadow: none;
+  background:#8284ff;
+  color:white;
+  transform:scale(1.15);
 }
 
 
-.checkout-box button {
-  font-size: 1.1rem;
-  color: white;
-  font-weight: 600;
-  width: 100%;
-  padding: 5px 0;
-  background-color: rgb(73, 73, 255);
-  border-radius: 20px;
-  cursor: pointer;
+/* CHECKOUT BUTTON */
+
+.checkout-box button{
+
+  padding:10px;
+  border-radius:30px;
+
+  border:none;
+
+  background:white;
+  color:#6366f1;
+
+  font-weight:700;
+  font-size:1rem;
+
+  cursor:pointer;
+
+  transition:all .25s ease;
 }
 
-.checkout-box button:hover {
-  background-color: rgb(18, 18, 142);
+.checkout-box button:hover{
+
+  transform:scale(1.05);
+  background:#f3f4f6;
+
 }
+
 
 .checkout-box h2 span {
-  color: blueviolet;
+  color: rgb(94, 255, 0);
 }
 
 .checkout-box p span {

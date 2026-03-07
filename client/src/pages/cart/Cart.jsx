@@ -138,6 +138,7 @@ const Cart = () => {
                           )}
                           <div className="set-qty">
                             <button
+                            id="dec"
                               className="dec"
                               onClick={() => decrease(item.id)}
                             >
