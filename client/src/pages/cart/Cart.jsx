@@ -9,12 +9,30 @@ import "react-toastify/dist/ReactToastify.css";
 import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 
 import "./Cart.css";
+import store_icon from "../../assets/image.png";
+
+import Footer from "../../components/footer/Footer.jsx";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
+  const [showAddressForm, setShowAddressForm] = useState(false);
+
+  const [address, setAddress] = useState(() => {
+    return (
+      JSON.parse(localStorage.getItem("deliveryAddress")) || {
+        /* fullName: firstName || "", */
+        area: "",
+        city: "",
+        state: "",
+        pin: "",
+        phone: "",
+      }
+    );
+  });
+
   // Load data from localStorage when component mounts
-   useEffect(() => {
+  useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("items")) || [];
     setCartItems(stored);
   }, []);
@@ -23,7 +41,7 @@ const Cart = () => {
   const { setCartCount } = useContext(CartContext);
 
   const token = localStorage.getItem("token");
-  const { firstName } = token ? jwtDecode(token) : {};
+  const { firstName, lastName } = token ? jwtDecode(token) : {};
 
   if (!token) {
     setTimeout(() => {
@@ -51,10 +69,11 @@ const Cart = () => {
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + Number(item.price) * item.quentity,
-    0
+    0,
   );
 
   function handleCheckout() {
+    navigate("/checkout");
     localStorage.removeItem("items");
     setCartItems([]);
     setCartCount(0);
@@ -104,14 +123,38 @@ const Cart = () => {
     localStorage.setItem("items", JSON.stringify(updatedItems));
   };
 
+  const handleAddressChange = (e) => {
+    setAddress({
+      ...address,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const saveAddress = () => {
+    localStorage.setItem("deliveryAddress", JSON.stringify(address));
+
+    toast.success("Address Updated Successfully");
+
+    setShowAddressForm(false);
+  };
+
   return (
     <div className="main-cart-container">
-      <h2 className="header-name">
-        <span>
-          Shop<span>ping</span>
-        </span>{" "}
-        Cart
-      </h2>
+      {/* NAVBAR */}
+      <nav className="cart-navbar">
+        <div className="nav-container">
+          <div className="logo">
+            <img src={store_icon} alt="Grovo" />
+            <h1>Grovo</h1>
+          </div>
+
+          <div className="nav-right">
+            <p>Hello, {firstName}</p>
+            <Link to="/">Continue Shopping</Link>
+          </div>
+        </div>
+      </nav>
+
       <div className="cart-container">
         {cartItems.length === 0 ? (
           <div className="empty-cart">
@@ -121,6 +164,103 @@ const Cart = () => {
         ) : (
           <div className="cart-items">
             <div className="cart-items-container">
+              {/* ADDRESS SECTION */}
+
+              <div className="address-box">
+                <div className="address-top">
+                  <div>
+                    <h3>Delivery Address</h3>
+
+                    <p style={{"fontWeight":500}}>{firstName} {lastName}</p>
+
+                    <p>
+                      {address.area || "Your Area"},{" "}
+                      {address.city || "Your City"}
+                    </p>
+
+                    <p>
+                      {address.state || "West Bengal"} -{" "}
+                      {address.pin || "700001"}
+                    </p>
+
+                    <p>{address.phone || "+91 0000000000"}</p>
+                  </div>
+
+                  <button onClick={() => setShowAddressForm(true)}>
+                    Change
+                  </button>
+                </div>
+              </div>
+
+              {/* ADDRESS MODAL */}
+
+              {showAddressForm && (
+                <div className="address-modal">
+                  <div className="address-form">
+                    <h2>Update Address</h2>
+
+                    {/* <input
+                      type="text"
+                      name="fullName"
+                      placeholder="Full Name"
+                      value={address.fullName}
+                      onChange={handleAddressChange}
+                    /> */}
+
+                    <input
+                      type="text"
+                      name="area"
+                      placeholder="Area"
+                      value={address.area}
+                      onChange={handleAddressChange}
+                    />
+
+                    <input
+                      type="text"
+                      name="city"
+                      placeholder="City"
+                      value={address.city}
+                      onChange={handleAddressChange}
+                    />
+
+                    <input
+                      type="text"
+                      name="state"
+                      placeholder="State"
+                      value={address.state}
+                      onChange={handleAddressChange}
+                    />
+
+                    <input
+                      type="text"
+                      name="pin"
+                      placeholder="Pin Code"
+                      value={address.pin}
+                      onChange={handleAddressChange}
+                    />
+
+                    <input
+                      type="text"
+                      name="phone"
+                      placeholder="Phone Number"
+                      value={address.phone}
+                      onChange={handleAddressChange}
+                    />
+
+                    <div className="address-btns">
+                      <button onClick={saveAddress}>Save Address</button>
+
+                      <button
+                        className="cancel-btn"
+                        onClick={() => setShowAddressForm(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {cartItems.map((item, i) => (
                 <div className="product-container" key={i}>
                   <div className="cart-item">
@@ -138,7 +278,7 @@ const Cart = () => {
                           )}
                           <div className="set-qty">
                             <button
-                            id="dec"
+                              id="dec"
                               className="dec"
                               onClick={() => decrease(item.id)}
                             >
@@ -207,6 +347,9 @@ const Cart = () => {
         )}
       </div>
       <ToastContainer />
+      <div style={{"marginTop":"60px"}}>
+        <Footer/>
+      </div>
     </div>
   );
 };
