@@ -6,6 +6,7 @@
 .main-cart-container {
   font-family: "Roboto", sans-serif;
   width: 100%;
+  min-height: 100vh;
 }
 
 
@@ -76,6 +77,7 @@
 .empty-cart {
   width: 100%;
   text-align: center;
+  margin: 50px 0;
 }
 
 .empty-cart h2 {
