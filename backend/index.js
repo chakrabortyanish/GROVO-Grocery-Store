@@ -16,7 +16,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || "http://localhost:5174",
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -26,5 +26,9 @@ app.use(
 dbConnection();
 
 app.use("/user", router);
+
+// Order Routes
+import orderRoutes from "./routes/order.route.js";
+app.use("/api/orders", orderRoutes);
 
 app.listen(PORT, () => console.log(`Server started at PORT : ${PORT}`));
