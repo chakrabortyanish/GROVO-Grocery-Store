@@ -149,7 +149,7 @@ const Cart = () => {
           </div>
 
           <div className="nav-right">
-            <p>Hello, {firstName}</p>
+            <p>Hello, <strong>{firstName}</strong></p>
             <Link to="/">Continue Shopping</Link>
           </div>
         </div>
