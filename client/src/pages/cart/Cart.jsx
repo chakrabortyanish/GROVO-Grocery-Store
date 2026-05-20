@@ -73,8 +73,8 @@ const Cart = () => {
   );
 
   function handleCheckout() {
-    navigate("/checkout");
-    localStorage.removeItem("items");
+    navigate("/payment");
+    /* localStorage.removeItem("items");
     setCartItems([]);
     setCartCount(0);
     toast.success("Order Confirmed!", {
@@ -85,7 +85,7 @@ const Cart = () => {
       pauseOnHover: true,
       draggable: true,
       theme: "colored",
-    });
+    }); */
   }
 
   const decrease = (id) => {

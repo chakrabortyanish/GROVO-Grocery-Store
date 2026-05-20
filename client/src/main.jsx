@@ -9,6 +9,18 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 
 import { CartProvider } from './components/contextAPI/cartContext.jsx'
 
+// Stripe imports
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+import CheckoutForm from './pages/checkout/CheckoutForm.jsx'
+import Payment from './pages/checkout/Payment.jsx'
+
+const stripePromise = loadStripe(
+  import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+);
+
+// Router setup
 const Router = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -17,13 +29,16 @@ const Router = createBrowserRouter(
         <Route path='/login' element={<LogIn/>}></Route>
         <Route path='/delete' element={<Delete/>}></Route>
         <Route path='/cart' element={<Cart/>}></Route>
+        <Route path='/payment' element={<Payment/>}></Route>
       </>
     )
   )
 
 
 createRoot(document.getElementById('root')).render(
-  <CartProvider>
-    <RouterProvider router={Router} />
-  </CartProvider>
+  <Elements stripe={stripePromise}>
+    <CartProvider>
+      <RouterProvider router={Router} />
+    </CartProvider>
+  </Elements>
 )
