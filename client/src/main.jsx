@@ -13,7 +13,6 @@ import { CartProvider } from './components/contextAPI/cartContext.jsx'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-import CheckoutForm from './pages/checkout/CheckoutForm.jsx'
 import Payment from './pages/checkout/Payment.jsx'
 
 const stripePromise = loadStripe(
