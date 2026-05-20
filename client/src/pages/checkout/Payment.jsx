@@ -81,7 +81,7 @@ const Payment = () => {
     });
   };
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
 
     const { cardName, cardNumber, expiry, cvv } = cardData;
@@ -96,13 +96,56 @@ const Payment = () => {
       return;
     }
 
-    toast.success("Payment Successful");
+    try {
+    // GET CART ITEMS
+    const items =
+      JSON.parse(localStorage.getItem("items")) || [];
 
-    localStorage.removeItem("items");
-    setCartCount(0);
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 2000);
+    // GET ADDRESS
+    const address =
+      JSON.parse(localStorage.getItem("deliveryAddress")) || {};
+  console.log(address, items, totalPrice);
+    // TOKEN
+    const token = localStorage.getItem("token");
+
+    // SEND TO BACKEND
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/orders/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+
+        },
+        body: JSON.stringify({
+          items,
+          address,
+          totalAmount: totalPrice,
+          paymentMethod: "Card",
+          paymentStatus: "Paid",
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      toast.success("Payment Successful");
+
+      localStorage.removeItem("items");
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    console.log(error);
+
+    toast.error("Payment Failed");
+  }
   };
 
   return (
