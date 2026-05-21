@@ -159,9 +159,18 @@ header {
   background-size: 200% 200%;
 }
 
-.acc a {
-  color: white;
+.sign-in {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #3340fc;
   text-decoration: none;
+  padding: 5px 10px;
+}
+
+.sign-in:hover {
+  color: #0011ff;
 }
 
 .username {

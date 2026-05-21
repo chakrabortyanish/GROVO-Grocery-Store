@@ -20,6 +20,7 @@
   align-items:flex-start;
 }
 
+
 /* LEFT */
 
 .payment-left{
@@ -30,8 +31,24 @@
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-.payment-left h2{
+.payment-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
   margin-bottom:25px;
+}
+
+.payment-header button{
+  width:35px;
+  height:35px;
+  border:none;
+  border-radius:50%;
+  background:#f2f2f2;
+  font-size:1.2rem;
+  cursor:pointer;
+}
+
+.payment-left h2{
   font-size:2rem;
 }
 

@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import "./Navbar.css";
 
-import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
 
-import { useNavigate, Link } from "react-router-dom";
-
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { BsCart3 } from "react-icons/bs";
@@ -13,35 +10,32 @@ import store_icon from "../../assets/image.png";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 
+import { FaRegUserCircle } from "react-icons/fa";
+
 import { CartContext } from "../../components/contextAPI/cartContext.jsx";
+import UserMenu from "../userMenu/UserMenu.jsx";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const iconRef = useRef(null);
 
-  const token = localStorage.getItem("token") || "";
-  if (token) {
-    var decodedToken = jwtDecode(token);
-  }
-  const { firstName, lastName } = decodedToken || {};
-  // const [firstName, lastName] = username.split(" ");
   const { cartCount } = useContext(CartContext);
 
-  const navigate = useNavigate();
-  const handleLogout = async () => {
+  /* const handleLogout = async () => {
     const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
       method: "POST",
-      credentials: "include"
+      credentials: "include",
     });
 
     const data = await res.json();
-    console.log("logout res: ",data);
+    // console.log("logout res: ", data);
     const { message, success } = data;
     if (!success) {
       toast.error(message, {
         position: "top-right",
-        autoClose: 2000,  });
+        autoClose: 2000,
+      });
       return;
     }
 
@@ -63,7 +57,7 @@ const Navbar = () => {
 
   const handleDeleteAccount = () => {
     navigate("/delete");
-  };
+  }; */
 
   // Handle click outside
   useEffect(() => {
@@ -142,7 +136,8 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="right-side">
-        <div className="account-container">
+        <UserMenu />
+        {/* <div className="account-container">
           <div className="acc">
             {firstName ? (
               <div className="username">
@@ -166,7 +161,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
         <Link to="/cart">
           <div className="cart">
             <span>{cartCount}</span>

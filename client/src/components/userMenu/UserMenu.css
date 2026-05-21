@@ -1,0 +1,173 @@
+.user-menu-container {
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* BUTTON */
+
+.user-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.user-menu-btn:hover {
+  /* background: #f3f4f6; */
+}
+
+.user-icon {
+  font-size: 1.3rem;
+  color: #5c67ff;
+}
+
+.user-menu-btn span {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #5863ff;
+}
+
+/* ARROW */
+
+.dropdown-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  color: #5c67ff;
+}
+
+.rotate-arrow {
+  transform: rotate(180deg);
+}
+
+/* DROPDOWN */
+
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+
+  width: 270px;
+ background: transparent;
+ padding-top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  transition: all 0.25s ease;
+
+}
+
+.dropdown-content{
+background: white;
+  border-radius: 18px;
+border: 1px solid #eee;
+  padding: 12px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* SHOW */
+
+.show-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* USER INFO */
+
+.dropdown-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+
+  margin-bottom: 8px;
+}
+
+.dropdown-user-icon {
+  font-size: 2.5rem;
+  color: #6366f1;
+}
+
+.dropdown-user-info h3 {
+  font-size: 1rem;
+  color: #111;
+}
+
+.dropdown-user-info p {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* ITEMS */
+
+.dropdown-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 13px 14px;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+  color: #222;
+
+  background: transparent;
+  border: none;
+
+  font-size: 0.95rem;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.dropdown-item svg {
+  font-size: 1.3rem;
+}
+
+.dropdown-item:hover {
+  background: #f5f7ff;
+  color: #4f46e5;
+}
+
+/* LOGOUT */
+
+.logout-btn:hover {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+/* DELETE */
+
+.delete-btn:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 768px) {
+
+  .dropdown-menu {
+    width: 240px;
+    right: -20px;
+  }
+
+  .user-menu-btn span {
+    display: none;
+  }
+}

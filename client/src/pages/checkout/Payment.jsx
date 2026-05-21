@@ -84,6 +84,15 @@ const Payment = () => {
   const handlePayment = async (e) => {
     e.preventDefault();
 
+    const address =
+      JSON.parse(localStorage.getItem("deliveryAddress")) || {};
+      console.log("address: ", address);
+
+  if(address && Object.keys(address).length === 0){
+    toast.info("Add address before payment");
+    return;
+  }
+
     const { cardName, cardNumber, expiry, cvv } = cardData;
 
     if (
@@ -100,11 +109,8 @@ const Payment = () => {
     // GET CART ITEMS
     const items =
       JSON.parse(localStorage.getItem("items")) || [];
+  // console.log(address, items, totalPrice);
 
-    // GET ADDRESS
-    const address =
-      JSON.parse(localStorage.getItem("deliveryAddress")) || {};
-  console.log(address, items, totalPrice);
     // TOKEN
     const token = localStorage.getItem("token");
 
@@ -157,7 +163,10 @@ const Payment = () => {
 
         <div className="payment-left">
 
-          <h2>Payment Details</h2>
+          <div className="payment-header">
+            <button onClick={()=>window.location.href = "/cart"}>🢠</button>
+            <h2>Payment Details</h2>
+          </div>
 
           {/* CARD PREVIEW */}
 
