@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 
 import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 
@@ -12,6 +12,7 @@ import "./Cart.css";
 import store_icon from "../../assets/image.png";
 
 import Footer from "../../components/footer/Footer.jsx";
+import UserMenu from "../../components/userMenu/UserMenu.jsx";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -149,8 +150,10 @@ const Cart = () => {
           </div>
 
           <div className="nav-right">
-            <p>Hello, <strong>{firstName}</strong></p>
-            <Link to="/">Continue Shopping</Link>
+            <UserMenu />
+            <Link to="/" id="continue-shopping">
+              Continue Shopping
+            </Link>
           </div>
         </div>
       </nav>
@@ -158,6 +161,30 @@ const Cart = () => {
       <div className="cart-container">
         {cartItems.length === 0 ? (
           <div className="empty-cart">
+            {/* ADDRESS BAR */}
+            <div className="address-bar">
+              <div className="address-left">
+                <span className="deliver-text">Deliver to:</span>
+
+                <span className="user-name">
+                  {firstName} {lastName}
+                </span>
+
+                <span className="user-address">
+                  {address.area || "Your Area"}, {address.city || "Your City"},{" "}
+                  {address.state || "West Bengal"} - {address.pin || "700001"}
+                </span>
+              </div>
+
+              <button
+                className="change-address-btn"
+                onClick={() => setShowAddressForm(true)}
+              >
+                Change
+              </button>
+            </div>
+            {/* end ADDRESS BAR */}
+
             <h2>Your cart is empty.</h2>
             <Link to="/">Go to home</Link>
           </div>
@@ -171,7 +198,9 @@ const Cart = () => {
                   <div>
                     <h3>Delivery Address</h3>
 
-                    <p style={{"fontWeight":500}}>{firstName} {lastName}</p>
+                    <p style={{ fontWeight: 500 }}>
+                      {firstName} {lastName}
+                    </p>
 
                     <p>
                       {address.area || "Your Area"},{" "}
@@ -347,8 +376,8 @@ const Cart = () => {
         )}
       </div>
       <ToastContainer />
-      <div style={{"marginTop":"60px"}}>
-        <Footer/>
+      <div style={{ marginTop: "60px" }}>
+        <Footer />
       </div>
     </div>
   );
