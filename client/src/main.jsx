@@ -11,6 +11,7 @@ import { CartProvider } from './components/contextAPI/cartContext.jsx'
 
 import Payment from './pages/checkout/Payment.jsx'
 
+
 // Router setup
 const Router = createBrowserRouter(
     createRoutesFromElements(
