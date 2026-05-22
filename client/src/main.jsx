@@ -10,6 +10,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { CartProvider } from './components/contextAPI/cartContext.jsx'
 
 import Payment from './pages/checkout/Payment.jsx'
+import Orders from './pages/orders/Orders.jsx'
 
 
 // Router setup
@@ -22,6 +23,7 @@ const Router = createBrowserRouter(
         <Route path='/delete' element={<Delete/>}></Route>
         <Route path='/cart' element={<Cart/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
+        <Route path='/orders' element={<Orders/>}></Route>
       </>
     )
   )

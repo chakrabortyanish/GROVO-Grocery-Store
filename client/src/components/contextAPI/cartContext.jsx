@@ -7,6 +7,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
+  const [loadPage, setLoadPage] = useState(false);
   
   const token = localStorage.getItem("token") || "";
       if (token) {
@@ -20,7 +21,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   return (
-    <CartContext.Provider value={{ cartCount, setCartCount, firstName, lastName }}>
+    <CartContext.Provider value={{ cartCount, setCartCount, firstName, lastName, setLoadPage }}>
       {children}
     </CartContext.Provider>
   );

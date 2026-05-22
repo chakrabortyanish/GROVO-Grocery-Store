@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./LogIn.css";
 
@@ -7,8 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 import store_icon from "../../assets/image.png";
 
+import { CartContext } from "../../components/contextAPI/cartContext.jsx";
+
 const LogIn = () => {
   const navigate = useNavigate();
+  const { setLoadPage } = useContext(CartContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +44,7 @@ const LogIn = () => {
     // alert(message);
     if (success) {
       localStorage.setItem("token", token);
+      setLoadPage(true);
       toast.success(message, {
         position: "top-right",
         autoClose: 1000,
