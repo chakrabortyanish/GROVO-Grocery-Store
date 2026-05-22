@@ -70,11 +70,11 @@
 }
 
 #Signin{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
     color: white;
     background-color: rgb(81, 14, 112);
-    padding: 7px 0;
+    padding: 5px 0 !important;
     font-weight: 600;
     font-size: 1rem;
     border-radius: 1.5rem;

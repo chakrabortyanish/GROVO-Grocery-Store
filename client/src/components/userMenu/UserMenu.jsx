@@ -21,14 +21,14 @@ import "./UserMenu.css";
 const UserMenu = () => {
   const navigate = useNavigate();
 
-   const { firstName, lastName } = useContext(CartContext);
+   const { user, setUser } = useContext(CartContext);
 
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLogout = async () => {
     const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
       method: "POST",
-
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}` },
       credentials: "include",
     });
 
@@ -43,7 +43,9 @@ const UserMenu = () => {
       return;
     }
 
+    
     localStorage.removeItem("token");
+    setUser(null);
     toast.success("Logged out successfully", {
       position: "top-right",
       autoClose: 2000,
@@ -65,7 +67,7 @@ const UserMenu = () => {
 
   return (
     <div>
-      {firstName ? (
+      {user ? (
         <div
           className="user-menu-container"
           onMouseEnter={() => setShowDropdown(true)}
@@ -76,7 +78,7 @@ const UserMenu = () => {
           <div className="user-menu-btn">
             <FaRegUserCircle className="user-icon" />
 
-            <span>{firstName}</span>
+            <span>{user?.firstName}</span>
 
             <MdKeyboardArrowDown
               className={`dropdown-arrow ${showDropdown ? "rotate-arrow" : ""}`}
@@ -95,7 +97,7 @@ const UserMenu = () => {
                 <FaRegUserCircle className="dropdown-user-icon" />
 
                 <div>
-                  <h3>{firstName } {lastName}</h3>
+                  <h3>{user?.firstName} {user?.lastName}</h3>
                   <p>Welcome Back 👋</p>
                 </div>
               </div>

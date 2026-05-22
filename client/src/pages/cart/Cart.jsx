@@ -74,6 +74,10 @@ const Cart = () => {
   );
 
   function handleCheckout() {
+    if(localStorage.getItem("deliveryAddress") === null){
+      toast.warning("Please add a delivery address before checkout",);
+      return;
+    }
     navigate("/payment");
     /* localStorage.removeItem("items");
     setCartItems([]);

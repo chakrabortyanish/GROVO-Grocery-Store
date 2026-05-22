@@ -6,22 +6,41 @@ import { jwtDecode } from "jwt-decode";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+
   const [cartCount, setCartCount] = useState(0);
-  const [loadPage, setLoadPage] = useState(false);
-  
-  const token = localStorage.getItem("token") || "";
-      if (token) {
-        var decodedToken = jwtDecode(token);
-      }
-      const { firstName, lastName } = decodedToken || {};
+
+  const [user, setUser] = useState(() => {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return null;
+
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      return null;
+    }
+  });
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("items")) || [];
+
+    const stored =
+      JSON.parse(localStorage.getItem("items")) || [];
+
     setCartCount(stored.length);
+
   }, []);
 
   return (
-    <CartContext.Provider value={{ cartCount, setCartCount, firstName, lastName, setLoadPage }}>
+    <CartContext.Provider
+      value={{
+        cartCount,
+        setCartCount,
+
+        user,
+        setUser,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -189,7 +189,7 @@ form button:hover{
 
 /* RIGHT */
 
-.payment-right{
+.payment-page .payment-right{
   width:350px;
   background:white;
   padding:30px;

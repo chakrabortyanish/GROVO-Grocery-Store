@@ -9,16 +9,18 @@ import store_icon from "../../assets/image.png";
 
 import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 
+import { jwtDecode } from "jwt-decode";
+
 const LogIn = () => {
   const navigate = useNavigate();
-  const { setLoadPage } = useContext(CartContext);
+  const { setUser } = useContext(CartContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (password.length < 6) {
       toast.warning("Password must be at least 6 characters", {
         position: "top-right",
@@ -31,20 +33,28 @@ const LogIn = () => {
       });
       return;
     }
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-      credentials: "include"
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/user/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      },
+    );
     const result = await response.json();
     // console.log('Result: ',result);
-    const { message, success , token} = result;
+    const { message, success, token } = result;
     // console.log(Name);
     // alert(message);
     if (success) {
       localStorage.setItem("token", token);
-      setLoadPage(true);
+      // decode token
+      const decodedUser = jwtDecode(token);
+
+      // update context state
+      setUser(decodedUser);
+
       toast.success(message, {
         position: "top-right",
         autoClose: 1000,

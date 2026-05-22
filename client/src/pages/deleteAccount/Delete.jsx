@@ -15,7 +15,7 @@ import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 const Delete = () => {
   const navigate = useNavigate();
 
-  const { setCartCount, setLoadPage } = useContext(CartContext); 
+  const { setCartCount, setUser  } = useContext(CartContext); 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,8 +62,9 @@ const Delete = () => {
     if (success) {
       localStorage.removeItem("token");
       localStorage.removeItem("items");
+      localStorage.removeItem("deliveryAddress");
       setCartCount(0); 
-      setLoadPage(true);
+      setUser(null);
       toast.success(message, {
         position: "top-right",
         autoClose: 1000,
