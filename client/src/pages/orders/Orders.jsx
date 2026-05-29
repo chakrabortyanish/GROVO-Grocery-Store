@@ -121,7 +121,7 @@ const Orders = () => {
 
                 {/* SUMMARY */}
 
-                <div className="summary-box">
+                <div id="summary-box">
                   <div className="summary-row">
                     <span>Total Items</span>
 
