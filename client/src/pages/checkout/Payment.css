@@ -208,6 +208,16 @@ form button:hover{
   display:flex;
   flex-direction:column;
   gap:18px;
+  background:linear-gradient(
+    135deg,
+    #1a0efb,
+    #7c3aed,
+    #fa02cc
+  );
+
+  color:white;
+  padding:20px;
+  border-radius:20px;
 }
 
 .summary-row{

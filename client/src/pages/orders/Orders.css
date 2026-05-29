@@ -219,7 +219,7 @@
 
 /* SUMMARY */
 
-.summary-box{
+#summary-box{
   width:320px;
 
   background:#111827;
@@ -281,7 +281,7 @@
     flex-direction:column;
   }
 
-  .summary-box{
+  #summary-box{
     width:100%;
   }
 }
