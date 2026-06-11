@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import "./Navbar.css";
 
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -92,13 +92,13 @@ const Navbar = () => {
               <a href="#packages">Packages</a>
             </li>
             <li>
-              <a href="#contact">Contact Us</a>
+              <Link to="/contact">Contact Us</Link>
             </li>
             <li>
-              <a href="#feedback">Feedback</a>
+              <Link to="/feedback">Feedback</Link>
             </li>
             <li>
-              <a href="#about">About us</a>
+              <Link to="/about">About us</Link>
             </li>
           </ul>
         </div>
@@ -125,13 +125,13 @@ const Navbar = () => {
             <a href="#packages">Packages</a>
           </li>
           <li>
-            <a href="">Contact Us</a>
+            <Link to="/contact">Contact Us</Link>
           </li>
           <li>
-            <a href="">Feedback</a>
+            <Link to="/feedback">Feedback</Link>
           </li>
           <li>
-            <a href="">About us</a>
+            <Link to="/about">About us</Link>
           </li>
         </ul>
       </div>
