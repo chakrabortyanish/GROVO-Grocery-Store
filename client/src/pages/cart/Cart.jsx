@@ -74,8 +74,8 @@ const Cart = () => {
   );
 
   function handleCheckout() {
-    if(localStorage.getItem("deliveryAddress") === null){
-      toast.warning("Please add a delivery address before checkout",);
+    if (localStorage.getItem("deliveryAddress") === null) {
+      toast.warning("Please add a delivery address before checkout");
       return;
     }
     navigate("/payment");
@@ -176,7 +176,8 @@ const Cart = () => {
 
                 <span className="user-address">
                   {address.area || "Your Area"}, {address.city || "Your City"},{" "}
-                  {address.state || "West Bengal"} - {address.pin || "700001"}
+                  {address.state || "West Bengal"} - {address.pin || "700001"},{" "}
+                  Phone: {address.phone || "+91 0000000000"}
                 </span>
               </div>
 
@@ -216,7 +217,7 @@ const Cart = () => {
                       {address.pin || "700001"}
                     </p>
 
-                    <p>{address.phone || "+91 0000000000"}</p>
+                    <p>Phone: {address.phone || "+91 0000000000"}</p>
                   </div>
 
                   <button onClick={() => setShowAddressForm(true)}>
@@ -226,73 +227,6 @@ const Cart = () => {
               </div>
 
               {/* ADDRESS MODAL */}
-
-              {showAddressForm && (
-                <div className="address-modal">
-                  <div className="address-form">
-                    <h2>Update Address</h2>
-
-                    {/* <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full Name"
-                      value={address.fullName}
-                      onChange={handleAddressChange}
-                    /> */}
-
-                    <input
-                      type="text"
-                      name="area"
-                      placeholder="Area"
-                      value={address.area}
-                      onChange={handleAddressChange}
-                    />
-
-                    <input
-                      type="text"
-                      name="city"
-                      placeholder="City"
-                      value={address.city}
-                      onChange={handleAddressChange}
-                    />
-
-                    <input
-                      type="text"
-                      name="state"
-                      placeholder="State"
-                      value={address.state}
-                      onChange={handleAddressChange}
-                    />
-
-                    <input
-                      type="text"
-                      name="pin"
-                      placeholder="Pin Code"
-                      value={address.pin}
-                      onChange={handleAddressChange}
-                    />
-
-                    <input
-                      type="text"
-                      name="phone"
-                      placeholder="Phone Number"
-                      value={address.phone}
-                      onChange={handleAddressChange}
-                    />
-
-                    <div className="address-btns">
-                      <button onClick={saveAddress}>Save Address</button>
-
-                      <button
-                        className="cancel-btn"
-                        onClick={() => setShowAddressForm(false)}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {cartItems.map((item, i) => (
                 <div className="product-container" key={i}>
@@ -375,6 +309,73 @@ const Cart = () => {
                 </p>
               </div>
               <button onClick={handleCheckout}>Checkout</button>
+            </div>
+          </div>
+        )}
+
+        {showAddressForm && (
+          <div className="address-modal">
+            <div className="address-form">
+              <h2>Update Address</h2>
+
+              {/* <input
+                      type="text"
+                      name="fullName"
+                      placeholder="Full Name"
+                      value={address.fullName}
+                      onChange={handleAddressChange}
+                    /> */}
+
+              <input
+                type="text"
+                name="area"
+                placeholder="Area"
+                value={address.area}
+                onChange={handleAddressChange}
+              />
+
+              <input
+                type="text"
+                name="city"
+                placeholder="City"
+                value={address.city}
+                onChange={handleAddressChange}
+              />
+
+              <input
+                type="text"
+                name="state"
+                placeholder="State"
+                value={address.state}
+                onChange={handleAddressChange}
+              />
+
+              <input
+                type="text"
+                name="pin"
+                placeholder="Pin Code"
+                value={address.pin}
+                onChange={handleAddressChange}
+              />
+
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone Number"
+                value={address.phone}
+                onChange={handleAddressChange}
+              />
+
+              <div className="address-btns">
+                <button onClick={saveAddress}>Save Address</button>
+
+                <button
+                  className="cancel-btn"
+                  onClick={() => setShowAddressForm(false)}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}
