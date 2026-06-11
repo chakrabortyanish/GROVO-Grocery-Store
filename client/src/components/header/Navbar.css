@@ -115,6 +115,15 @@ header {
   transform: scaleX(1);
 }
 
+/* Active Link */
+.links ul a.active::after {
+  transform: scaleX(1);
+}
+
+.links ul a.active {
+  font-weight: 600;
+}
+
 .right-side {
   display: flex;
   align-items: center;

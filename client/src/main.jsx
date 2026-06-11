@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 import App from './App.jsx'
-import {SignUp, LogIn, Cart, Delete} from './pages/index.js'
+import {SignUp, LogIn, Cart, Delete, AboutUs, ContactUs, } from './pages/index.js'
+import Feedback from './pages/feedback/Feedback.jsx'
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 
@@ -24,6 +25,9 @@ const Router = createBrowserRouter(
         <Route path='/cart' element={<Cart/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
         <Route path='/orders' element={<Orders/>}></Route>
+        <Route path='/about' element={<AboutUs/>}></Route>
+        <Route path='/contact' element={<ContactUs/>}></Route>
+        <Route path='/feedback' element={<Feedback/>}></Route>
       </>
     )
   )
