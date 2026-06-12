@@ -1,30 +1,31 @@
 # GROVO - Grocery Store
-#### Grovo Grocery Store is a modern, full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) that provides users with a smooth online grocery shopping experience. The platform allows customers to browse grocery items by category, search for products, add them to the cart, and manage their orders seamlessly. Designed with a clean and responsive user interface, Grovo Grocery Store ensures accessibility across desktop and mobile devices. User authentication is implemented with secure JWT-based login and signup, enabling personalized shopping. The backend is connected to MongoDB Atlas, and the entire application is deployed on Vercel for fast, reliable, and scalable performance.
-
+#### Grovo Grocery Store is a modern, full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) that provides users with a smooth online grocery shopping experience. The platform allows customers to browse grocery items by category, search for products, add them to the cart, and manage their orders seamlessly.
 ### 📌Project Link: https://grovo-grocery-store.vercel.app/
 
 ##🚀 Technologies Used <br>
 
 #### 💻 Frontend<br>
-React.js<br>
-CSS <br>
-fetch (for API calls)<br>
-
+    React.js
+    CSS
+    fetch (for API calls)
+    
 ####🖥️ Backend<br>
-Node.js<br>
-Express.js<br>
-MongoDB (Database)<br>
-Mongoose (ODM)<br>
+
+    Node.js
+    Express.js
+    MongoDB (Database)
+    Mongoose (ODM)
 
 ## 🔐 Features<br>
-User Registration and Login <br>
-Browse Products<br>
-Add to Cart<br>
-Place Orders<br>
-Responsive Design<br>
+    User Registration and Login <br>
+    Browse Products<br>
+    Add to Cart<br>
+    Place Orders<br>
+    Responsive Design<br>
 
 ## 📷 Screenshots<br>
-<img width="1260" height="612" alt="1" src="https://github.com/user-attachments/assets/13211d3d-c850-4de8-a8db-7c6005c5ef18" /><br>
+<img width="1207" height="636" alt="image" src="https://github.com/user-attachments/assets/148a2cb6-a235-49f4-9f87-9075d8913f18" />
+<br>
 <img width="1166" height="265" alt="2" src="https://github.com/user-attachments/assets/a2da08ed-c4d9-499e-9198-1adae6b18fa4" /><br>
 <img width="1057" height="579" alt="3" src="https://github.com/user-attachments/assets/72fba62f-ffbd-450b-aa78-30d0596d90f8" /><br>
 <img width="1011" height="476" alt="4" src="https://github.com/user-attachments/assets/fa2fce64-539e-4040-a2c2-c5974be764ae" /><br>
