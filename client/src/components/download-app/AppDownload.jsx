@@ -14,7 +14,7 @@ const AppDownload = () => {
         </div>
         <div className="content">
            <h1 className="title">Download App</h1>
-           <p>Grocery shopping made easier. Now, you don't need to open the website for placing orders. Download the Chitkara Grocery Store app from Play Store and App Store to start shopping easily and faster.</p>
+           <p>Grocery shopping made easier. Now, you don't need to open the website for placing orders. Download the Grovo app from Play Store and App Store to start shopping easily and faster.</p>
            <div className="happy-shopping">HAPPY SHOPPING!</div>
            <div className="logos">
               <img src={appstore} alt="appstore" />
