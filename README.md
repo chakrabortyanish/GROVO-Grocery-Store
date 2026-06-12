@@ -41,5 +41,5 @@
 <img width="787" height="572" alt="11" src="https://github.com/user-attachments/assets/95cdfa28-e049-44f3-84b8-fa792a6ea239" /><br>
 
 
-
+### ⭐ If you find this project helpful, please give it a star!
 
