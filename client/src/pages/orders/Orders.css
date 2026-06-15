@@ -45,10 +45,71 @@
 
 /* CONTAINER */
 
+.orders-content#124{
+  max-width:1200px;
+  width: 100%;
+  margin:auto;
+  
+  display:flex;
+  flex-direction:column;
+}
+
+/* Container styling */
+.loading-state {
+  display: flex;
+  height: 60vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* The Spinner */
+.spinner {
+  /* Default Desktop sizing (200px) */
+  height: 200px;
+  width: 200px;
+  border-top: 4px solid #3b82f6; /* border-blue-500 */
+  border-right: 4px solid transparent; /* Required for the spinning arc effect */
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  border-radius: 50%; /* rounded-full */
+  margin-left: auto; /* mx-auto */
+  margin-right: auto;
+  margin-bottom: 1rem; /* mb-4 (16px) */
+  
+  /* Animation */
+  animation: spin 1s linear infinite; /* animate-spin */
+}
+
+/* Loading Text */
+.loading-text {
+  color: #2d343d; /* text-gray-600 */
+  font-weight: 500; /* font-medium */
+}
+
+/* Keyframes for the spin animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design for medium screens and down (max-width: 768px) */
+@media (max-width: 768px) { /* max-md equivalent */
+  .spinner {
+    height: 100px; /* max-md:h-[100px] */
+    width: 100px;  /* max-md:w-[100px] */
+  }
+}
+
 .orders-container{
   max-width:1200px;
   margin:auto;
-
+  width:100%;
   display:flex;
   flex-direction:column;
   gap:30px;

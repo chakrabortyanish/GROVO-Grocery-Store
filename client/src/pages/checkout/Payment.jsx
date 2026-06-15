@@ -142,8 +142,8 @@ const Payment = () => {
       localStorage.removeItem("items");
 
       setTimeout(() => {
-        window.location.href = "/";
-      }, 2000);
+        window.location.href = "/orders";
+      }, 3000);
     } else {
       toast.error(data.message);
     }

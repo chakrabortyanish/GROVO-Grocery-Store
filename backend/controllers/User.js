@@ -77,7 +77,7 @@ const signInUser = async (req, res) => {
 };
 
 const logOutUser = (req, res) => {
-  console.log("Verified User: ", req.user.firstName);
+  // console.log("Verified User: ", req.user.firstName);
   return res
     .status(200)
     .clearCookie("token")

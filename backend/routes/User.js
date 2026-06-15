@@ -7,6 +7,6 @@ export const router = express.Router();
 
 router.post("/signup", signUpUser);
 router.post("/login", signInUser);
-router.post("/logout", verifyToken, logOutUser);
+router.post("/logout", logOutUser);
 router.delete("/delete", deleteUser);
 
