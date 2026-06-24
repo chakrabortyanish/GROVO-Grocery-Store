@@ -6,6 +6,9 @@ import { dbConnection } from "./db/connection.js";
 import { router } from "./routes/User.js";
 import cors from "cors";
 
+import { adminRouter } from "./routes/admin.route.js";
+import { productRouter } from "./routes/product.route.js";
+
 const app = express();
 
 const PORT = process.env.PORT || 8000;
@@ -20,12 +23,21 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
+
+app.use("/uploads", express.static("uploads"));
 
 dbConnection();
 
+// user Routes
 app.use("/user", router);
+
+// admin Routes
+app.use("/api/admin", adminRouter);
+
+// products Routes
+app.use("/api/products", productRouter);
 
 // Order Routes
 import orderRoutes from "./routes/order.route.js";

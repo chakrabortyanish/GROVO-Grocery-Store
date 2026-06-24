@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import "./Navbar.css";
 
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,42 +22,7 @@ const Navbar = () => {
 
   const { cartCount } = useContext(CartContext);
 
-  /* const handleLogout = async () => {
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
-      method: "POST",
-      credentials: "include",
-    });
-
-    const data = await res.json();
-    // console.log("logout res: ", data);
-    const { message, success } = data;
-    if (!success) {
-      toast.error(message, {
-        position: "top-right",
-        autoClose: 2000,
-      });
-      return;
-    }
-
-    localStorage.removeItem("token");
-    toast.success("Logged out successfully", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "colored",
-    });
-
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
-  };
-
-  const handleDeleteAccount = () => {
-    navigate("/delete");
-  }; */
+  const userToken = localStorage.getItem("token");
 
   // Handle click outside
   useEffect(() => {
@@ -136,32 +101,15 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="right-side">
-        <UserMenu />
-        {/* <div className="account-container">
-          <div className="acc">
-            {firstName ? (
-              <div className="username">
-                {firstName}
-                <MdOutlineArrowDropDown size={20} />
-              </div>
-            ) : (
-              <Link to="/login">Sign In</Link>
-            )}
-          </div>
-          <div className="mg-acc">
-            {firstName && (
-              <div className="mg-content">
-                <div className="fullname">{`${firstName} ${lastName}`}</div>
-                <button id="logout" onClick={handleLogout}>
-                  Logout
-                </button>
-                <button id="delete-account" onClick={handleDeleteAccount}>
-                  Delete Account
-                </button>
-              </div>
-            )}
-          </div>
-        </div> */}
+        <div className="user-menu">
+          <UserMenu />
+          {!userToken && (
+            <Link to="/admin-auth">
+              <button className="admin-btn">Admin</button>
+            </Link>
+          )}
+        </div>
+
         <Link to="/cart">
           <div className="cart">
             <span>{cartCount}</span>

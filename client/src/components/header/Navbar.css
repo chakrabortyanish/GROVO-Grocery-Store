@@ -131,6 +131,29 @@ header {
   /* position: relative; */
 }
 
+/* admin auth */
+.right-side .user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-btn {
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #459fff;
+  color: white;
+  border-radius: 20px;
+}
+
+.admin-btn:hover {
+  border-radius: 0px;
+  /* background-color: #0056b3; */
+}
+
 .cart,
 .cart .icon {
   position: relative;
