@@ -57,7 +57,7 @@ const UserMenu = () => {
     });
 
     setTimeout(() => {
-      navigate("/login");
+      navigate("/");
     }, 2000);
   };
 
@@ -126,6 +126,7 @@ const UserMenu = () => {
               </button>
 
               <button
+              id="delete-button"
                 className="dropdown-item delete-btn"
                 onClick={handleDeleteAccount}
               >

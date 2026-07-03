@@ -1,5 +1,5 @@
 .user-menu-container {
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@
 }
 
 .user-menu-btn span {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
   color: #5863ff;
@@ -53,23 +53,21 @@
   right: 0;
 
   width: 270px;
- background: transparent;
- padding-top: 10px;
+  background: transparent;
+  padding-top: 10px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
 
   transition: all 0.25s ease;
-
 }
 
-.dropdown-content{
-background: white;
+.dropdown-content {
+  background: white;
   border-radius: 18px;
-border: 1px solid #eee;
+  border: 1px solid #eee;
   padding: 12px;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* SHOW */
@@ -153,15 +151,21 @@ border: 1px solid #eee;
 
 /* DELETE */
 
-.delete-btn:hover {
-  background: #fef2f2;
-  color: #dc2626;
+#delete-button {
+  color: #222 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  font-weight: normal !important;
+}
+
+#delete-button:hover {
+  background: #fef2f2 !important;
+  color: #dc2626 !important;
 }
 
 /* MOBILE */
 
 @media screen and (max-width: 768px) {
-
   .dropdown-menu {
     width: 240px;
     right: -20px;

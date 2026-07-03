@@ -1,21 +1,44 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const adminUsername = localStorage.getItem("adminUsername")
+  const adminUsername = localStorage.getItem("adminUsername");
 
-  const stats = {
-    products: 125,
-    orders: 58,
-    categories: 6,
-    revenue: 25600,
-  };
+  const [stats, setStats] = useState({
+    products: 0,
+    orders: 0,
+    categories: 0,
+    revenue: 0,
+  });
+
+  useEffect(() => {
+    const fetchDashboardStats = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/admin/dashboard`
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+          setStats(data.stats);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchDashboardStats();
+  }, []);
 
   return (
     <div className="dashboard">
       <div className="welcome">
-        <h1>Welcome Back, <i>{adminUsername}</i></h1>
+        <h1>
+          Welcome Back, <i>{adminUsername}</i>
+        </h1>
         <p>Manage your grocery store efficiently.</p>
       </div>
 
@@ -44,18 +67,14 @@ const Dashboard = () => {
       <div className="quick-actions">
         <div
           className="action-card"
-          onClick={() =>
-            navigate("/admin/add-product")
-          }
+          onClick={() => navigate("/admin/add-product")}
         >
           <h3>➕ Add Product</h3>
         </div>
 
         <div
           className="action-card"
-          onClick={() =>
-            navigate("/admin/manage-products")
-          }
+          onClick={() => navigate("/admin/manage-products")}
         >
           <h3>📦 Manage Products</h3>
         </div>
