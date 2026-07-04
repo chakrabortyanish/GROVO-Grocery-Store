@@ -8,6 +8,7 @@ import { products, bundle_products } from "../../allProducts.js";
 
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../components/contextAPI/cartContext.jsx";
+import ProductCard from "../ProductCard.jsx";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ const Products = () => {
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   let handleCart = (e) => {
+    console.log(e.currentTarget.id);
     const productId = String(e.currentTarget.id);
     const username = localStorage.getItem("token");
     if (!username) {
@@ -97,7 +99,7 @@ const Products = () => {
         <h2 className="title">Popular Product</h2>
         <div className="product">
           {currentProducts.map((item, i) => {
-            return (
+            return <ProductCard item={item} key={i} handleCart={handleCart}/> /* (
               <div className="item itemInfo" key={i}>
                 <div className="image">
                   <img src={item.image} alt={item.name} />
@@ -111,7 +113,7 @@ const Products = () => {
                   Add to Cart
                 </div>
               </div>
-            );
+            ); */
           })}
           
         </div>

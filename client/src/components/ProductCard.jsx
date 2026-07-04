@@ -1,6 +1,11 @@
 import React from "react";
 
-const ProductCard = ({ item, handleCart }) => {
+const ProductCard = ({ item }) => {
+
+  const handleCart = (e) => {
+    console.log(e.currentTarget.id);
+  }
+  
   return (
     <div className="itemInfo">
       <div className="image">
