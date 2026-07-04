@@ -4,7 +4,7 @@ export const addProduct = async (req, res) => {
   try {
     const { name, category, price, quantity, unit, inStock } = req.body;
 
-    const image = req.file ? req.file.filename : "";
+    const image = req.file ? req.file.path : "";
 
     const product = await Product.create({
       adminId: req.admin.adminId,
@@ -96,7 +96,7 @@ export const updateProduct = async (req, res) => {
     product.inStock = req.body.inStock ?? product.inStock;
 
     if (req.file) {
-      product.image = req.file.filename;
+      product.image = req.file.path;
     }
 
     await product.save();

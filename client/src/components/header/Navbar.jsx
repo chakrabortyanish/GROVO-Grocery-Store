@@ -68,20 +68,22 @@ const Navbar = () => {
           </ul>
         </div>
       )}
-      <div className="heading">
-        <HiOutlineMenuAlt2
-          size={27}
-          className="menu-icon"
-          ref={iconRef}
-          onClick={() => setMenuOpen((prev) => !prev)}
-        />
-        <img src={store_icon} alt="Grovo" />
-        <h1>Grovo</h1>
-      </div>
+      <Link to="/">
+        <div className="heading">
+          <HiOutlineMenuAlt2
+            size={27}
+            className="menu-icon"
+            ref={iconRef}
+            onClick={() => setMenuOpen((prev) => !prev)}
+          />
+          <img src={store_icon} alt="Grovo" />
+          <h1>Grovo</h1>
+        </div>
+      </Link>
       <div className="links">
         <ul>
           <li>
-            <a href="">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <a href="#categories">Categories</a>

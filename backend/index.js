@@ -26,8 +26,6 @@ app.use(
   }),
 );
 
-app.use("/uploads", express.static("uploads"));
-
 dbConnection();
 
 // user Routes

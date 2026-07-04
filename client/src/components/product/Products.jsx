@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Products.css";
 
 import { toast, ToastContainer } from "react-toastify";
@@ -12,6 +12,44 @@ import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 const Products = () => {
   const navigate = useNavigate();
   const { setCartCount } = useContext(CartContext);
+
+  const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const productsPerPage = 8;
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/products`,
+          {
+            method: "GET",
+          },
+        );
+        const data = await response.json();
+
+        if (data.success) {
+          setProducts(data.products);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  //pagination logic
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct,
+  );
+
+  const totalPages = Math.ceil(products.length / productsPerPage);
 
   let handleCart = (e) => {
     const productId = String(e.currentTarget.id);
@@ -58,22 +96,46 @@ const Products = () => {
       <div className="Popular-Product">
         <h2 className="title">Popular Product</h2>
         <div className="product">
-          {products.map((item, i) => {
+          {currentProducts.map((item, i) => {
             return (
               <div className="item itemInfo" key={i}>
                 <div className="image">
-                  <img src={item.img} alt={item.name} />
+                  <img src={item.image} alt={item.name} />
                 </div>
                 <h3>{item.name}</h3>
-                <div className="weight">1 KG</div>
+                <div className="weight">
+                  {item.quantity} {item.unit}
+                </div>
                 <div className="price">Rs. {item.price}</div>
-                <div className="add-to-cart" id={item.id} onClick={handleCart}>
+                <div className="add-to-cart" id={item._id} onClick={handleCart}>
                   Add to Cart
                 </div>
               </div>
             );
           })}
+          
         </div>
+
+        {/* Pagination buttons */}
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+
+            <span>
+              {currentPage} / {totalPages}
+            </span>
+
+            <button
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
       </div>
 
       {/*  Popular Bundle Pack */}

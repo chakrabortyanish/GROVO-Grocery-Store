@@ -45,7 +45,7 @@
 }
 
 .itemInfo img:hover{
-  scale: 1.5;
+  scale: 1.2;
 }
 
 .itemInfo h3{
@@ -87,6 +87,35 @@
 .add-to-cart:hover{
   background-color: #50ac60;
   color: white;
+}
+
+/* pagination styles */
+.pagination {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 40px auto;
+}
+
+.pagination button {
+  padding: 7px 15px;
+  border: none;
+  background: #28a745;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-weight: 600;
+  font-size: 12px;
 }
 
 

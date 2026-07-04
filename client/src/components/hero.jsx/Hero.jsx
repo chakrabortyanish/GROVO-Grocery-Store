@@ -9,9 +9,12 @@ import { bg1, bg2, bg } from "../../assets/index.js";
 
 import { slide1, slide2, slide3, slide4 } from "../../assets/index.js";
 
+import {useNavigate} from "react-router-dom";
+
 const Hero = () => {
   const [showDeals, setShowDeals] = useState(false);
   const dealsRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleOverlayClick = (e) => {
     /* console.log(dealsRef.current);
@@ -39,6 +42,17 @@ const Hero = () => {
       },
     ],
   };
+
+  // search functionality
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (query) => {
+
+    if (!query.trim()) return; // Prevent navigation if the query is empty or only whitespace
+
+    navigate(`/${query}`);
+  }
+  
   return (
     <div className="hero">
       <Navbar />
@@ -50,8 +64,22 @@ const Hero = () => {
           <h1>Order Your daily Groceries</h1>
           <h3>#Free Delivery</h3>
           <div className="search">
-            <input type="text" placeholder="Search.." />
-            <button>
+            <select
+              name="category"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            >
+              <option value="" style={{"color": "gray"}}>Select Category</option>
+              <option value="fruits-vegetables">
+                Fruits & Vegetables
+              </option>
+              <option value="medicine">Medicine</option>
+              <option value="beauty">Beauty</option>
+              <option value="baby-care">Baby Care</option>
+              <option value="gardening">Gardening</option>
+              <option value="stationary">Stationary</option>
+            </select>
+            <button onClick={() => handleSearch(searchQuery)} >
               <IoSearch />
             </button>
           </div>

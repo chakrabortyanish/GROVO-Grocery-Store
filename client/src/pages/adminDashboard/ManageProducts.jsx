@@ -162,7 +162,7 @@ const ManageProducts = () => {
               <tr key={product._id}>
                 <td>
                   <img
-                    src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${product.image}`}
+                    src={product.image}
                     alt={product.name}
                     className="product-image"
                   />
