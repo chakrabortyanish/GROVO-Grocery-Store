@@ -6,7 +6,7 @@ import {
   increaseCart,
   decreaseCart,
   removeCartItem,
-  clearCart,
+  // clearCart,
 } from "../controllers/cart.controller.js";
 
 import { verifyToken } from "../middleware/auth.middleware.js";
@@ -23,6 +23,6 @@ router.patch("/decrease/:productId", verifyToken, decreaseCart);
 
 router.delete("/remove/:productId", verifyToken, removeCartItem);
 
-router.delete("/clear", verifyToken, clearCart);
+// router.delete("/clear", verifyToken, clearCart);
 
 export { router as cartRoutes };
