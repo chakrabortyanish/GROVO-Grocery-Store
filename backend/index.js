@@ -37,6 +37,10 @@ app.use("/api/admin", adminRouter);
 // products Routes
 app.use("/api/products", productRouter);
 
+// Cart Routes
+import { cartRoutes  } from "./routes/cart.route.js";
+app.use("/api/cart", cartRoutes );
+
 // Order Routes
 import orderRoutes from "./routes/order.route.js";
 app.use("/api/orders", orderRoutes);
