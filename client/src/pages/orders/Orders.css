@@ -215,8 +215,16 @@
 }
 
 .product-left p{
-  margin-top:8px;
   color:#666;
+}
+
+.order-quantity{
+  margin:3px 0 8px 0;
+  color:#666;
+  display:inline-block;
+  background:#e5e7eb;
+  padding:3px 10px;
+  border-radius:20px;
 }
 
 /* BOTTOM */

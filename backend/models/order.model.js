@@ -9,11 +9,12 @@ const orderSchema = new mongoose.Schema(
 
     items: [
       {
-        id: String,
-        name: String,
-        price: Number,
-        quentity: Number,
-        img: String,
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+        },
+        itemTotal: Number,
+        cartQuantity: Number,
       },
     ],
 
@@ -34,7 +35,7 @@ const orderSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Order = mongoose.model("Order", orderSchema);

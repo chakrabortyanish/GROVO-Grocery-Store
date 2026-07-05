@@ -34,7 +34,7 @@ export const createOrder = async (req, res) => {
 
 export const findAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.user.id }).sort({ createdAt: -1 }); 
+    const orders = await Order.find({ userId: req.user.id }).populate("items.product").sort({ createdAt: -1 }); 
     if (!orders) {
       return res.status(404).json({
         success: false,

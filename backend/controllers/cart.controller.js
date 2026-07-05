@@ -31,8 +31,8 @@ export const addToCart = async (req, res) => {
     );
 
     if (productExists) {
-      return res.status(400).json({
-        success: false,
+      return res.status(200).json({
+        cartExists: true,
         message: "Product already in cart",
       });
     }
@@ -106,7 +106,7 @@ export const getCart = async (req, res) => {
       0
     );
 
-    res.json({
+    res.status(200).json({
       success: true,
       items,
       totalPrice,
@@ -122,10 +122,13 @@ export const getCart = async (req, res) => {
 
 // increase cart quantity
 export const increaseCart = async (req, res) => {
+  console.log("Increase Cart called");
   try {
     const userId = req.user.id;
 
     const { productId } = req.params;
+
+    console.log("Product ID:", productId, userId); // Log the productId to check its value
 
     const cart = await Cart.findOne({ userId });
 
@@ -193,7 +196,7 @@ export const decreaseCart = async (req, res) => {
 
     res.json({
       success: true,
-      message: "Quantity Updated",
+      message: "Quantity Decrease",
     });
   } catch (err) {
     res.status(500).json({
@@ -226,6 +229,27 @@ export const removeCartItem = async (req, res) => {
     res.json({
       success: true,
       message: "Item Removed",
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+// clear cart
+export const clearCart = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    await Cart.findOneAndUpdate(
+      { userId },
+      { items: [] }
+    );
+
+    res.json({
+      success: true,
     });
   } catch (err) {
     res.status(500).json({

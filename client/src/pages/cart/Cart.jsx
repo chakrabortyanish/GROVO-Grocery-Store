@@ -14,8 +14,24 @@ import store_icon from "../../assets/image.png";
 import Footer from "../../components/footer/Footer.jsx";
 import UserMenu from "../../components/userMenu/UserMenu.jsx";
 
+import axios from "axios";
+
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const userToken = localStorage.getItem("token");
+  const { setTotalProductsPrice,cartItems, setCartItems } = useContext(CartContext);
+
+  const navigate = useNavigate();
+
+  if (!userToken) {
+    setTimeout(() => {
+      navigate("/login");
+    }, 1000);
+    return;
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const [showAddressForm, setShowAddressForm] = useState(false);
 
@@ -32,46 +48,41 @@ const Cart = () => {
     );
   });
 
+  // fetch cart items
+
+  const fetchCartItems = async () => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (data.success) {
+        setCartItems(data.items);
+        setTotalItems(data.totalItems);
+        setTotalPrice(data.totalPrice);
+        setTotalProductsPrice(data.totalPrice);
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+      toast.error("Failed to fetch cart items");
+    }
+  };
+
   // Load data from localStorage when component mounts
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
+    fetchCartItems();
     const stored = JSON.parse(localStorage.getItem("items")) || [];
     setCartItems(stored);
   }, []);
 
-  const navigate = useNavigate();
-  const { setCartCount } = useContext(CartContext);
-
-  const token = localStorage.getItem("token");
-  const { firstName, lastName } = token ? jwtDecode(token) : {};
-
-  if (!token) {
-    setTimeout(() => {
-      navigate("/login");
-    }, 1000);
-    return;
-  }
-
-  const handleRemove = (id) => {
-    // console.log(id.typeof);
-    const updatedItems = cartItems.filter((item) => item.id !== id);
-    setCartItems(updatedItems);
-    localStorage.setItem("items", JSON.stringify(updatedItems));
-
-    toast.warning("Item removed from cart", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "colored",
-    });
-  };
-
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + Number(item.price) * item.quentity,
-    0,
-  );
+  const { firstName, lastName } = userToken ? jwtDecode(userToken) : {};
 
   function handleCheckout() {
     if (localStorage.getItem("deliveryAddress") === null) {
@@ -79,53 +90,87 @@ const Cart = () => {
       return;
     }
     navigate("/payment");
-    /* localStorage.removeItem("items");
-    setCartItems([]);
-    setCartCount(0);
-    toast.success("Order Confirmed!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "colored",
-    }); */
   }
 
-  const decrease = (id) => {
-    const item = cartItems.find((i) => i.id === id);
+  // increase cart quantity
+  const increaseQuantity = async (productId) => {
+    try {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/increase/${productId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        },
+      );
 
-    if (item && item.quentity === 1) {
-      handleRemove(id); // this already updates state & localStorage
-      return;
-    }
-
-    const updatedItems = cartItems.map((item) => {
-      if (item.id === id) {
-        if (item.quentity && item.quentity > 1) {
-          return { ...item, quentity: item.quentity - 1 };
-        }
+      if (data.success) {
+        await fetchCartItems();
+        toast.success(data.message);
       }
-      return item;
-    });
 
-    setCartItems(updatedItems);
-    localStorage.setItem("items", JSON.stringify(updatedItems));
+      // Fetch cart again here if needed
+      // getCart();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to increase quantity",
+      );
+    }
   };
 
-  const increase = (id) => {
-    const updatedItems = cartItems.map((item) => {
-      if (item.id === id) {
-        if (item.quentity) {
-          return { ...item, quentity: item.quentity + 1 };
-        }
-      }
-      return item;
-    });
+  // decrease cart quantity
+  const decreaseQuantity = async (productId) => {
+    try {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/decrease/${productId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        },
+      );
 
-    setCartItems(updatedItems);
-    localStorage.setItem("items", JSON.stringify(updatedItems));
+      if (data.success) {
+        await fetchCartItems();
+        toast.success(data.message);
+      }
+
+      // Fetch cart again here if needed
+      // getCart();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to decrease quantity",
+      );
+    }
+  };
+
+  // Remove Product
+  const removeFromCart = async (productId) => {
+    try {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/remove/${productId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        },
+      );
+
+      if (data.success) {
+        await fetchCartItems();
+        toast.success(data.message);
+      }
+
+      // Fetch cart again here if needed
+      // getCart();
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to remove product");
+    }
   };
 
   const handleAddressChange = (e) => {
@@ -231,25 +276,23 @@ const Cart = () => {
               {cartItems.map((item, i) => (
                 <div className="product-container" key={i}>
                   <div className="cart-item">
-                    <img src={item.img} alt={item.name} width="100" />
+                    <img src={item.image} alt={item.name} width="100" />
                     <div className="product-info">
                       <div className="top">
                         <h3>{item.name}</h3>
                         <div className="qty">
-                          {item.weight ? (
-                            <div className="weight">{item.quentity} KG</div>
-                          ) : (
-                            <div className="qt">
-                              <span>Qty: {item.quentity}</span>
-                            </div>
-                          )}
+                          <div className="item-unit">
+                            {item.quantity} {item.unit}
+                          </div>
+                          <div className="qt">
+                            <span>Qty: {item.cartQuantity}</span>
+                          </div>
                           <div className="set-qty">
-                            <button
-                              id="dec"
-                              className="dec"
-                              onClick={() => decrease(item.id)}
-                            >
-                              {item.quentity == 1 ? (
+                            {item.cartQuantity == 1 ? (
+                              <button
+                                className="dec"
+                                onClick={() => removeFromCart(item.productId)}
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   height="20px"
@@ -259,28 +302,34 @@ const Cart = () => {
                                 >
                                   <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                                 </svg>
-                              ) : (
-                                "-"
-                              )}
-                            </button>
-                            <span>{item.quentity}</span>
+                              </button>
+                            ) : (
+                              <button
+                                className="dec"
+                                onClick={() => decreaseQuantity(item.productId)}
+                              >
+                                -
+                              </button>
+                            )}
+                            <span>{item.cartQuantity}</span>
                             <button
                               className="inc"
-                              onClick={() => increase(item.id)}
+                              onClick={() => increaseQuantity(item.productId)}
                             >
                               +
                             </button>
                           </div>
                         </div>
                       </div>
-                      <p className="stock">In stock</p>
+                      <p
+                        className={`${item.inStock === "In Stock" ? "in-stock" : "out-of-stock"}`}
+                      >
+                        {item.inStock}
+                      </p>
                     </div>
                     <div className="right-box">
-                      <p>
-                        ₹{" "}
-                        {(Number(item.price) * (item.quentity || 1)).toFixed(2)}
-                      </p>
-                      <button onClick={() => handleRemove(item.id)}>
+                      <p>₹ {item.itemTotal}</p>
+                      <button onClick={() => removeFromCart(item.productId)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           height="20px"
@@ -317,14 +366,6 @@ const Cart = () => {
           <div className="address-modal">
             <div className="address-form">
               <h2>Update Address</h2>
-
-              {/* <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full Name"
-                      value={address.fullName}
-                      onChange={handleAddressChange}
-                    /> */}
 
               <input
                 type="text"

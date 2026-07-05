@@ -33,9 +33,15 @@ const ProductCard = ({ item }) => {
         }
       );
 
-      console.log("Cart Item Added:", data);
+      if (data.success) {
+        toast.success(data.message);
+      }
+      if (data.cartExists) {
+        toast.error(data.message);
+      }
     } catch (error) {
       console.error("Error adding to cart:", error);
+      toast.error("Failed to add to cart");
     }
   };
 

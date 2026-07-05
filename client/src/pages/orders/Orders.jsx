@@ -24,6 +24,7 @@ const Orders = () => {
       .then((data) => {
         if (data.success) {
           setOrders(data.orders);
+          // console.log("Fetched orders:", data.orders);
         }
       })
       .catch((err) => console.error("Error fetching orders:", err))
@@ -97,16 +98,18 @@ const Orders = () => {
                         {order.items.map((item) => (
                           <div className="product-item" key={item._id}>
                             <div className="product-left">
-                              <img src={item.img} alt={item.name} />
+                              <img src={item.product.image} alt={item.product.name} />
 
                               <div>
-                                <h3>{item.name}</h3>
-
-                                <p>Quantity: {item.quentity}</p>
+                                <h3>{item.product.name}</h3>
+                                <p className="order-quantity">
+                                  {item.product.quantity} {item.product.unit}
+                                </p>
+                                <p>Quantity: {item.cartQuantity}</p>
                               </div>
                             </div>
 
-                            <h2>₹ {item.price * item.quentity}</h2>
+                            <h2>₹ {item.itemTotal}</h2>
                           </div>
                         ))}
                       </div>

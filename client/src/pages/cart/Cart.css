@@ -320,14 +320,17 @@
   font-weight:700;
 }
 
-.stock{
+.in-stock{
   color:#16a34a;
   font-weight:600;
 }
 
-.product-info .stock{
-  color: green;
+.out-of-stock{
+  color:#ef4444;
+  font-weight:600;
 }
+
+
 
 .checkout-box {
  min-width:260px;
@@ -406,6 +409,13 @@
   background:#8284ff;
   color:white;
   transform:scale(1.15);
+}
+
+.item-unit{
+  font-size:1rem;
+  font-weight:400;
+  color:#0347f2;
+  margin-bottom: 10px;
 }
 
 
