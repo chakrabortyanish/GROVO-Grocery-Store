@@ -5,6 +5,9 @@ import "./CategoryProducts.css";
 import Footer from "../../components/footer/Footer";
 import { Navbar } from "../../components";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Beauty = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,6 +50,7 @@ const Beauty = () => {
             products.map((item) => <ProductCard key={item._id} item={item} />)
           )}
         </div>
+        <ToastContainer position="top-right" autoClose={1500} />
       </div>
 
       <Footer />

@@ -4,6 +4,9 @@ import "./CategoryProducts.css";
 import Footer from "../../components/footer/Footer";
 import { Navbar } from "../../components";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Stationary = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,6 +54,7 @@ const Stationary = () => {
             ))
           )}
         </div>
+        <ToastContainer position="top-right" autoClose={1500} />
       </div>
 
       <Footer />
