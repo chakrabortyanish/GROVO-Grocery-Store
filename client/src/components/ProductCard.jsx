@@ -13,15 +13,16 @@ const ProductCard = ({ item }) => {
   const { setCartCount } = useContext(CartContext);
 
   const userToken = localStorage.getItem("token");
-  if (!userToken) {
+
+  const handleCart = async (productId) => {
+    if (!userToken) {
     toast.error("Please login first");
     setTimeout(() => {
         navigate("/login");
       }, 1000);
       return;
   }
-
-  const handleCart = async (productId) => {
+  
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/cart/add`,
