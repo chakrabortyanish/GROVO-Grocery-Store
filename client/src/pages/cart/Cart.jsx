@@ -18,7 +18,8 @@ import axios from "axios";
 
 const Cart = () => {
   const userToken = localStorage.getItem("token");
-  const { setTotalProductsPrice,cartItems, setCartItems } = useContext(CartContext);
+  const { setTotalProductsPrice, cartItems, setCartItems } =
+    useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -424,7 +425,7 @@ const Cart = () => {
           </div>
         )}
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={1000} />
       <div style={{ marginTop: "60px" }}>
         <Footer />
       </div>
