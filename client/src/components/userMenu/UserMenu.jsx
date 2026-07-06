@@ -21,7 +21,7 @@ import "./UserMenu.css";
 const UserMenu = () => {
   const navigate = useNavigate();
 
-   const { user, setUser } = useContext(CartContext);
+   const { user, setUser, setCartCount } = useContext(CartContext);
 
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -46,9 +46,10 @@ const UserMenu = () => {
     
     localStorage.removeItem("token");
     setUser(null);
+    setCartCount(0);
     toast.success("Logged out successfully", {
       position: "top-right",
-      autoClose: 2000,
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -58,7 +59,7 @@ const UserMenu = () => {
 
     setTimeout(() => {
       navigate("/");
-    }, 2000);
+    }, 1500);
   };
 
   const handleDeleteAccount = () => {
