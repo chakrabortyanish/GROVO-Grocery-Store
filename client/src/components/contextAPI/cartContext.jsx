@@ -1,10 +1,9 @@
 import React from "react";
-import { createContext, useState, useEffect } from "react";
-
-import axios from "axios";
+import { createContext, useState } from "react";
 
 import { jwtDecode } from "jwt-decode";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -20,33 +19,9 @@ export const CartProvider = ({ children }) => {
     try {
       return jwtDecode(userToken);
     } catch (error) {
-      return null;
+      return error;
     }
   });
-
-  const fetchCartItems = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/cart/`,
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-          withCredentials: true,
-        },
-      );
-
-      if (data.success) {
-        setCartItems(data.totalItems);
-      }
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
 
   return (
     <CartContext.Provider

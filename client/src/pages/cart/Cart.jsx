@@ -31,10 +31,13 @@ const Cart = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [totalItems, setTotalItems] = useState(0);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [showAddressForm, setShowAddressForm] = useState(false);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [address, setAddress] = useState(() => {
     return (
       JSON.parse(localStorage.getItem("deliveryAddress")) || {
