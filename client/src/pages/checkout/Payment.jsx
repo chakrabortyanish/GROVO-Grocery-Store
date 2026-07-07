@@ -151,17 +151,12 @@ const Payment = () => {
           }
         },
 
-        prefill: {
-          name: address.fullName,
-          contact: address.phone,
-        },
-
         notes: {
           address: `${address.area}, ${address.city}`,
         },
 
         theme: {
-          color: "#2ecc71",
+          color: "#cc2eac",
         },
 
         modal: {
