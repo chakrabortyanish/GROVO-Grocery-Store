@@ -29,9 +29,32 @@ const orderSchema = new mongoose.Schema(
 
     totalAmount: Number,
 
-    paymentMethod: String,
+    paymentMethod: {
+        type:String,
+        default:"Razorpay"
+    },
 
-    paymentStatus: String,
+    paymentStatus: {
+      type: String,
+      enum: ["Paid"],
+      default: "Paid",
+    },
+
+    // Razorpay Details
+    razorpayOrderId: {
+      type: String,
+      default: "",
+    },
+
+    razorpayPaymentId: {
+      type: String,
+      default: "",
+    },
+
+    razorpaySignature: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

@@ -6,143 +6,217 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 
+import { createOrder, verifyPayment } from "../../services/paymentService.js";
+import { loadRazorpay } from "../../utils/loadRazorpay.js";
+
+import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
+
+import { SiRazorpay } from "react-icons/si";
+
 const Payment = () => {
-  const { totalProductsPrice, cartItems } = useContext(CartContext);
-  // console.log("cartItems in Payment.jsx: ", cartItems);
+  const navigate = useNavigate();
 
-  const [cardData, setCardData] = useState({
-    cardName: "",
-    cardNumber: "",
-    expiry: "",
-    cvv: "",
-  });
+  const { totalProductsPrice, setTotalProductsPrice, cartItems, setCartItems } =
+    useContext(CartContext);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
 
-    if (name === "cardNumber") {
-      const formatted = value
-        .replace(/\D/g, "")
-        .substring(0, 16)
-        .replace(/(.{4})/g, "$1 ")
-        .trim();
+  const fetchCartItems = async () => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        },
+      );
 
-      setCardData({
-        ...cardData,
-        [name]: formatted,
-      });
+      if (data.success) {
+        setCartItems(data.items);
+        setTotalProductsPrice(data.totalPrice);
 
-      return;
+        // Redirect to cart page if cart is empty
+        if (cartItems.length === 0) {
+          toast.warning("Your cart is empty.");
+          navigate("/cart");
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+      toast.error("Failed to fetch cart items");
     }
+  };
 
-    if (name === "expiry") {
-      let formatted = value.replace(/\D/g, "");
+  const [loading, setLoading] = useState(false);
 
-      if (formatted.length >= 3) {
-        formatted = formatted.substring(0, 2) + "/" + formatted.substring(2, 4);
+  const handlePayment = async () => {
+    try {
+      const address = JSON.parse(localStorage.getItem("deliveryAddress")) || {};
+
+      if (Object.keys(address).length === 0) {
+        toast.warning("Please add delivery address.");
+        return;
       }
 
-      setCardData({
-        ...cardData,
-        [name]: formatted,
+      setLoading(true);
+
+      const loaded = await loadRazorpay();
+
+      if (!loaded) {
+        toast.error("Unable to load Razorpay.");
+        setLoading(false);
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+
+      const orderResponse = await createOrder(
+        {
+          items: cartItems.map((item) => ({
+            product: item.productId,
+            // eslint-disable-next-line no-undef
+            itemTotal: item.cartQuantity * item.price,
+            cartQuantity: item.cartQuantity,
+          })),
+          totalProductsPrice,
+        },
+        token,
+      );
+
+      if (!orderResponse.success) {
+        toast.error(orderResponse.message);
+        setLoading(false);
+        return;
+      }
+
+      const razorpayOrder = orderResponse.razorpayOrder;
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY,
+
+        amount: razorpayOrder.amount,
+
+        currency: razorpayOrder.currency,
+
+        name: "Grovo",
+
+        description: "Grocery Purchase",
+
+        image: "https://grovo-grocery-store.vercel.app/image.png", // optional
+
+        order_id: razorpayOrder.id,
+
+        handler: async function (response) {
+          try {
+            const verify = await verifyPayment(
+              {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                items: cartItems.map((item) => ({
+                  product: item.productId,
+                  // eslint-disable-next-line no-undef
+                  itemTotal: item.cartQuantity * item.price,
+                  cartQuantity: item.cartQuantity,
+                })),
+                address,
+                paymentMethod: "Razorpay",
+                totalProductsPrice,
+              },
+              token,
+            );
+
+            if (verify.success) {
+              toast.success("Payment Successful");
+
+              await handleClearCart();
+
+              setTimeout(() => {
+                navigate("/orders");
+              }, 1500);
+            } else {
+              toast.error(verify.message);
+            }
+          } catch (err) {
+            console.log(err);
+            toast.error("Verification Failed");
+          } finally {
+            setLoading(false);
+          }
+        },
+
+        prefill: {
+          name: address.fullName,
+          contact: address.phone,
+        },
+
+        notes: {
+          address: `${address.area}, ${address.city}`,
+        },
+
+        theme: {
+          color: "#2ecc71",
+        },
+
+        modal: {
+          ondismiss: function () {
+            toast.info("Payment Cancelled");
+            setLoading(false);
+          },
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+
+      paymentObject.on("payment.failed", function (response) {
+        toast.error("Payment Failed");
+
+        console.log(response.error);
+
+        setLoading(false);
       });
 
-      return;
+      paymentObject.open();
+    } catch (error) {
+      console.error("Payment Error:", error);
+      console.log(error);
+
+      toast.error("Something went wrong.");
+
+      setLoading(false);
     }
-
-    if (name === "cvv") {
-      setCardData({
-        ...cardData,
-        [name]: value.replace(/\D/g, "").substring(0, 3),
-      });
-
-      return;
-    }
-
-    setCardData({
-      ...cardData,
-      [name]: value,
-    });
   };
 
   const handleClearCart = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/clear`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      });
-    } catch (error) {
-      console.error("Error clearing cart:", error);
-    }
-  };
-
-  const handlePayment = async (e) => {
-    e.preventDefault();
-
-    const address = JSON.parse(localStorage.getItem("deliveryAddress")) || {};
-    console.log("address: ", address);
-
-    if (address && Object.keys(address).length === 0) {
-      toast.info("Add address before payment");
-      return;
-    }
-
-    const { cardName, cardNumber, expiry, cvv } = cardData;
-
-    if (!cardName || !cardNumber || !expiry || !cvv) {
-      toast.error("Please fill all fields");
-      return;
-    }
-
-    try {
-      // TOKEN
-      const token = localStorage.getItem("token");
-
-      // SEND TO BACKEND
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/orders/create`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/clear`,
         {
-          method: "POST",
+          method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            items: cartItems.map((item) => ({
-              product: item.productId,
-              itemTotal: item.itemTotal,
-              cartQuantity: item.cartQuantity,
-            })),
-            address,
-            totalAmount: totalProductsPrice,
-            paymentMethod: "Card",
-            paymentStatus: "Paid",
-          }),
         },
       );
 
       const data = await response.json();
 
-      if (data.success) {
-        toast.success("Payment Successful");
-        await handleClearCart(); // Clear the cart after successful payment
-
-        setTimeout(() => {
-          window.location.href = "/orders";
-        }, 3000);
-      } else {
-        toast.error(data.message);
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to clear cart");
       }
-    } catch (error) {
-      console.log(error);
 
-      toast.error("Payment Failed");
+      return;
+    } catch (error) {
+      console.error("Clear Cart Error:", error);
+      throw error;
     }
   };
 
@@ -153,90 +227,62 @@ const Payment = () => {
 
         <div className="payment-left">
           <div className="payment-header">
-            <button onClick={() => (window.location.href = "/cart")}>🢠</button>
-            <h2>Payment Details</h2>
+            <button className="back-btn" onClick={() => navigate("/cart")}>
+              ←
+            </button>
+
+            <h2>Payment</h2>
           </div>
 
-          {/* CARD PREVIEW */}
-
-          <div className="atm-card">
-            <div className="card-top">
-              <h3>Grovo Bank</h3>
-              <span>VISA</span>
+          <div className="payment-card">
+            <div className="razorpay-logo">
+              <div className="payment-logo">
+                <SiRazorpay />
+              </div>
+              <h2>Razorpay</h2>
             </div>
 
-            <div className="chip"></div>
+            <h3>Secure Checkout</h3>
 
-            <h1>{cardData.cardNumber || "XXXX XXXX XXXX XXXX"}</h1>
+            <p>Complete your payment safely with Razorpay.</p>
 
-            <div className="card-bottom">
+            <div className="payment-methods">
               <div>
-                <p>Card Holder</p>
-                <h4>{cardData.cardName || "YOUR NAME"}</h4>
+                <span>✔</span>
+                UPI
               </div>
 
               <div>
-                <p>Expires</p>
-                <h4>{cardData.expiry || "MM/YY"}</h4>
+                <span>✔</span>
+                Credit / Debit Card
+              </div>
+
+              <div>
+                <span>✔</span>
+                Net Banking
+              </div>
+
+              <div>
+                <span>✔</span>
+                Wallets
+              </div>
+
+              <div>
+                <span>✔</span>
+                EMI
               </div>
             </div>
+
+            <button
+              className="pay-btn"
+              onClick={handlePayment}
+              disabled={loading}
+            >
+              {loading
+                ? "Opening Razorpay..."
+                : `Pay ₹ ${totalProductsPrice.toFixed(2)}`}
+            </button>
           </div>
-
-          {/* FORM */}
-
-          <form onSubmit={handlePayment}>
-            <div className="input-group">
-              <label>Card Holder Name</label>
-
-              <input
-                type="text"
-                name="cardName"
-                placeholder="Anish Chakraborty"
-                value={cardData.cardName}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-group">
-              <label>Card Number</label>
-
-              <input
-                type="text"
-                name="cardNumber"
-                placeholder="1234 5678 9012 3456"
-                value={cardData.cardNumber}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="row">
-              <div className="input-group">
-                <label>Expiry Date</label>
-
-                <input
-                  type="text"
-                  name="expiry"
-                  placeholder="MM/YY"
-                  value={cardData.expiry}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="input-group">
-                <label>CVV</label>
-
-                <input
-                  type="password"
-                  name="cvv"
-                  placeholder="123"
-                  value={cardData.cvv}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <button type="submit">Pay ₹ {totalProductsPrice.toFixed(2)}</button>
-          </form>
         </div>
 
         {/* RIGHT */}
@@ -246,27 +292,51 @@ const Payment = () => {
 
           <div className="summary-box">
             <div className="summary-row">
-              <p>Subtotal</p>
-              <span>₹ {totalProductsPrice.toFixed(2)}</span>
+              <span>Subtotal</span>
+              <strong>₹ {totalProductsPrice.toFixed(2)}</strong>
             </div>
 
             <div className="summary-row">
-              <p>Delivery</p>
-              <span>Free</span>
+              <span>Delivery</span>
+              <strong className="free">FREE</strong>
             </div>
 
+            <div className="divider"></div>
+
             <div className="summary-row total">
-              <p>Total</p>
-              <span>₹ {totalProductsPrice.toFixed(2)}</span>
+              <span>Total</span>
+              <strong>₹ {totalProductsPrice.toFixed(2)}</strong>
             </div>
           </div>
 
-          <div className="secure-box">🔒 100% Secure Payment</div>
+          <div className="security-card">
+            <div className="security-icon">🔒</div>
+
+            <div>
+              <h4>100% Secure Payment</h4>
+              <p>Powered by Razorpay</p>
+            </div>
+          </div>
+
+          <div className="features">
+            <div className="feature">
+              🚚
+              <span>Fast Checkout</span>
+            </div>
+
+            <div className="feature">
+              🔐
+              <span>Encrypted Payment</span>
+            </div>
+
+            <div className="feature">
+              ⭐<span>Trusted by Millions</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <ToastContainer position="top-right"
-        autoClose={2000}/>
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 };

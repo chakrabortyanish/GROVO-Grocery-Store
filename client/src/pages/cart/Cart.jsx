@@ -18,7 +18,7 @@ import axios from "axios";
 
 const Cart = () => {
   const userToken = localStorage.getItem("token");
-  const { setTotalProductsPrice, cartItems, setCartItems } =
+  const { setTotalProductsPrice, totalProductsPrice, cartItems, setCartItems } =
     useContext(CartContext);
 
   const navigate = useNavigate();
@@ -30,10 +30,6 @@ const Cart = () => {
     return;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [totalItems, setTotalItems] = useState(0);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [totalPrice, setTotalPrice] = useState(0);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [showAddressForm, setShowAddressForm] = useState(false);
@@ -67,9 +63,8 @@ const Cart = () => {
       );
 
       if (data.success) {
+        console.log("Fetched cart items:", data.items);
         setCartItems(data.items);
-        setTotalItems(data.totalItems);
-        setTotalPrice(data.totalPrice);
         setTotalProductsPrice(data.totalPrice);
       }
     } catch (error) {
@@ -358,7 +353,7 @@ const Cart = () => {
                   Total products: <span>{cartItems.length}</span>
                 </p>
                 <p>
-                  Total price: <span>₹ {totalPrice.toFixed(2)}</span>
+                  Total price: <span>₹ {totalProductsPrice.toFixed(2)}</span>
                 </p>
               </div>
               <button onClick={handleCheckout}>Checkout</button>

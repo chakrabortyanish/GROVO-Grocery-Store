@@ -1,300 +1,349 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.payment-page{
-  width:100%;
-  min-height:100vh;
-  background:#f4f7fb;
-  padding:40px 20px;
-  font-family:Arial, Helvetica, sans-serif;
+.payment-page {
+  min-height: 100vh;
+
+  background: linear-gradient(135deg, #f6f8ff, #eef2ff, #ffffff);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 60px 20px;
 }
 
-.payment-container{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  gap:40px;
-  align-items:flex-start;
-}
+.payment-container {
+  width: 100%;
+  max-width: 1150px;
 
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 45px;
+}
 
 /* LEFT */
 
-.payment-left{
-  flex:2;
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+.payment-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin-bottom: 25px;
 }
 
-.payment-header{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:25px;
+.back-btn {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: white;
+
+  cursor: pointer;
+
+  font-size: 20px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s;
 }
 
-.payment-header button{
-  width:35px;
-  height:35px;
-  border:none;
-  border-radius:50%;
-  background:#f2f2f2;
-  font-size:1.2rem;
-  cursor:pointer;
+.back-btn:hover {
+  transform: translateY(-3px);
 }
 
-.payment-left h2{
-  font-size:2rem;
+.payment-header h2 {
+  font-size: 32px;
+
+  color: #222;
 }
 
-/* CARD */
+.payment-card {
+  background: white;
 
-.atm-card{
-  width:100%;
-  max-width:500px;
-  height:280px;
-  border-radius:25px;
-  padding:30px;
-  margin-bottom:35px;
+  border-radius: 28px;
 
-  background:linear-gradient(
-    135deg,
-    #4f46e5,
-    #7c3aed,
-    #9333ea
-  );
+  padding: 40px;
 
-  color:white;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
 
-  position:relative;
-  overflow:hidden;
-
-  box-shadow:0 15px 35px rgba(79,70,229,0.35);
+  transition: 0.35s;
 }
 
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.payment-card:hover {
+  transform: translateY(-6px);
 }
 
-.card-top h3{
-  font-size:1.4rem;
+.razorpay-logo {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
 }
 
-.card-top span{
-  font-size:1.5rem;
-  font-weight:bold;
+.razorpay-logo h2 {
+  font-size: 28px;
+
+    background: linear-gradient(135deg, #5f2cff, #a300ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Standard property for compatibility */
+  background-clip: text;
+  color: transparent;
+
 }
 
-.chip{
-  width:70px;
-  height:50px;
-  border-radius:10px;
-  margin-top:30px;
+.payment-logo {
+  width: 85px;
+  height: 85px;
 
-  background:linear-gradient(
-    135deg,
-    #fcd34d,
-    #f59e0b
-  );
+  border-radius: 22px;
+
+  background: linear-gradient(135deg, #5f2cff, #a300ff);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 38px;
+
+  color: white;
 }
 
-.atm-card h1{
-  margin-top:28px;
-  letter-spacing:4px;
-  font-size:1.8rem;
+.payment-card h3 {
+  font-size: 32px;
+
+  margin-bottom: 10px;
 }
 
-.card-bottom{
-  margin-top:25px;
-  display:flex;
-  justify-content:space-between;
+.payment-card p {
+  color: #666;
+
+  line-height: 1.6;
+
+  margin-bottom: 30px;
 }
 
-.card-bottom p{
-  font-size:.8rem;
-  opacity:.8;
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  margin-bottom: 35px;
 }
 
-.card-bottom h4{
-  margin-top:5px;
-  font-size:1rem;
+.payment-methods div {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 17px;
+
+  color: #444;
 }
 
-/* FORM */
+.payment-methods span {
+  color: #00a651;
 
-form{
-  width:100%;
+  font-size: 18px;
 }
 
-.input-group{
-  margin-bottom:20px;
+.pay-btn {
+  width: 100%;
+
+  border: none;
+
+  padding: 17px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  color: white;
+
+  font-size: 19px;
+
+  font-weight: 700;
+
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+
+  transition: 0.35s;
 }
 
-.input-group label{
-  display:block;
-  margin-bottom:8px;
-  font-weight:600;
+.pay-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.35);
 }
 
-.input-group input{
-  width:100%;
-  height:50px;
-  border-radius:12px;
-  border:1px solid #ddd;
-  padding:0 15px;
-  font-size:1rem;
-  outline:none;
-}
+.pay-btn:disabled {
+  opacity: 0.7;
 
-.row{
-  display:flex;
-  gap:20px;
-}
-
-.row .input-group{
-  flex:1;
-}
-
-form button{
-  width:100%;
-  height:55px;
-  border:none;
-  border-radius:14px;
-
-  background:linear-gradient(
-    135deg,
-    #4f46e5,
-    #7c3aed
-  );
-
-  color:white;
-  font-size:1.1rem;
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:.3s;
-}
-
-form button:hover{
-  transform:translateY(-3px);
+  cursor: not-allowed;
 }
 
 /* RIGHT */
 
-.payment-page .payment-right{
-  width:350px;
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+.payment-right {
+  background: white;
 
-  position:sticky;
-  top:30px;
+  padding: 35px;
+
+  border-radius: 28px;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+
+  height: fit-content;
 }
 
-.payment-right h2{
-  margin-bottom:25px;
+.payment-right h2 {
+  margin-bottom: 25px;
+
+  color: #222;
 }
 
-.summary-box{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-  background:linear-gradient(
-    135deg,
-    #1a0efb,
-    #7c3aed,
-    #fa02cc
-  );
+.summary-box {
+  background: linear-gradient(135deg, #4f46e5, #d000ff);
 
-  color:white;
-  padding:20px;
-  border-radius:20px;
+  color: white;
+
+  padding: 28px;
+
+  border-radius: 22px;
+
+  margin-bottom: 28px;
 }
 
-.summary-row{
-  display:flex;
-  justify-content:space-between;
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 18px 0;
+
+  font-size: 18px;
 }
 
-.total{
-  padding-top:15px;
-  border-top:1px solid #ddd;
-  font-size:1.2rem;
-  font-weight:bold;
+.divider {
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.3);
+
+  margin: 25px 0;
 }
 
-.secure-box{
-  margin-top:30px;
-  padding:15px;
-  border-radius:12px;
-  background:#eef2ff;
-  color:#4338ca;
-  font-weight:600;
-  text-align:center;
+.total {
+  font-size: 22px;
+
+  font-weight: 700;
 }
 
-/* MOBILE */
-
-@media screen and (max-width:900px){
-
-  .payment-container{
-    flex-direction:column;
-  }
-
-  .payment-right{
-    width:100%;
-    position:static;
-  }
-
-  .atm-card{
-    height:auto;
-    padding:25px;
-  }
-
-  .atm-card h1{
-    font-size:1.5rem;
-  }
+.free {
+  color: #bbffb3;
 }
 
-@media screen and (max-width:600px){
+.security-card {
+  display: flex;
 
-  .payment-page{
-    padding:20px 10px;
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 20px;
+
+  border-radius: 18px;
+
+  background: #f3f6ff;
+
+  margin-bottom: 25px;
+}
+
+.security-icon {
+  width: 55px;
+  height: 55px;
+
+  background: white;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 24px;
+}
+
+.security-card h4 {
+  color: #222;
+
+  margin-bottom: 5px;
+}
+
+.security-card p {
+  color: #666;
+}
+
+.features {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.feature {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 18px;
+
+  border-radius: 15px;
+
+  background: #fafafa;
+
+  transition: 0.3s;
+}
+
+.feature:hover {
+  transform: translateX(6px);
+
+  background: #eef3ff;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .payment-container {
+    grid-template-columns: 1fr;
   }
 
-  .payment-left{
-    padding:20px;
+  .payment-right {
+    order: -1;
   }
 
-  .payment-left h2{
-    font-size:1.5rem;
+  .payment-header h2 {
+    font-size: 28px;
   }
 
-  .atm-card{
-    max-width:100%;
+  .payment-card {
+    padding: 30px;
   }
 
-  .atm-card h1{
-    font-size:1.2rem;
-    letter-spacing:2px;
-  }
-
-  .row{
-    flex-direction:column;
-    gap:0;
-  }
-
-  .card-bottom{
-    flex-direction:column;
-    gap:15px;
+  .payment-right {
+    padding: 30px;
   }
 }
