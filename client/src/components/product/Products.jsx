@@ -110,7 +110,7 @@ const Products = () => {
                   <h3>{item.name}</h3>
                   <div className="des">{item.des}</div>
                   <div className="price">Rs. {item.price}</div>
-                  <div className="add-to-cart" id={item.id}>
+                  <div className="add-to-cart" id={item.id} onClick={() => alert("This section is under development.")}>
                     Add to Cart
                   </div>
                 </div>

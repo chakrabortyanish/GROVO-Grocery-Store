@@ -17,8 +17,8 @@ const AppDownload = () => {
            <p>Grocery shopping made easier. Now, you don't need to open the website for placing orders. Download the Grovo app from Play Store and App Store to start shopping easily and faster.</p>
            <div className="happy-shopping">HAPPY SHOPPING!</div>
            <div className="logos">
-              <img src={appstore} alt="appstore" />
-              <img src={googleplay} alt="googleplay" />
+              <img src={appstore} alt="appstore" onClick={()=> alert("This project is for display purposes only. The app is not available for download.")}/>
+              <img src={googleplay} alt="googleplay" onClick={()=> alert("This project is for display purposes only. The app is not available for download.")}/>
            </div>
         </div>
     </div>

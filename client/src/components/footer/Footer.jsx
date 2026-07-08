@@ -50,7 +50,7 @@ const Footer = () => {
             <li>Cities we serve</li>
           </ul>
         </div>
-        <div className="copy-right">Copyright ©2025 | All Rights Reserved | Designed by <span style={{color: "yellow"}}>Anish Chakraborty</span></div>
+        <div className="copy-right">Copyright ©2025 | All Rights Reserved | Developed by <span style={{color: "yellow"}}>Anish Chakraborty</span></div>
       </div>
     </div>
   );
