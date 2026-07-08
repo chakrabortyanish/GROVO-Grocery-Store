@@ -4,12 +4,16 @@ import "./Orders.css";
 import { MdOutlineShoppingBag, MdOutlineLocationOn } from "react-icons/md";
 import Footer from "../../components/footer/Footer";
 
+import { downloadInvoice } from "../../services/orderService.js";
+import { toast, ToastContainer } from "react-toastify";
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
 
   const token = localStorage.getItem("token");
 
   const [loading, setLoading] = useState(true);
+  const [generatingInvoice, setGeneratingInvoice] = useState(false);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/allOrders`, {
@@ -24,12 +28,44 @@ const Orders = () => {
       .then((data) => {
         if (data.success) {
           setOrders(data.orders);
-          // console.log("Fetched orders:", data.orders);
+          console.log("Fetched orders:", data.orders);
         }
       })
       .catch((err) => console.error("Error fetching orders:", err))
       .finally(() => setLoading(false));
   }, []);
+
+  // handle invoice download
+  const handleDownloadInvoice = async (id) => {
+    setGeneratingInvoice(true);
+
+    try {
+      const token = localStorage.getItem("token");
+
+      const pdfBlob = await downloadInvoice(id, token);
+
+      const url = window.URL.createObjectURL(pdfBlob);
+
+      const link = document.createElement("a");
+
+      link.href = url;
+
+      link.download = `Invoice-${id}.pdf`;
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      window.URL.revokeObjectURL(url);
+      setGeneratingInvoice(false);
+      toast.success("Invoice downloaded successfully");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to download invoice");
+    }
+  };
 
   return (
     <>
@@ -97,7 +133,10 @@ const Orders = () => {
                         {order.items.map((item) => (
                           <div className="product-item" key={item._id}>
                             <div className="product-left">
-                              <img src={item.product.image} alt={item.product.name} />
+                              <img
+                                src={item.product.image}
+                                alt={item.product.name}
+                              />
 
                               <div>
                                 <h3>{item.product.name}</h3>
@@ -126,6 +165,10 @@ const Orders = () => {
                           </div>
 
                           <div className="address-details">
+                            <div className="address-row" >
+                                  <span className="address-key">Name:</span>
+                                  <span className="address-value">{order.userId.firstName+" "+order.userId.lastName}</span>
+                                </div>
                             {Object.entries(order.address || {}).map(
                               ([key, value]) => (
                                 <div className="address-row" key={key}>
@@ -160,6 +203,14 @@ const Orders = () => {
                           </div>
                         </div>
                       </div>
+                      <div
+                        className="invoice-btn"
+                        onClick={() => handleDownloadInvoice(order._id)}
+                      >
+                        {generatingInvoice
+                          ? "Generating Invoice..."
+                          : "Download Invoice"}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -169,6 +220,7 @@ const Orders = () => {
         </div>
       </div>
       <Footer />
+      <ToastContainer />
     </>
   );
 };

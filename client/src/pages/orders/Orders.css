@@ -315,6 +315,24 @@
   font-size:1.1rem;
 }
 
+/* invoice download */
+.invoice-btn{
+  width: 100%;
+  margin-top: 30px;
+  background-color: #e5ffd0;
+  padding: 10px;
+  border-radius: 25px;
+  box-shadow:
+  inset 2px 2px 4px rgba(0,0,0,0.1),
+  inset -2px -2px 4px rgba(255,255,255,0.7);
+  text-align: center;
+  cursor: pointer;
+}
+
+.invoice-btn:hover{
+  background-color: #aaff64;
+}
+
 /* EMPTY */
 
 .empty-orders{

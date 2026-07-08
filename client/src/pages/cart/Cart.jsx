@@ -30,6 +30,8 @@ const Cart = () => {
     return;
   }
 
+  const { firstName, lastName } = userToken ? jwtDecode(userToken) : {};
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [showAddressForm, setShowAddressForm] = useState(false);
 
@@ -37,7 +39,7 @@ const Cart = () => {
   const [address, setAddress] = useState(() => {
     return (
       JSON.parse(localStorage.getItem("deliveryAddress")) || {
-        /* fullName: firstName || "", */
+        fullName: firstName+" "+lastName || "",
         area: "",
         city: "",
         state: "",
@@ -80,8 +82,6 @@ const Cart = () => {
     const stored = JSON.parse(localStorage.getItem("items")) || [];
     setCartItems(stored);
   }, []);
-
-  const { firstName, lastName } = userToken ? jwtDecode(userToken) : {};
 
   function handleCheckout() {
     if (localStorage.getItem("deliveryAddress") === null) {
