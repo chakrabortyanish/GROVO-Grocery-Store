@@ -2,41 +2,77 @@
 #### Grovo Grocery Store is a modern, full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) that provides users with a smooth online grocery shopping experience. The platform allows customers to browse grocery items by category, search for products, add them to the cart, and manage their orders seamlessly.
 ### 📌Project Link: https://grovo-grocery-store.vercel.app/
 
-##🚀 Technologies Used <br>
+## 🚀 Technologies Used
 
-#### 💻 Frontend<br>
-    React.js
-    React Router DOM
-    CSS
-    fetch (for API calls)
-    
-####🖥️ Backend<br>
+### 💻 Frontend
+    - React.js
+    - React Router DOM
+    - CSS
+    - Fetch API and Axios (for API calls)
+    - React Toastify
 
-    Node.js
-    Express.js
-    MongoDB (Database)
-    Mongoose (ODM)
-    Multer (Image Upload)
-    JWT Authentication
+### 🖥️ Backend
+    - Node.js
+    - Express.js
+    - MongoDB
+    - Mongoose
+    - Multer (Image handle)
+    - Cloudinary ( Image storage)
+    - JWT Authentication
+    - Razorpay Payment Gateway
 
-## 🔐 Features<br>
-    User Registration and Login <br>
-    Browse Products<br>
-    Add to Cart<br>
-    Place Orders<br>
-    Responsive Design<br>
+---
 
-## 🔑 Admin Features
+## 🔐 User Features
+
+    - User Registration & Login
+    - Browse Products
+    - Search Products
+    - View Product Details
+    - Add to Cart
+    - Update Cart Quantity
+    - Remove Items from Cart
+    - Secure Checkout
+    - Razorpay Payment Integration
+    - Order Confirmation
+    - Order History
+    - Responsive Design
+
+---
+
+## 👨‍💼 Admin Features
+
     - Admin Authentication (Login & Logout)
     - Dashboard Overview
     - Add New Products
-    - Edit Existing Products
+    - Edit Products
     - Delete Products
-    - Manage Product Inventory
     - Update Stock Status (In Stock / Out of Stock)
     - Upload Product Images
-    - View Total Products
+    - View All Products
+    - View Customer Orders
     - Responsive Admin Dashboard
+
+---
+
+## 💳 Payment Gateway
+
+    - Razorpay Payment Gateway Integration
+    - Secure Online Payments
+    - Test & Live Mode Support
+    - Payment Verification
+    - Order Creation Before Payment
+    - Signature Verification
+    - Automatic Payment Status Update
+
+## ✨ Additional Features
+
+    - JWT Protected Routes
+    - Image Upload with Multer
+    - RESTful API Architecture
+    - Responsive UI for Mobile & Desktop
+    - Environment Variable Configuration
+    - Error Handling & Validation
 
 ## 📷 Screenshots<br>
 <img width="1245" height="621" alt="image" src="https://github.com/user-attachments/assets/8df7ba78-4fab-4072-8ea9-3b46c198e880" />
@@ -50,7 +86,10 @@
 <img width="1260" height="558" alt="7" src="https://github.com/user-attachments/assets/ffbbcf69-9aae-4923-a7be-6a95dc4e4cbb" /><br>
 <img width="1098" height="649" alt="image" src="https://github.com/user-attachments/assets/0d3522fe-8c05-4b8c-9be3-4d6c6cdb374b" />
 <br>
-<img width="1122" height="643" alt="image" src="https://github.com/user-attachments/assets/398ae9cd-0989-4a73-9311-e8b8605030bb" /><br>
+<img width="1108" height="639" alt="image" src="https://github.com/user-attachments/assets/c3acd9f2-9d4d-45f4-86bb-a7bd843d3691" /><br>
+<img width="1086" height="635" alt="image" src="https://github.com/user-attachments/assets/534360e0-7070-4e3a-a34f-129aa733cf0c" />
+
+<br>
 <img width="400" height="470" alt="r" src="https://github.com/user-attachments/assets/5a5dcdc7-8b18-4e7c-b17e-5970d611f0ca" />
 <img width="400" height="470" alt="d" src="https://github.com/user-attachments/assets/deb4ca23-e89d-43e3-9025-4b37f4b22afd" />
 <img width="1311" height="628" alt="image" src="https://github.com/user-attachments/assets/ec358b0f-f47f-498b-81ac-03b39bd68fa7" /><br>
