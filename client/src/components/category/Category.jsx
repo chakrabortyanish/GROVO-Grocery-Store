@@ -16,7 +16,7 @@ const Category = () => {
     <div className="category" id="categories">
       <h2 className="title">Category</h2>
       <div className="con-item">
-        <Link to="/fruits-vegetables">
+        <Link to="/stationary">
           <div className="item">
             <img src={office} alt="office" className="category-image" />
             <h3>Stationary</h3>
