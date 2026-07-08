@@ -72,7 +72,7 @@ const loginAdmin = async (req, res) => {
         expiresIn: "7d",
       }
     );
-    console.log("Generated token:", token);
+    // console.log("Generated token:", token);
 
     res.status(200).json({
       success: true,

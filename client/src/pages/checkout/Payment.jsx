@@ -144,7 +144,7 @@ const Payment = () => {
               toast.error(verify.message);
             }
           } catch (err) {
-            console.log(err);
+            // console.log(err);
             toast.error("Verification Failed");
           } finally {
             setLoading(false);
@@ -172,7 +172,7 @@ const Payment = () => {
       paymentObject.on("payment.failed", function (response) {
         toast.error("Payment Failed");
 
-        console.log(response.error);
+        // console.log(response.error);
 
         setLoading(false);
       });
@@ -180,7 +180,7 @@ const Payment = () => {
       paymentObject.open();
     } catch (error) {
       console.error("Payment Error:", error);
-      console.log(error);
+      // console.log(error);
 
       toast.error("Something went wrong.");
 

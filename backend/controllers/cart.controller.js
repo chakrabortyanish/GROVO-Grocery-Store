@@ -122,13 +122,13 @@ export const getCart = async (req, res) => {
 
 // increase cart quantity
 export const increaseCart = async (req, res) => {
-  console.log("Increase Cart called");
+  // console.log("Increase Cart called");
   try {
     const userId = req.user.id;
 
     const { productId } = req.params;
 
-    console.log("Product ID:", productId, userId); // Log the productId to check its value
+    // console.log("Product ID:", productId, userId); // Log the productId to check its value
 
     const cart = await Cart.findOne({ userId });
 

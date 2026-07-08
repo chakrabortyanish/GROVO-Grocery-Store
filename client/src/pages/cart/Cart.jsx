@@ -63,12 +63,12 @@ const Cart = () => {
       );
 
       if (data.success) {
-        console.log("Fetched cart items:", data.items);
+        // console.log("Fetched cart items:", data.items);
         setCartItems(data.items);
         setTotalProductsPrice(data.totalPrice);
       }
     } catch (error) {
-      console.error("Error fetching cart items:", error);
+      // console.error("Error fetching cart items:", error);
       toast.error("Failed to fetch cart items");
     }
   };
