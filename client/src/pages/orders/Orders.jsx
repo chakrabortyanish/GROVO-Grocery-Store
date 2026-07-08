@@ -77,8 +77,7 @@ const Orders = () => {
                       <div className="order-top">
                         <div>
                           <h2>Order ID</h2>
-
-                          <p>#{order._id.slice(-8)}</p>
+                          <p>{order.razorpayOrderId}</p>
                         </div>
 
                         <div className="top-right">

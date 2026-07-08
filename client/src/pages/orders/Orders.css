@@ -147,7 +147,6 @@
 }
 
 .order-top p{
-  margin-top:6px;
   color:#666;
 }
 
@@ -245,7 +244,7 @@
   background:#f8fafc;
 
   padding:20px;
-
+  margin: 0 !important;
   border-radius:20px;
 }
 
