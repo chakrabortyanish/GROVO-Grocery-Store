@@ -81,7 +81,7 @@ const ProductCard = ({ item }) => {
         <img src={item.image} alt={item.name} />
       </div>
 
-      <h3>{item.name}</h3>
+      <h3 className="product-title">{item.name}</h3>
       <div className="weight">
         {item.quantity} {item.unit}
       </div>
