@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {CartContext} from "./contextAPI/cartContext.jsx";
+import { CartContext } from "./contextAPI/cartContext.jsx";
 
 const ProductCard = ({ item }) => {
+  console.log("ProductCard item:", item); // Log the item prop to check its value
   const navigate = useNavigate();
   const { setCartCount } = useContext(CartContext);
 
@@ -16,13 +17,13 @@ const ProductCard = ({ item }) => {
 
   const handleCart = async (productId) => {
     if (!userToken) {
-    toast.error("Please login first");
-    setTimeout(() => {
+      toast.error("Please login first");
+      setTimeout(() => {
         navigate("/login");
       }, 1000);
       return;
-  }
-  
+    }
+
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/cart/add`,
@@ -34,7 +35,7 @@ const ProductCard = ({ item }) => {
             Authorization: `Bearer ${userToken}`,
           },
           withCredentials: true,
-        }
+        },
       );
 
       if (data.success) {
@@ -45,8 +46,8 @@ const ProductCard = ({ item }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.error("Error adding to cart:", error);
-      toast.error("Failed to add to cart");
+      // console.error("Error adding to cart:", error);
+      toast.error("Failed to add to cart: " + error.response.data.message);
     }
   };
 
@@ -54,29 +55,35 @@ const ProductCard = ({ item }) => {
     fetchCartItems();
   }, []);
 
-
   const fetchCartItems = async () => {
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/cart/`,
-          {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-            },
-            withCredentials: true,
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
           },
-        );
-  
-        if (data.success) {
-          setCartCount(data.totalItems);
-        }
-      } catch (error) {
-        console.error("Error fetching cart items:", error);
+          withCredentials: true,
+        },
+      );
+
+      if (data.success) {
+        setCartCount(data.totalItems);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
 
   return (
     <div className="itemInfo">
+      <div className={`stock-status ${item.inStock === "In Stock" ? "in-stock" : "out-of-stock"}`}>
+        {item.inStock == "In Stock" ? (
+          <span className="">In Stock</span>
+        ) : (
+          <span className="">Out of Stock</span>
+        )}
+      </div>
       <div className="image">
         <img src={item.image} alt={item.name} />
       </div>

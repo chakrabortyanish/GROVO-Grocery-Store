@@ -1,5 +1,7 @@
-import React, {/*  useContext, */ useEffect, useState } from "react";
+import React, { /*  useContext, */ useEffect, useState } from "react";
 import "./Products.css";
+// import order css file to use the same loading spinner
+import "../../pages/orders/Orders.css";
 
 // import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +18,7 @@ const Products = () => {
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const productsPerPage = 8;
 
@@ -32,6 +35,7 @@ const Products = () => {
 
         if (data.success) {
           setProducts(data.products);
+          setLoading(false);
         }
       } catch (error) {
         console.log(error);
@@ -56,33 +60,40 @@ const Products = () => {
     <div className="products-main">
       <div className="Popular-Product">
         <h2 className="title">Popular Product</h2>
-        <div className="product">
-          {currentProducts.map((item, i) => {
-            return <ProductCard item={item} key={i}/>
-          })}
-          
-        </div>
-
-        {/* Pagination buttons */}
-          <div className="pagination">
-            <button
-              onClick={() => setCurrentPage((prev) => prev - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-
-            <span>
-              {currentPage} / {totalPages}
-            </span>
-
-            <button
-              onClick={() => setCurrentPage((prev) => prev + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
+        {loading ? (
+          <div class="loading-state" id="loading-state">
+            <div class="spinner" id="spinner"></div>
+            <p class="loading-text">Loading Products...</p>
           </div>
+        ) : (
+          <>
+            <div className="product">
+              {currentProducts.map((item, i) => {
+                return <ProductCard item={item} key={i} />;
+              })}
+            </div>
+            {/* Pagination buttons */}
+            <div className="pagination">
+              <button
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+
+              <span>
+                {currentPage} / {totalPages}
+              </span>
+
+              <button
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {/*  Popular Bundle Pack */}
@@ -99,10 +110,7 @@ const Products = () => {
                   <h3>{item.name}</h3>
                   <div className="des">{item.des}</div>
                   <div className="price">Rs. {item.price}</div>
-                  <div
-                    className="add-to-cart"
-                    id={item.id}
-                  >
+                  <div className="add-to-cart" id={item.id}>
                     Add to Cart
                   </div>
                 </div>

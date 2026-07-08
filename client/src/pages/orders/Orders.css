@@ -71,7 +71,7 @@
   width: 200px;
   border-top: 4px solid #3b82f6; /* border-blue-500 */
   border-right: 4px solid transparent; /* Required for the spinning arc effect */
-  border-bottom: 4px solid transparent;
+  border-bottom: 4px solid rgb(234, 0, 255);
   border-left: 4px solid transparent;
   border-radius: 50%; /* rounded-full */
   margin-left: auto; /* mx-auto */

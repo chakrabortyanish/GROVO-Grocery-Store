@@ -11,8 +11,21 @@
   width: 100%;
   display: grid;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr) !important;
   gap: 30px;
+}
+
+#loading-state{
+  height: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center !important;
+}
+
+#spinner{
+  height: 100px;
+  width: 100px;
 }
 
 .itemInfo{
@@ -24,6 +37,29 @@
    overflow: hidden;
    transition: all 0.3s ease 0s;
    position: relative;
+}
+
+.itemInfo .stock-status{
+  font-family: poppins, sans-serif;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 3px 5px;
+  border-radius: 0px 0px 0px 5px;
+  z-index: 50;
+
+}
+
+.itemInfo .in-stock{
+  background-color: #4eb060;
+  color: white !important;
+}
+
+.itemInfo .out-of-stock{
+  background-color: #f44336;
+  color: white !important;
 }
 
 .itemInfo:hover{
