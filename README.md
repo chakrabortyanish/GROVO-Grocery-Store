@@ -36,6 +36,7 @@
     - Razorpay Payment Integration
     - Order Confirmation
     - Order History
+    - Download Invoice
     - Responsive Design
 
 ---
@@ -79,7 +80,8 @@
 
 <br>
 <img width="1166" height="265" alt="2" src="https://github.com/user-attachments/assets/a2da08ed-c4d9-499e-9198-1adae6b18fa4" /><br>
-<img width="1057" height="579" alt="3" src="https://github.com/user-attachments/assets/72fba62f-ffbd-450b-aa78-30d0596d90f8" /><br>
+<img width="1100" height="647" alt="image" src="https://github.com/user-attachments/assets/4e88d4f7-684e-4ea4-964a-8545333c440e" />
+<br>
 <img width="1011" height="476" alt="4" src="https://github.com/user-attachments/assets/fa2fce64-539e-4040-a2c2-c5974be764ae" /><br>
 <img width="1067" height="473" alt="5" src="https://github.com/user-attachments/assets/45ef261e-f2e5-4a9b-95c1-59660b907204" /><br>
 <img width="1196" height="258" alt="6" src="https://github.com/user-attachments/assets/15fcce54-ab59-453b-9c08-59d1454c64df" /><br>
@@ -88,14 +90,16 @@
 <br>
 <img width="1108" height="639" alt="image" src="https://github.com/user-attachments/assets/c3acd9f2-9d4d-45f4-86bb-a7bd843d3691" /><br>
 <img width="1086" height="635" alt="image" src="https://github.com/user-attachments/assets/534360e0-7070-4e3a-a34f-129aa733cf0c" />
-
 <br>
-<img width="400" height="470" alt="r" src="https://github.com/user-attachments/assets/5a5dcdc7-8b18-4e7c-b17e-5970d611f0ca" />
-<img width="400" height="470" alt="d" src="https://github.com/user-attachments/assets/deb4ca23-e89d-43e3-9025-4b37f4b22afd" />
+<img width="1120" height="643" alt="image" src="https://github.com/user-attachments/assets/0f693b1e-7583-4a1e-9bfa-68a7a0ff672b" /><br>
+<img width="1100" height="594" alt="image" src="https://github.com/user-attachments/assets/445c2d83-85b2-4e16-9261-bdd47f8d7f3d" /><br>
+
+<!--<img width="400" height="470" alt="r" src="https://github.com/user-attachments/assets/5a5dcdc7-8b18-4e7c-b17e-5970d611f0ca" />
+<img width="400" height="470" alt="d" src="https://github.com/user-attachments/assets/deb4ca23-e89d-43e3-9025-4b37f4b22afd" />-->
 <img width="1311" height="628" alt="image" src="https://github.com/user-attachments/assets/ec358b0f-f47f-498b-81ac-03b39bd68fa7" /><br>
 <img width="1294" height="638" alt="image" src="https://github.com/user-attachments/assets/f9a4b1ca-a441-458b-9032-a49297b71a8b" /><br>
 <img width="1318" height="638" alt="image" src="https://github.com/user-attachments/assets/43ff475a-a61d-40a3-9711-ca0de6b47550" /><br>
-<img width="787" height="572" alt="11" src="https://github.com/user-attachments/assets/95cdfa28-e049-44f3-84b8-fa792a6ea239" /><br>
+<img width="1100" height="572" alt="11" src="https://github.com/user-attachments/assets/95cdfa28-e049-44f3-84b8-fa792a6ea239" /><br>
 
 
 ### ⭐ If you find this project helpful, please give it a star!
