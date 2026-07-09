@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CartContext } from "./contextAPI/cartContext.jsx";
 
 const ProductCard = ({ item }) => {
-  console.log("ProductCard item:", item); // Log the item prop to check its value
+  // console.log("ProductCard item:", item); // Log the item prop to check its value
   const navigate = useNavigate();
   const { setCartCount } = useContext(CartContext);
 

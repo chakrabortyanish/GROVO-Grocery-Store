@@ -1,25 +1,31 @@
-.signup-container{
-    width: 320px;
-    margin: 30px auto;
+/* Base Resets & Global Font */
+.signup-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 100%;
+  max-width: 500px; /* Marginally wider for better field breathing room */
+  margin: 20px auto;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
-
+/* Header/Brand Section */
 .heading-signup {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 7px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 28px;
 }
 
 .heading-signup img {
-  width: 40px;
+  width: 36px;
+  height: auto;
 }
 
 .heading-signup h1 {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   background: linear-gradient(
     90deg,
     #ff4b1f,
@@ -31,103 +37,148 @@
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin: 0;
 }
 
-
-.container{
-    width: 100%;
-    padding: 20px 20px;
-    text-align: left;
-    border: 2px solid rgb(120, 120, 120);
-    border-radius: 10px;
+/* Main Form Card */
+.form-card {
+  width: 100%;
+  background: #ffffff;
+  padding: 32px 28px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 
+              0 2px 5px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
-.container h2{
-    margin-bottom: 30px;
-    text-align: center;
-    color: blue;
-    text-decoration: underline;
+.form-card h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
-.container input{
-    font-family: 'Times New Roman', Times, serif;
-    color: rgb(0, 0, 0);
-    display: block;
-    width: 100%;
-    border: 1px solid rgb(40, 40, 40);
-    border-radius: 7px;
-    outline: 0;
-    font-size: 1.2rem;
-    font-weight: 400;
-    padding: 5px 0px 5px 10px;
-    margin-top: 5px;
+/* Form Layout Structure */
+.name-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
 }
 
-.container .fullname input{
-   text-transform: capitalize;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.container .fullname{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.name-row .form-group {
+  width: 50%;
 }
 
-.first-name, .last-name{
-    width: 45%;
+/* Form Labels */
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 6px;
 }
 
-.from-text{
-    color: rgb(62, 62, 62);
-    width: 100%;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 10px;
+#opt-text{
+    font-size: 12px;
+    color: #10b981;
 }
 
-.form-err{
-    color: red;
-    font-size: 0.9rem;
-    font-weight: 400;
-    height: 10px;
+/* Inputs styling */
+.form-card input {
+  font-family: inherit;
+  color: #1a1a1a;
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+  font-weight: 400;
+  padding: 10px 14px !important;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
 }
 
-#submit{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    width: 100%;
-    color: white;
-    background-color: rgb(0, 0, 161);
-    padding: 7px 0;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 1.5rem;
-    cursor: pointer;
+/* Input states */
+.form-card input:hover {
+  border-color: #cbd5e1;
 }
 
-#success{
-    color: green;
-    text-align: center;
-    font-weight: 600;
-    margin-top: 10px;
+.form-card input:focus {
+  background-color: #ffffff;
+  border-color: #4f46e5; /* Modern Indigo */
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
-#submit:hover{
-    background-color: rgb(20, 20, 215);
+.form-card input::placeholder {
+  color: #94a3b8;
 }
 
-.already-account{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 0.9rem;
-    display: block;
-    text-align: center;
-    margin-top: 5px;
-    color: rgb(167, 0, 155);
-    text-decoration: none;
-    font-weight: 500;
+/* Submit Button */
+#submit {
+  font-family: inherit;
+  width: 100%;
+  color: #ffffff;
+  background-color: #4f46e5; /* Premium modern Indigo */
+  padding: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 8px;
 }
 
-.already-account:hover{
-    color: rgb(0, 32, 114);
-    text-decoration: underline;
+#submit:hover {
+  background-color: #4338ca;
 }
 
+#submit:active {
+  transform: scale(0.98);
+}
+
+/* Footer Link */
+.already-account {
+  font-size: 0.9rem;
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.already-account span {
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.already-account:hover span {
+  text-decoration: underline;
+}
+
+/* Status Notifications styling overrides if needed */
+.form-err {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+#success {
+  color: #10b981;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 12px;
+}

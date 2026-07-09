@@ -2,30 +2,84 @@ import bcrypt from "bcrypt";
 import { User } from "../models/User.js";
 import jwt from "jsonwebtoken";
 
+// opt configuration
+import otpGenerator from "otp-generator";
+import sendOTP from "../utils/sendOTP.js";
+
+const userData = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password -otp");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
 const signUpUser = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
+
     const user = await User.findOne({ email });
+
     if (user) {
-      return res
-        .status(409)
-        .json({ message: "User already exists ,you have to login" });
+      return res.status(409).json({
+        message: "User already exists",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const result = await User.create({
-      firstName,
-      lastName,
-      email,
-      password: hashedPassword,
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+      digits: true,
     });
 
-    return res
-      .status(201)
-      .json({ message: "Signup Successful", success: true });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal server error", error });
+    await User.create({
+      firstName,
+
+      lastName,
+
+      email,
+
+      password: hashedPassword,
+
+      otp,
+
+      otpExpires: Date.now() + 1 * 60 * 1000,
+
+      isVerified: false,
+    });
+
+    await sendOTP(email, otp);
+
+    return res.status(201).json({
+      success: true,
+
+      message: "OTP sent to your email.",
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
   }
 };
 
@@ -47,6 +101,13 @@ const signInUser = async (req, res) => {
       return res.status(401).json({ message: "Password is not matched" });
     }
 
+    // verify opt
+    if (!user.isVerified) {
+      return res.status(401).json({
+        message: "Please verify your email first.",
+      });
+    }
+
     // 3. Success
     const token = jwt.sign(
       {
@@ -56,7 +117,7 @@ const signInUser = async (req, res) => {
         mail: user.email,
       },
       process.env.SECRET_KEY,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
 
     const options = {
@@ -73,6 +134,99 @@ const signInUser = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
+const verifyOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (user.otp !== otp) {
+      return res.status(400).json({
+        message: "Invalid OTP",
+      });
+    }
+
+    if (user.otpExpires < Date.now()) {
+      return res.status(400).json({
+        message: "OTP expired",
+      });
+    }
+
+    user.isVerified = true;
+
+    user.otp = "";
+
+    user.otpExpires = null;
+
+    await user.save();
+
+    return res.json({
+      success: true,
+
+      message: "Email verified successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+const resendOTP = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Optional: Don't resend if already verified
+    if (user.isVerified) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is already verified",
+      });
+    }
+
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+      digits: true,
+    });
+
+    user.otp = otp;
+    user.otpExpires = Date.now() + 60 * 1000; // 1 minute
+
+    await user.save();
+
+    await sendOTP(email, otp);
+
+    return res.status(200).json({
+      success: true,
+      message: "New OTP sent successfully",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
 };
 
@@ -112,4 +266,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export { signUpUser, signInUser, deleteUser, logOutUser };
+export { userData, signUpUser, signInUser, deleteUser, logOutUser, verifyOTP, resendOTP };

@@ -41,6 +41,8 @@ import AddProduct from "./pages/adminDashboard/AddProduct.jsx";
 import ManageProducts from "./pages/adminDashboard/ManageProducts.jsx";
 import Dashboard from "./pages/adminDashboard/Dashboard.jsx";
 
+import VerifyOTP from "./pages/VerifyOTP/VerifyOTP.jsx"
+
 // Router setup
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +50,7 @@ const Router = createBrowserRouter(
       <Route path="/" element={<App />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
       <Route path="/login" element={<LogIn />}></Route>
+      <Route path="/verify-otp" element={<VerifyOTP />} />
       <Route path="/delete" element={<Delete />}></Route>
       <Route path="/cart" element={<Cart />}></Route>
       <Route path="/payment" element={<Payment />}></Route>
@@ -55,7 +58,6 @@ const Router = createBrowserRouter(
       <Route path="/about" element={<AboutUs />}></Route>
       <Route path="/contact" element={<ContactUs />}></Route>
       <Route path="/feedback" element={<Feedback />}></Route>
-
       // Product category routes
       <Route path="/baby-care" element={<BabyCare />} />
       <Route path="/medicine" element={<Medicine />} />
@@ -63,7 +65,6 @@ const Router = createBrowserRouter(
       <Route path="/beauty" element={<Beauty />} />
       <Route path="/gardening" element={<Gardening />} />
       <Route path="/fruits-vegetables" element={<FruitsVegetables />} />
-
       {/* admin routes */}
       <Route path="/admin-auth" element={<AdminAuth />}></Route>
       <Route path="/admin" element={<AdminLayout />}>

@@ -15,7 +15,7 @@ import { CartContext } from "../../components/contextAPI/cartContext.jsx";
 const Delete = () => {
   const navigate = useNavigate();
 
-  const { setCartCount, setUser  } = useContext(CartContext); 
+  const { setCartCount, setUser } = useContext(CartContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ const Delete = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const confirmDelete  = await Swal.fire({
+    const confirmDelete = await Swal.fire({
       title: "Are you sure?",
       text: "You won’t be able to recover this account!",
       icon: "warning",
@@ -49,11 +49,14 @@ const Delete = () => {
       });
       return;
     }
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/delete`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/user/delete`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      },
+    );
     const result = await response.json();
     // console.log(result);
     const { message, success } = result;
@@ -63,7 +66,7 @@ const Delete = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("items");
       localStorage.removeItem("deliveryAddress");
-      setCartCount(0); 
+      setCartCount(0);
       setUser(null);
       toast.success(message, {
         position: "top-right",
@@ -97,35 +100,42 @@ const Delete = () => {
         <img src={store_icon} alt="Grovo" />
         <h1>Grovo</h1>
       </div>
-      <div className="login-box">
-        <h2 id="del-h2">Delete Account</h2>
+      <div className="delete-card">
+        <h2>Delete Account</h2>
+        <p className="delete-warning">
+          Warning: This action is permanent. Please enter your credentials to
+          confirm identity.
+        </p>
         <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input
-            className="email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button className="SignIn" type="submit">
+          <div className="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button className="delete-btn" type="submit">
             Delete Account
           </button>
         </form>
-        <Link to="/" id="go-back">
-          Go Back
+        <Link to="/" className="go-back-link">
+          Cancel & Go Back
         </Link>
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={1500} />
     </div>
   );
 };
