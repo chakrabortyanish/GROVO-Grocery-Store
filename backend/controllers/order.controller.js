@@ -402,32 +402,31 @@ export const downloadInvoice = async (req, res) => {
     doc.moveDown(3);
     const sigY = doc.y;
     
-    // Replace this string with your actual signature image link hosting URL
     const signatureUrl = "https://grovo-grocery-store.vercel.app/anish.signature.png"; 
     const signatureBuffer = await fetchImageBuffer(signatureUrl);
 
     if (signatureBuffer) {
       try {
-        // Fits the signature cleanly right above the text identifier line
-        doc.image(signatureBuffer, 420, sigY, { fit: [100, 45] });
+        doc.image(signatureBuffer, 420, sigY, { fit: [100, 55] });
       } catch (sigErr) {
         console.error("Failed to render signature buffer:", sigErr);
       }
     }
 
-    // Aligns the visual signature bounding lines and descriptive text
+    // Moved up from sigY + 50 to sigY + 35 to close the gap
     doc
       .strokeColor(dividerColor)
       .lineWidth(1)
-      .moveTo(400, sigY + 50)
-      .lineTo(545, sigY + 50)
+      .moveTo(400, sigY + 35)
+      .lineTo(545, sigY + 35)
       .stroke();
 
+    // Moved up from sigY + 55 to sigY + 40
     doc
       .font("Helvetica-Bold")
       .fontSize(10)
       .fillColor(darkTextColor)
-      .text("Authorized Signatory", 400, sigY + 55, { width: 145, align: "center" });
+      .text("Authorized Signatory", 400, sigY + 40, { width: 145, align: "center" });
 
     // --- FINAL FOOTER MESSAGE ---
     doc.moveDown(4);
