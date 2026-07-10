@@ -7,8 +7,10 @@ import otpGenerator from "otp-generator";
 import sendOTP from "../utils/sendOTP.js";
 
 const userData = async (req, res) => {
+  const {email} = req.body;
+
   try {
-    const user = await User.findById(req.user.id).select("-password -otp");
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
@@ -19,7 +21,11 @@ const userData = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      user,
+      message: "Email varified",
+      user: {
+        email: user.email,
+        isVerified: user.isVerified,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -266,4 +272,12 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export { userData, signUpUser, signInUser, deleteUser, logOutUser, verifyOTP, resendOTP };
+export {
+  userData,
+  signUpUser,
+  signInUser,
+  deleteUser,
+  logOutUser,
+  verifyOTP,
+  resendOTP,
+};

@@ -17,7 +17,11 @@ const LogIn = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [userData, serUserData] = useState("");
+  const [userData, serUserData] = useState(null);
+  const [checkingData, setCheckingData] = useState(true);
+
+  console.log("email", email);
+  console.log("user", userData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,37 +63,45 @@ const LogIn = () => {
     // console.log("Email:", email, "Password:", password);
   };
 
-  /* useEffect(() => {
+  useEffect(() => {
     getUserData();
-  }, []); */
+  }, [email]);
 
-  /* const getUserData = async () => {
+  const getUserData = async () => {
+    setCheckingData(true);
 
-    const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/user`,
-
-      {
-        method: "GET",
-
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/user/check-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
         },
-      },
-    );
+      );
 
-    const result = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    if (result.success) {
-      toast.success(result.message);
-      serUserData(result.user);
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
-    } else {
-      toast.error(result.message);
+      const result = await response.json();
+
+      if (result.success) {
+        // toast.success(result.message);
+        serUserData(result.user); // Note: check if this is a typo for setUserData
+      } else {
+        serUserData(null);
+      }
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+      // toast.error("Something went wrong. Please try again.");
+      serUserData(null); 
+    } finally {
+      setCheckingData(false);
     }
-  }; */
+  };
 
   return (
     <div className="login-container">
@@ -109,18 +121,26 @@ const LogIn = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {/* <p id="varification-check">
-              {userData.isVerified ? (
-                <span id="varify">Email is varified</span>
+            <p id="varification-check">
+              {userData ? (
+                userData.isVerified ? (
+                  <span id="verify" style={{ color: "green" }}>
+                    Email is verified
+                  </span>
+                ) : (
+                  <>
+                    <span id="not-verify" style={{ color: "red" }}>
+                      Email is not verified
+                    </span>
+                    <Link to="/verify-otp" state={{ email: userData.email }}>
+                      Verify email
+                    </Link>
+                  </>
+                )
               ) : (
-                <>
-                  <span id="not-varify">Email is not varified</span>{" "}
-                  <Link to="/verify-otp" state={{ email: userData.email }}>
-                    Varify email
-                  </Link>
-                </>
+                <span style={{ color: "red" }}>User not found</span>
               )}
-            </p> */}
+            </p>
           </div>
           <div className="form-group">
             <label>Password</label>
@@ -132,8 +152,8 @@ const LogIn = () => {
               required
             />
           </div>
-          <button id="Signin" type="submit">
-            Sign In
+          <button id="Signin" type="submit" disabled={checkingData}>
+            {checkingData? "Checking email...": "Sign In"}
           </button>
         </form>
         <Link to="/signup" className="switch-auth-link">

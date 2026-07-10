@@ -81,14 +81,6 @@
   font-size: 12px;
 }
 
-#varification-check #not-varify{
-  color: red;
-}
-
-#varification-check #varify{
-  color: green;
-}
-
 #varification-check a{
   color: blue;
   padding-left: 2px;
