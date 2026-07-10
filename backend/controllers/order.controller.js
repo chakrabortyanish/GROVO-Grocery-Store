@@ -196,27 +196,25 @@ export const downloadInvoice = async (req, res) => {
     const logoBuffer = await fetchImageBuffer(logoUrl);
 
     if (logoBuffer) {
-      if (logoBuffer) {
-        try {
-          // Render the logo image
-          doc.image(logoBuffer, 50, 32, { width: 50 });
+      try {
+        // Render the logo image
+        doc.image(logoBuffer, 50, 32, { width: 50 });
 
-          // Move text to X: 115 to clear the logo, and align perfectly with the top of the logo (Y: 45)
-          doc
-            .font("Helvetica-Bold")
-            .fontSize(28)
-            .fillColor(primaryColor)
-            .text("GROVO", 115, 45);
+        // Move text to X: 115 to clear the logo, and align perfectly with the top of the logo (Y: 45)
+        doc
+          .font("Helvetica-Bold")
+          .fontSize(28)
+          .fillColor(primaryColor)
+          .text("GROVO", 115, 45);
 
-          // Let the text flow naturally below "GROVO" without hardcoding a broken Y coordinate
-          doc
-            .font("Helvetica")
-            .fontSize(10)
-            .fillColor(lightTextColor)
-            .text("Premium Grocery & Stationary Store");
-        } catch (imgErr) {
-          console.error("Failed to render logo buffer:", imgErr);
-        }
+        // Let the text flow naturally below "GROVO" without hardcoding a broken Y coordinate
+        doc
+          .font("Helvetica")
+          .fontSize(10)
+          .fillColor(lightTextColor)
+          .text("Premium Grocery & Stationary Store");
+      } catch (imgErr) {
+        console.error("Failed to render logo buffer:", imgErr);
       }
     } else {
       // Fallback clean text styling if the network fetch fails
@@ -399,6 +397,37 @@ export const downloadInvoice = async (req, res) => {
         width: 95,
         align: "right",
       });
+
+    // --- OWNER SIGNATURE SECTION ---
+    doc.moveDown(3);
+    const sigY = doc.y;
+    
+    // Replace this string with your actual signature image link hosting URL
+    const signatureUrl = "https://grovo-grocery-store.vercel.app/anish.signature.png"; 
+    const signatureBuffer = await fetchImageBuffer(signatureUrl);
+
+    if (signatureBuffer) {
+      try {
+        // Fits the signature cleanly right above the text identifier line
+        doc.image(signatureBuffer, 420, sigY, { fit: [100, 45] });
+      } catch (sigErr) {
+        console.error("Failed to render signature buffer:", sigErr);
+      }
+    }
+
+    // Aligns the visual signature bounding lines and descriptive text
+    doc
+      .strokeColor(dividerColor)
+      .lineWidth(1)
+      .moveTo(400, sigY + 50)
+      .lineTo(545, sigY + 50)
+      .stroke();
+
+    doc
+      .font("Helvetica-Bold")
+      .fontSize(10)
+      .fillColor(darkTextColor)
+      .text("Authorized Signatory", 400, sigY + 55, { width: 145, align: "center" });
 
     // --- FINAL FOOTER MESSAGE ---
     doc.moveDown(4);
