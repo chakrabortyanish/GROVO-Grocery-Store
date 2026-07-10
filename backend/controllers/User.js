@@ -78,7 +78,6 @@ const signUpUser = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-
       message: "OTP sent to your email.",
     });
   } catch (err) {

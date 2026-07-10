@@ -67,6 +67,7 @@ const SignUp = () => {
         const result = await response.json();
         const { message, success } = result;
         if (success) {
+          console.log("Navigating to verify page...");
           toast.success("OTP sent to your email");
 
           navigate("/verify-otp", {
@@ -74,18 +75,6 @@ const SignUp = () => {
               email: formData.email,
             },
           });
-          /* toast.success(message, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "colored",
-          });
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000); */
         } else {
           toast.warning(message);
         }
@@ -96,69 +85,72 @@ const SignUp = () => {
   };
   return (
     <div className="signup-container">
-  <div className="heading-signup">
-    <img src={store_icon} alt="Grovo" />
-    <h1>Grovo</h1>
-  </div>
-  <div className="form-card">
-    <h2>Create Your Account</h2>
-    <form onSubmit={handleSubmit}>
-      <div className="name-row">
-        <div className="form-group">
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            placeholder="John"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            placeholder="Doe"
-            required
-          />
-        </div>
+      <div className="heading-signup">
+        <img src={store_icon} alt="Grovo" />
+        <h1>Grovo</h1>
       </div>
-      <div className="form-group">
-        <label>Email Address <p id="opt-text">**(Should be valid for OTP verification)**</p></label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="you@example.com"
-          required
-        />
+      <div className="form-card">
+        <h2>Create Your Account</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="name-row">
+            <div className="form-group">
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="John"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Doe"
+                required
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <label>
+              Email Address{" "}
+              <p id="opt-text">**(Should be valid for OTP verification)**</p>
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              required
+            />
+          </div>
+          <button id="submit" type="submit">
+            Create Account
+          </button>
+        </form>
+        <Link to="/login" className="already-account">
+          Already have an account? <span>Login</span>
+        </Link>
       </div>
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="••••••••"
-          required
-        />
-      </div>
-      <button id="submit" type="submit">
-        Create Account
-      </button>
-    </form>
-    <Link to="/login" className="already-account">
-      Already have an account? <span>Login</span>
-    </Link>
-  </div>
-  <ToastContainer position="top-right" autoClose={1500}/>
-</div>
+      <ToastContainer position="top-right" autoClose={1500} />
+    </div>
   );
 };
 
