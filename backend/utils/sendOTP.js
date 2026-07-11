@@ -1,63 +1,55 @@
-import nodemailer from "nodemailer";
+import axios from "axios";
+
 import dotenv from "dotenv";
-
 dotenv.config();
-
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false, // for port 587
-  requireTLS: true,
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
 
 const sendOTP = async (email, otp) => {
   try {
-    await transporter.sendMail({
-      from: `Grovo <${process.env.FROM_EMAIL}>`,
-      to: email,
-      subject: "Grovo Email Verification",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto;">
-          <h2 style="color:#2E7D32;">Welcome to Grovo</h2>
+    const response = await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        sender: {
+          name: process.env.FROM_NAME,
+          email: process.env.FROM_EMAIL,
+        },
 
-          <p>Hello,</p>
+        to: [
+          {
+            email: email,
+          },
+        ],
 
-          <p>Your email verification OTP is:</p>
+        subject: "Grovo Email Verification",
 
-          <div style="
-            font-size:32px;
-            font-weight:bold;
-            letter-spacing:6px;
-            color:#2E7D32;
-            text-align:center;
-            margin:20px 0;
-          ">
-            ${otp}
-          </div>
+        htmlContent: `
+        <div style="font-family:Arial,sans-serif;padding:20px">
+            <h2>Grovo Email Verification</h2>
 
-          <p>This OTP is valid for <strong>1 minute</strong>.</p>
+            <p>Your OTP is:</p>
 
-          <p>If you didn't request this OTP, please ignore this email.</p>
+            <h1 style="letter-spacing:5px">${otp}</h1>
 
-          <hr>
+            <p>This OTP will expire in <strong>1 minute</strong>.</p>
 
-          <p style="font-size:12px;color:gray;">
-            © ${new Date().getFullYear()} Grovo Grocery Store
-          </p>
+            <p>If you didn't request this OTP, please ignore this email.</p>
         </div>
-      `,
-    });
+        `,
+      },
+      {
+        headers: {
+          accept: "application/json",
+          "api-key": process.env.BREVO_API_KEY,
+          "content-type": "application/json",
+        },
+      }
+    );
 
-    // console.log("✅ OTP email sent successfully.");
+    console.log("Email sent:", response.data);
   } catch (error) {
-    console.error("❌ Error sending OTP:", error);
+    console.error(
+      "Brevo API Error:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
