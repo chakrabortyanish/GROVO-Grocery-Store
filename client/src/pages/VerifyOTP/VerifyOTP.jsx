@@ -13,6 +13,7 @@ const VerifyOTP = () => {
   const location = useLocation();
 
   const email = location.state?.email;
+  console.log(email)
 
   const [otp, setOtp] = useState("");
 
@@ -54,46 +55,46 @@ const VerifyOTP = () => {
   };
 
   const resendOTP = async () => {
-  const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/user/resend-otp`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/user/resend-otp`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
       },
-      body: JSON.stringify({ email }),
+    );
+
+    const result = await response.json();
+
+    if (result.success) {
+      toast.success(result.message);
+
+      setTimer(60);
+      setDisabled(true);
+    } else {
+      toast.error(result.message);
     }
-  );
-
-  const result = await response.json();
-
-  if (result.success) {
-    toast.success(result.message);
-
-    setTimer(60);
-    setDisabled(true);
-  } else {
-    toast.error(result.message);
-  }
-};
+  };
 
   // de
   useEffect(() => {
-  if (!disabled) return;
+    if (!disabled) return;
 
-  const interval = setInterval(() => {
-    setTimer((prev) => {
-      if (prev <= 1) {
-        clearInterval(interval);
-        setDisabled(false);
-        return 0;
-      }
-      return prev - 1;
-    });
-  }, 1000);
+    const interval = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setDisabled(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
 
-  return () => clearInterval(interval);
-}, [disabled]);
+    return () => clearInterval(interval);
+  }, [disabled]);
 
   return (
     <div className="otp-container">
@@ -143,7 +144,11 @@ const VerifyOTP = () => {
         <div className="resend-wrapper">
           <p>
             Didn't receive the code?{" "}
-            <button className="resend-link" onClick={resendOTP}  disabled={disabled}>
+            <button
+              className="resend-link"
+              onClick={resendOTP}
+              disabled={disabled}
+            >
               {disabled ? `Resend OTP in ${timer}s` : "Resend OTP"}
             </button>
           </p>

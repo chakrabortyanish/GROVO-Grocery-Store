@@ -70,11 +70,13 @@ const SignUp = () => {
           // console.log("Navigating to verify page...");
           toast.success("OTP sent to your email");
 
-          navigate("/verify-otp", {
-            state: {
-              email: formData.email,
-            },
-          });
+          setTimeout(() => {
+            navigate("/verify-otp", {
+              state: {
+                email: formData.email,
+              },
+            });
+          }, 1000);
         } else {
           toast.warning(message);
         }

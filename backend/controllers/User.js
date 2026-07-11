@@ -223,7 +223,7 @@ const resendOTP = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "New OTP sent successfully",
+      message: "OTP sent successfully",
     });
   } catch (error) {
     console.error(error);

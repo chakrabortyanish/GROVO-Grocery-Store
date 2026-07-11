@@ -97,9 +97,38 @@ const LogIn = () => {
     } catch (error) {
       console.error("Failed to fetch user data:", error);
       // toast.error("Something went wrong. Please try again.");
-      serUserData(null); 
+      serUserData(null);
     } finally {
       setCheckingData(false);
+    }
+  };
+
+  const handleSendOTP = async () => {
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/user/resend-otp`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: userData.email }),
+      },
+    );
+
+    const result = await response.json();
+
+    if (result.success) {
+      toast.success(result.message);
+
+      setTimeout(() => {
+        navigate("/verify-otp",{
+              state: {
+                email: userData.email,
+              },
+            });
+      }, 1500);
+    } else {
+      toast.error(result.message);
     }
   };
 
@@ -132,9 +161,7 @@ const LogIn = () => {
                     <span id="not-verify" style={{ color: "red" }}>
                       Email is not verified
                     </span>
-                    <Link to="/verify-otp" state={{ email: userData.email }}>
-                      Verify email
-                    </Link>
+                    <strong onClick={handleSendOTP}>Verify email</strong>
                   </>
                 )
               ) : (
@@ -153,7 +180,7 @@ const LogIn = () => {
             />
           </div>
           <button id="Signin" type="submit" disabled={checkingData}>
-            {checkingData? "Checking email...": "Sign In"}
+            {checkingData ? "Checking email..." : "Sign In"}
           </button>
         </form>
         <Link to="/signup" className="switch-auth-link">

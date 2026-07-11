@@ -81,12 +81,17 @@
   font-size: 12px;
 }
 
-#varification-check a{
+#varification-check strong{
   color: blue;
-  padding-left: 2px;
+  padding: 1px 3px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  background-color: #d5ddff;
+  margin-left: 3px;
+  border-radius: 5px;
 }
 
-#varification-check a:hover{
+#varification-check strong:hover{
   text-decoration: underline;
 }
 
