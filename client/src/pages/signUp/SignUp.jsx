@@ -67,7 +67,7 @@ const SignUp = () => {
         const result = await response.json();
         const { message, success } = result;
         if (success) {
-          console.log("Navigating to verify page...");
+          // console.log("Navigating to verify page...");
           toast.success("OTP sent to your email");
 
           navigate("/verify-otp", {
