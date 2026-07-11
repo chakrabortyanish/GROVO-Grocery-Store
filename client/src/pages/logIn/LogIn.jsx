@@ -20,8 +20,8 @@ const LogIn = () => {
   const [userData, serUserData] = useState(null);
   const [checkingData, setCheckingData] = useState(true);
 
-  console.log("email", email);
-  console.log("user", userData);
+  // console.log("email", email);
+  // console.log("user", userData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

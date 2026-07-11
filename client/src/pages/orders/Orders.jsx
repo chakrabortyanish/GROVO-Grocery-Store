@@ -28,7 +28,7 @@ const Orders = () => {
       .then((data) => {
         if (data.success) {
           setOrders(data.orders);
-          console.log("Fetched orders:", data.orders);
+          // console.log("Fetched orders:", data.orders);
         }
       })
       .catch((err) => console.error("Error fetching orders:", err))

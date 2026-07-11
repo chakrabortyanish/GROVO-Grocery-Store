@@ -13,7 +13,7 @@ const VerifyOTP = () => {
   const location = useLocation();
 
   const email = location.state?.email;
-  console.log(email)
+  // console.log(email)
 
   const [otp, setOtp] = useState("");
 
