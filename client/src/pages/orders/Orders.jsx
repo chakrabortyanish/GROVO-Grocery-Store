@@ -28,7 +28,7 @@ const Orders = () => {
       .then((data) => {
         if (data.success) {
           setOrders(data.orders);
-          // console.log("Fetched orders:", data.orders);
+          // console.log("Fetched orders:", orders.address);
         }
       })
       .catch((err) => console.error("Error fetching orders:", err))
@@ -165,19 +165,26 @@ const Orders = () => {
                           </div>
 
                           <div className="address-details">
-                            <div className="address-row" >
-                                  <span className="address-key">Name:</span>
-                                  <span className="address-value">{order.userId.firstName+" "+order.userId.lastName}</span>
-                                </div>
-                            {Object.entries(order.address || {}).map(
-                              ([key, value]) => (
-                                <div className="address-row" key={key}>
-                                  <span className="address-key">{key}</span>
+                            <div className="address-row">
+                              <span className="address-key">Name:</span>
+                              <span className="address-value">
+                                {order.userId.firstName +
+                                  " " +
+                                  order.userId.lastName}
+                              </span>
+                            </div>
 
+                            {Object.entries(order.address || {})
+                              .filter(([key]) => key !== "fullName")
+                              .map(([key, value]) => (
+                                <div className="address-row" key={key}>
+                                  <span className="address-key">
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                    :
+                                  </span>
                                   <span className="address-value">{value}</span>
                                 </div>
-                              ),
-                            )}
+                              ))}
                           </div>
                         </div>
 
