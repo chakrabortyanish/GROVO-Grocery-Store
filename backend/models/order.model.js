@@ -29,6 +29,11 @@ const orderSchema = new mongoose.Schema(
 
     totalAmount: Number,
 
+    orderStatus: {
+      type: String,
+      default: "",
+    },
+
     paymentMethod: {
         type:String,
         default:"Razorpay"

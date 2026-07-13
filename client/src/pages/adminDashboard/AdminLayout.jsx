@@ -43,6 +43,10 @@ const AdminLayout = () => {
           <NavLink to="/admin/manage-products">
             Manage Products
           </NavLink>
+          
+          <NavLink to="/admin/manage-products">
+            Manage Orders
+          </NavLink>
         </nav>
 
         <div className="logout-admin" onClick={() => logout()}>

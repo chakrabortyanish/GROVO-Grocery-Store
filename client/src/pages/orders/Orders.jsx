@@ -16,7 +16,7 @@ const Orders = () => {
   const [generatingInvoice, setGeneratingInvoice] = useState(false);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/allOrders`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/userOrders`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
