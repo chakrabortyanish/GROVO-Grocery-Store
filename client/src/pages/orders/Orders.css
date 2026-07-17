@@ -135,7 +135,7 @@
    Interactive Order Milestones Tracking Timeline CSS 
    ========================================================================== */
 .tracker-wrapper {
-  margin: 2.5rem 0;
+  margin: 2rem 0;
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -254,7 +254,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem;
+  padding: 0.7rem 1rem;
   border-radius: 18px;
   background: #f8fafc;
   border: 1px solid #f1f5f9;
@@ -267,8 +267,8 @@
 }
 
 .product-left img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   border-radius: 12px;
   background: #ffffff;
@@ -315,18 +315,19 @@
 
 /* Lower Context Breakdown Split Layout */
 .order-bottom {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   gap: 2rem;
 }
 
-.address-box {
+.orders-page .address-box {
   flex: 1;
   background: #f8fafc;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 20px;
   border: 1px solid #f1f5f9;
+  margin-bottom: 0 !important;
 }
 
 .address-title {
@@ -428,11 +429,11 @@
 /* Micro-Interaction Button Design */
 .invoice-btn-modern {
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   background: #f0fdf4;
   border: 1px dashed #bbf7d0;
   color: #166534;
-  padding: 1rem;
+  padding: 0.9rem;
   border-radius: 16px;
   font-weight: 700;
   font-size: 0.925rem;
