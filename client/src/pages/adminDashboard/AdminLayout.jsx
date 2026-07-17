@@ -43,8 +43,8 @@ const AdminLayout = () => {
           <NavLink to="/admin/manage-products">
             Manage Products
           </NavLink>
-          
-          <NavLink to="/admin/manage-products">
+
+          <NavLink to="/admin/manage-orders">
             Manage Orders
           </NavLink>
         </nav>

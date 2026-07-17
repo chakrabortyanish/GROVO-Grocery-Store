@@ -7,9 +7,8 @@ import crypto from "crypto";
 import PDFDocument from "pdfkit";
 
 // ============================
-// CREATE ORDER
+// CREATE ORDER FOR USERS
 // ============================
-
 export const createOrder = async (req, res) => {
   try {
     const { totalProductsPrice, items } = req.body;
@@ -44,9 +43,121 @@ export const createOrder = async (req, res) => {
 };
 
 // ============================
+// USERS FIND ORDERS
+// ============================
+export const findAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ userId: req.user.id })
+      .populate("userId")
+      .populate("items.product")
+      .sort({ createdAt: -1 });
+    if (!orders) {
+      return res.status(404).json({
+        success: false,
+        message: "No orders found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      orders,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+};
+
+// ============================
+// MANAGE ORDERS FOR ADMIN
+// ============================
+export const handleOrders = async (req, res) => {
+  try {
+    // Implement pagination defaults
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Fetch orders with populated references for better readability in the admin panel
+    const orders = await Order.find()
+      .populate("userId", "name email") // Populates user details (adjust fields as needed)
+      .populate("items.product") // Populates product details
+      .sort({ createdAt: -1 }) // Newest orders first
+      .skip(skip)
+      .limit(limit);
+
+    const totalOrders = await Order.countDocuments();
+
+    console.log(orders)
+
+    return res.status(200).json({
+      success: true,
+      count: orders.length,
+      pagination: {
+        totalOrders,
+        currentPage: page,
+        totalPages: Math.ceil(totalOrders / limit),
+      },
+      data: orders,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server Error: Unable to fetch orders",
+      error: error.message,
+    });
+  }
+};
+
+// ============================
+// ADMIN UPDATE ORDER STATUS
+// ============================
+export const updateOrderStatus = async (req, res) => {
+  try {
+    const { orderStatus } = req.body;
+    const { id } = req.params;
+
+    // 1. Validate input
+    if (!orderStatus) {
+      return res.status(400).json({
+        success: false,
+        message: "Order status is required",
+      });
+    }
+
+    // 2. Find order and update
+    const order = await Order.findById(id);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    // 3. Update the status
+    order.orderStatus = orderStatus;
+    await order.save();
+
+    return res.status(200).json({
+      success: true,
+      message: `Order status successfully updated to '${orderStatus}'`,
+      data: order,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server Error: Unable to update order status",
+      error: error.message,
+    });
+  }
+};
+
+// ============================
 // VERIFY PAYMENT
 // ============================
-
 export const verifyPayment = async (req, res) => {
   try {
     const {
@@ -112,31 +223,6 @@ export const verifyPayment = async (req, res) => {
     res.status(500).json({
       success: false,
       message: error.message,
-    });
-  }
-};
-
-export const findAllOrders = async (req, res) => {
-  try {
-    const orders = await Order.find({ userId: req.user.id })
-      .populate("userId")
-      .populate("items.product")
-      .sort({ createdAt: -1 });
-    if (!orders) {
-      return res.status(404).json({
-        success: false,
-        message: "No orders found",
-      });
-    }
-    res.status(200).json({
-      success: true,
-      orders,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      success: false,
-      message: "Server Error",
     });
   }
 };
@@ -279,7 +365,10 @@ export const downloadInvoice = async (req, res) => {
 
     const customerName =
       order.userId.firstName + " " + order.userId.lastName || "Valued Customer";
-    doc.font("Helvetica-Bold").fillColor(darkTextColor).text(customerName, 350, doc.y + 4);
+    doc
+      .font("Helvetica-Bold")
+      .fillColor(darkTextColor)
+      .text(customerName, 350, doc.y + 4);
     doc.font("Helvetica").fillColor(darkTextColor);
     doc.text(`${order.address.area}, ${order.address.city}`);
     doc.text(`${order.address.state} - ${order.address.pin}`);
@@ -401,8 +490,9 @@ export const downloadInvoice = async (req, res) => {
     // --- OWNER SIGNATURE SECTION ---
     doc.moveDown(3);
     const sigY = doc.y;
-    
-    const signatureUrl = "https://grovo-grocery-store.vercel.app/anish.signature.png"; 
+
+    const signatureUrl =
+      "https://grovo-grocery-store.vercel.app/anish.signature.png";
     const signatureBuffer = await fetchImageBuffer(signatureUrl);
 
     if (signatureBuffer) {
@@ -426,7 +516,10 @@ export const downloadInvoice = async (req, res) => {
       .font("Helvetica-Bold")
       .fontSize(10)
       .fillColor(darkTextColor)
-      .text("Authorized Signatory", 400, sigY + 40, { width: 145, align: "center" });
+      .text("Authorized Signatory", 400, sigY + 40, {
+        width: 145,
+        align: "center",
+      });
 
     // --- FINAL FOOTER MESSAGE ---
     doc.moveDown(4);

@@ -42,6 +42,7 @@ import ManageProducts from "./pages/adminDashboard/ManageProducts.jsx";
 import Dashboard from "./pages/adminDashboard/Dashboard.jsx";
 
 import VerifyOTP from "./pages/VerifyOTP/VerifyOTP.jsx"
+import ManageOrders from "./pages/adminDashboard/ManageOrders.jsx";
 
 // Router setup
 const Router = createBrowserRouter(
@@ -65,6 +66,7 @@ const Router = createBrowserRouter(
       <Route path="/beauty" element={<Beauty />} />
       <Route path="/gardening" element={<Gardening />} />
       <Route path="/fruits-vegetables" element={<FruitsVegetables />} />
+
       {/* admin routes */}
       <Route path="/admin-auth" element={<AdminAuth />}></Route>
       <Route path="/admin" element={<AdminLayout />}>
@@ -72,6 +74,7 @@ const Router = createBrowserRouter(
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="add-product" element={<AddProduct />} />
         <Route path="manage-products" element={<ManageProducts />} />
+        <Route path="manage-orders" element={<ManageOrders />} />
       </Route>
     </>,
   ),

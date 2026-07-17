@@ -24,7 +24,7 @@
 }
 
 .sidebar {
-  width: 260px;
+  min-width: 260px;
   background: #111827;
   color: white;
   padding: 30px;
@@ -390,6 +390,8 @@ td {
 .add-product-page {
   padding: 20px;
   padding-bottom: 0;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .product-card {
@@ -542,7 +544,7 @@ td {
 
 .products-table-card {
   background: white;
-  border-radius: 20px;
+  border-radius: 13px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
@@ -561,6 +563,7 @@ td {
   padding: 18px;
   font-size: 14px;
   font-weight: 600;
+  background-color: #6a6a6a;
   color: #ececec;
   border-bottom: 1px solid #e5e7eb;
 }
