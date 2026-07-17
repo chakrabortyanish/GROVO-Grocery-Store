@@ -777,7 +777,6 @@ td {
 /* ========================================== Sidebar ===== */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
 .admin-layout {
   display: flex;
   min-height: 100vh;
@@ -786,137 +785,137 @@ td {
 }
 
 .sidebar {
+  width: 260px;
+  min-width: 260px;
   background: #0f172a;
   color: white;
   padding: 25px;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h2 {
   text-align: center;
   margin-bottom: 40px;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 1px;
+  color: #f8fafc;
 }
 
 .sidebar nav {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .sidebar a {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   text-decoration: none;
   color: #cbd5e1;
-  padding: 15px 18px;
+  padding: 14px 18px;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   font-weight: 500;
-  overflow: hidden;
 }
 
-/* Hide border by default */
+/* Nav Item Icons styling */
+.nav-icon {
+  font-size: 1.35rem;
+  color: #94a3b8;
+  transition: color 0.25s ease;
+}
+
+/* Hover States */
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.sidebar a:hover .nav-icon {
+  color: white;
+}
+
+/* Active Link State */
+.sidebar a.active {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+}
+
+.sidebar a.active .nav-icon {
+  color: #38bdf8;
+}
+
+/* Fixed Active indicator: Positioned beautifully on the left edge */
 .sidebar a::after {
   content: "";
   position: absolute;
-  top: 0%;
+  top: 25%;
   right: 0;
-  width: 4px;
-  height: 100%;
+  width: 6px;
+  height: 50%; /* Vertical center pill line */
   background: #38bdf8;
-  border-radius: 10px;
+  border-radius: 4px 0px 0px 4px;
   opacity: 0;
-  transform: scaleY(0);
-  transition: all 0.3s ease;
-}
-
-/* Hover */
-.sidebar a:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: white;
-}
-
-/* Active Link */
-.sidebar a.active {
-  background: rgba(56, 189, 248, 0.15);
-  color: white;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar a.active::after {
   opacity: 1;
-  transform: scaleY(1);
+  transform: scaleX(1);
 }
 
-.sidebar::before {
-  content: "";
-  position: absolute;
-  top: -150%;
-  left: -30%;
-  width: 160%;
-  height: 40%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 255, 255, 0.211),
-    transparent
-  );
-
-  transform: rotate(-12deg);
-  animation: glassShine 2s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes glassShine {
-  0% {
-    top: -150%;
-  }
-
-  100% {
-    top: 150%;
-  }
-}
-
+/* Sidebar entrance animation */
 .sidebar {
-  animation: slideIn 0.8s ease;
+  animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideIn {
   from {
-    transform: translateX(-80px);
+    transform: translateX(-20px);
     opacity: 0;
   }
-
   to {
     transform: translateX(0);
     opacity: 1;
   }
 }
 
+/* Clean Admin Logout Layout box */
 .logout-admin {
+  margin-top: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ff6b6b;
+  gap: 8px;
+  background: #ef4444;
   color: white;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  border-radius: 7px;
+  padding: 12px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logout-admin:hover {
+  background: #dc2626;
 }
 
 .logout-admin span {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  padding: 7px 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
+/* .admin-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+} */
 /* ======================== sidebar end  ===================== */
 
 /* ===== Admin Profile ===== */

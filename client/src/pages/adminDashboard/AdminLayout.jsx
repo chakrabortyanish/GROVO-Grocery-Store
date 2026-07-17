@@ -1,30 +1,29 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./Admin.css";
 
-import { MdLogout } from "react-icons/md";
-
 import { toast, ToastContainer } from "react-toastify";
+
+import { MdLogout, MdDashboard, MdAddCircle, MdLayers, MdShoppingBag } from 'react-icons/md';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
   const adminUsername = localStorage.getItem("adminUsername");
 
-   if(!adminUsername){
+  if (!adminUsername) {
     toast.info("Login First");
     setTimeout(() => {
-        navigate("/admin-auth");
-      }, 1500);
-   }
+      navigate("/admin-auth");
+    }, 1500);
+  }
 
-
-  const logout = ()=>{
+  const logout = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("adminUsername");
     toast.success("Logout Successfull");
     setTimeout(() => {
-        navigate("/");
-      }, 1500);
-  }
+      navigate("/");
+    }, 1500);
+  };
 
   return (
     <div className="admin-layout">
@@ -33,19 +32,23 @@ const AdminLayout = () => {
 
         <nav>
           <NavLink to="/admin/dashboard" end>
-            Dashboard
+            <MdDashboard className="nav-icon" />
+            <span>Dashboard</span>
           </NavLink>
 
           <NavLink to="/admin/add-product">
-            Add Product
+            <MdAddCircle className="nav-icon" />
+            <span>Add Product</span>
           </NavLink>
 
           <NavLink to="/admin/manage-products">
-            Manage Products
+            <MdLayers className="nav-icon" />
+            <span>Manage Products</span>
           </NavLink>
 
           <NavLink to="/admin/manage-orders">
-            Manage Orders
+            <MdShoppingBag className="nav-icon" />
+            <span>Manage Orders</span>
           </NavLink>
         </nav>
 
@@ -58,7 +61,7 @@ const AdminLayout = () => {
       <main className="admin-content">
         <Outlet />
       </main>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };
