@@ -90,7 +90,7 @@ export const handleOrders = async (req, res) => {
 
     const totalOrders = await Order.countDocuments();
 
-    console.log(orders)
+    // console.log(orders)
 
     return res.status(200).json({
       success: true,
