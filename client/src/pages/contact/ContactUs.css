@@ -128,7 +128,7 @@
   gap: 20px;
 }
 
-.input-group input,
+.input-group input, .input-group select,
 .input-group textarea {
   width: 100%;
   padding: 15px 18px;
@@ -139,7 +139,7 @@
   transition: 0.3s;
 }
 
-.input-group input:focus,
+.input-group input:focus, .input-group select:focus,
 .input-group textarea:focus {
   border-color: #22c55e;
 }
