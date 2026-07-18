@@ -43,6 +43,8 @@ import Dashboard from "./pages/adminDashboard/Dashboard.jsx";
 
 import VerifyOTP from "./pages/VerifyOTP/VerifyOTP.jsx"
 import ManageOrders from "./pages/adminDashboard/ManageOrders.jsx";
+import ManageContacts from "./pages/adminDashboard/ManageContacts/ManageContacts.jsx";
+import ContactDetailsPage from "./pages/adminDashboard/ManageContacts/ContactDetailsPage.jsx"
 
 // Router setup
 const Router = createBrowserRouter(
@@ -75,6 +77,8 @@ const Router = createBrowserRouter(
         <Route path="add-product" element={<AddProduct />} />
         <Route path="manage-products" element={<ManageProducts />} />
         <Route path="manage-orders" element={<ManageOrders />} />
+        <Route path="manage-contacts" element={<ManageContacts />} />
+        <Route path="contacts/:id" element={<ContactDetailsPage />} />
       </Route>
     </>,
   ),

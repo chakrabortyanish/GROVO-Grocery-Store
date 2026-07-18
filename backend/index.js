@@ -45,4 +45,8 @@ app.use("/api/cart", cartRoutes );
 import orderRoutes from "./routes/order.route.js";
 app.use("/api/orders", orderRoutes);
 
+// Contact Routes
+import contactRouter from "./routes/contact.route.js"
+app.use("/api/contact", contactRouter)
+
 app.listen(PORT, () => console.log(`Server started at PORT : ${PORT}`));

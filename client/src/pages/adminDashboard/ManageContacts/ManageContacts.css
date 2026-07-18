@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-main: #f4f7f6;
+  --bg-card: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #f1f5f9;
+  
+  /* Status pill styling colors matched to source image */
+  --status-resolved-bg: #d1fae5;
+  --status-resolved-text: #065f46;
+  --status-progress-bg: #dbeafe;
+  --status-progress-text: #1e40af;
+  --status-pending-bg: #fef3c7;
+  --status-pending-text: #92400e;
+  --status-closed-bg: #f1f5f9;
+  --status-closed-text: #475569;
+}
+
+.manage-container {
+  padding: 2rem;
+  max-width: 100%;
+  margin: 0 auto;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Header UI Elements Block */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.header-icon-box {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.header-icon {
+  font-size: 2rem;
+  color: #4f46e5;
+}
+
+.header-text-box h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.header-text-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Content Container Card */
+.table-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  width: 100%;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.table-wrapper thead{
+  border-radius: 5px;
+}
+
+.custom-table {
+  max-width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* Headers styling matching the light text theme alignment */
+.custom-table th {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: white;
+  border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+
+}
+
+/* Row settings */
+.custom-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.custom-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.custom-table td {
+  padding: 1.5rem;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+/* Sub-id Tag styling wrapper block */
+.id-badge {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: monospace;
+  border: 1px solid #dcfce7;
+}
+
+/* Customer block wrapper items */
+.customer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.customer-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.customer-email {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Category column field */
+.category-text {
+  font-weight: 500;
+  color: #475569;
+}
+
+/* Message block presentation */
+.message-preview-box {
+  max-width: 320px;
+}
+
+.subject-line {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message-snippet {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Custom Interactive Select Pills styling elements matching layout template */
+.status-select {
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.status-pending {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
+}
+
+.status-progress {
+  background-color: var(--status-progress-bg);
+  color: var(--status-progress-text);
+}
+
+.status-resolved {
+  background-color: var(--status-resolved-bg);
+  color: var(--status-resolved-text);
+}
+
+.status-closed {
+  background-color: var(--status-closed-bg);
+  color: var(--status-closed-text);
+}
+
+/* Actions Button Box Elements style alignment mapping */
+.action-buttons-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.btn-action svg {
+  font-size: 1.1rem;
+}
+
+/* Utilities classes definitions */
+.text-center {
+  text-align: center !important;
+}
+
+.loading-state, .no-data {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}

@@ -3,7 +3,7 @@ import "./Admin.css";
 
 import { toast, ToastContainer } from "react-toastify";
 
-import { MdLogout, MdDashboard, MdAddCircle, MdLayers, MdShoppingBag } from 'react-icons/md';
+import { MdLogout, MdDashboard, MdAddCircle, MdLayers, MdShoppingBag, MdSupportAgent } from 'react-icons/md';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -49,6 +49,10 @@ const AdminLayout = () => {
           <NavLink to="/admin/manage-orders">
             <MdShoppingBag className="nav-icon" />
             <span>Manage Orders</span>
+          </NavLink>
+          <NavLink to="/admin/manage-contacts">
+            <MdSupportAgent className="nav-icon" />
+            <span>Manage Contacts</span>
           </NavLink>
         </nav>
 

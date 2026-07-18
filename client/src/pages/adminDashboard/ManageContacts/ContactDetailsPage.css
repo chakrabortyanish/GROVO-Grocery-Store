@@ -1,0 +1,223 @@
+.details-container {
+  padding: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.btn-back:hover {
+  color: #1e293b;
+}
+
+/* Grid setup matching general dynamic UI dashboards layouts */
+.details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Main Component Panels styles details */
+.details-main-card, .details-sidebar-card, .reply-section-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.ticket-id-tag {
+  font-family: monospace;
+  font-weight: 700;
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+/* Status design system match matching image */
+.status-pill {
+  padding: 0.35rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.status-pending { background: #fef3c7; color: #92400e; }
+.status-inprogress { background: #dbeafe; color: #1e40af; }
+.status-resolved { background: #d1fae5; color: #065f46; }
+.status-closed { background: #f1f5f9; color: #475569; }
+
+.ticket-subject {
+  font-size: 1.6rem;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.meta-info-row {
+  display: flex;
+  gap: 1.5rem;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #f1f5f9;
+  margin: 1.5rem 0;
+}
+
+.message-body-box h4 {
+  margin: 0 0 0.75rem 0;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.message-content {
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: 12px;
+  color: #334155;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Sidebar Information blocks profiles styles */
+.details-sidebar-card h3, .reply-section-card h3 {
+  margin: 0 0 1.25rem 0;
+  font-size: 1.15rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.context-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.context-icon {
+  font-size: 1.5rem;
+  color: #4f46e5;
+  margin-top: 0.2rem;
+}
+
+.context-item label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.context-item p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.context-item a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.order-highlight {
+  background: #f0fdf4;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px dashed #bbf7d0;
+}
+
+/* Response Section Form Handling */
+.reply-timestamp {
+  font-size: 0.85rem;
+  color: #10b981;
+  margin: -1rem 0 1rem 0;
+}
+
+.reply-textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.reply-textarea:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.btn-submit-reply {
+  background: #1e293b;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.btn-submit-reply:hover {
+  background: #0f172a;
+}
+
+.btn-submit-reply:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.details-loading, .details-error {
+  padding: 5rem;
+  text-align: center;
+  color: #64748b;
+  font-size: 1.1rem;
+}

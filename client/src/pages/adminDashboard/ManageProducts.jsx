@@ -11,7 +11,7 @@ const ManageProducts = () => {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/products/admin`,
         {
-          mmethod: "GET",
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
