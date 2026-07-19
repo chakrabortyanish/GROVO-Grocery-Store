@@ -48,13 +48,13 @@ const Navbar = () => {
         <div className="menu-container" ref={menuRef}>
           <ul className="menu-links">
             <li>
-              <a href="#home">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="#categories">Categories</a>
+              <Link to="/#categories">Categories</Link>
             </li>
             <li>
-              <a href="#packages">Packages</a>
+              <Link to="/#packages">Packages</Link>
             </li>
             <li>
               <Link to="/contact">Contact Us</Link>
@@ -86,10 +86,10 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="#categories">Categories</a>
+            <Link to="/#categories">Categories</Link>
           </li>
           <li>
-            <a href="#packages">Packages</a>
+            <Link to="/#packages">Packages</Link>
           </li>
           <li>
             <Link to="/contact">Contact Us</Link>
