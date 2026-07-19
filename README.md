@@ -1,4 +1,4 @@
-# GROVO - Grocery Store
+# GROVO - Grocery Delivery System
 #### Grovo Grocery Store is a modern, full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) that provides users with a smooth online grocery shopping experience. The platform allows customers to browse grocery items by category, search for products, add them to the cart, and manage their orders seamlessly.
 ### 📌Project Link: https://grovo-grocery-store.vercel.app/
 
@@ -98,10 +98,16 @@
 
 <!--<img width="400" height="470" alt="r" src="https://github.com/user-attachments/assets/5a5dcdc7-8b18-4e7c-b17e-5970d611f0ca" />
 <img width="400" height="470" alt="d" src="https://github.com/user-attachments/assets/deb4ca23-e89d-43e3-9025-4b37f4b22afd" />-->
-<img width="1311" height="628" alt="image" src="https://github.com/user-attachments/assets/ec358b0f-f47f-498b-81ac-03b39bd68fa7" /><br>
-<img width="1294" height="638" alt="image" src="https://github.com/user-attachments/assets/f9a4b1ca-a441-458b-9032-a49297b71a8b" /><br>
-<img width="1318" height="638" alt="image" src="https://github.com/user-attachments/assets/43ff475a-a61d-40a3-9711-ca0de6b47550" /><br>
-<img width="1327" height="642" alt="image" src="https://github.com/user-attachments/assets/94b1a86b-09bd-4403-8cf2-ca0c332c793d" /><br>
+<img width="1341" height="640" alt="image" src="https://github.com/user-attachments/assets/ed02a6a8-a9b3-41b9-b316-d727e399f8b1" /><br>
+<img width="1316" height="643" alt="image" src="https://github.com/user-attachments/assets/418df415-9058-499e-9fa2-5734271c4c65" />
+<br>
+<img width="1331" height="640" alt="image" src="https://github.com/user-attachments/assets/ad98dea9-0dd2-43fa-b3b0-aeb13b6e785c" />
+<br>
+<img width="1330" height="646" alt="image" src="https://github.com/user-attachments/assets/2d028200-5053-4a05-a10f-8c22fc7f913e" />
+<br>
+<img width="1332" height="638" alt="image" src="https://github.com/user-attachments/assets/7dbdd0e9-f6b4-4088-9b2c-1901e77178c6" /><br>
+<img width="468" height="507" alt="image" src="https://github.com/user-attachments/assets/5886ae11-1dce-44b2-b6ca-7ca3285ec1b1" />
+<img width="468" height="507" alt="image" src="https://github.com/user-attachments/assets/eebb9ae2-e71b-4479-8ff9-e961dda68b0f" /><br>
 
 <img width="1100" height="572" alt="11" src="https://github.com/user-attachments/assets/95cdfa28-e049-44f3-84b8-fa792a6ea239" /><br>
 
