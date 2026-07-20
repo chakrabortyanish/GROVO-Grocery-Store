@@ -30,7 +30,7 @@ export default function ManageContacts() {
       });
       const data = await response.json();
       if (data.success) {
-        console.log(data.contacts)
+        // console.log(data.contacts)
         setContacts(data.contacts);
       }
     } catch (error) {

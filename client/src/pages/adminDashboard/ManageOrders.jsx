@@ -44,7 +44,7 @@ const ManageOrders = () => {
       }
 
       if (resData.success) {
-        console.log(resData.data)
+        // console.log(resData.data)
         setOrders(resData.data);
         setPagination(resData.pagination);
       }

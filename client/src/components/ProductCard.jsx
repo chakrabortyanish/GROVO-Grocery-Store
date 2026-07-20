@@ -9,6 +9,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { CartContext } from "./contextAPI/cartContext.jsx";
 
 const ProductCard = ({ item }) => {
+  const isInStock = item.inStock === "In Stock";
+
+  // Helper function to safely parse and format JSON stringified pack items
+  const formatPackItems = (packItems) => {
+    if (!packItems) return "";
+    try {
+      const items =
+        typeof packItems === "string" ? JSON.parse(packItems) : packItems;
+      return Array.isArray(items) ? items.join(", ") : packItems;
+    } catch (error) {
+      return packItems; // Fallback if parsing fails or if it's already a plain string
+    }
+  };
   // console.log("ProductCard item:", item); // Log the item prop to check its value
   const navigate = useNavigate();
   const { setCartCount } = useContext(CartContext);
@@ -77,24 +90,40 @@ const ProductCard = ({ item }) => {
 
   return (
     <div className="itemInfo">
-      <div className={`stock-status ${item.inStock === "In Stock" ? "in-stock" : "out-of-stock"}`}>
-        {item.inStock == "In Stock" ? (
-          <span className="">In Stock</span>
-        ) : (
-          <span className="">Out of Stock</span>
-        )}
+      {/* Stock Status Badge */}
+      <div
+        className={`stock-status ${isInStock ? "in-stock" : "out-of-stock"}`}
+      >
+        {isInStock ? "In Stock" : "Out of Stock"}
       </div>
+
+      {/* Product Image */}
       <div className="image">
         <img src={item.image} alt={item.name} />
       </div>
 
+      {/* Title */}
       <h3 className="product-title">{item.name}</h3>
+
+      {/* Weight / Unit Badge */}
       <div className="weight">
         {item.quantity} {item.unit}
       </div>
+
+      {/* Render Pack Items list if available */}
+      {item.packItems && (
+        <div className="pack-items-text">{formatPackItems(item.packItems)}</div>
+      )}
+
+      {/* Price */}
       <div className="price">Rs. {item.price}</div>
 
-      <button className="add-to-cart" onClick={() => handleCart(item._id)}>
+      {/* Action Button */}
+      <button
+        className="add-to-cart"
+        onClick={() => handleCart && handleCart(item._id)}
+        disabled={!isInStock}
+      >
         Add to Cart
       </button>
     </div>

@@ -2,7 +2,7 @@ import Product from "../models/product.model.js";
 
 export const addProduct = async (req, res) => {
   try {
-    const { name, category, price, quantity, unit, inStock } = req.body;
+    const { name, category, price, quantity, unit, inStock, packItems } = req.body;
 
     const image = req.file ? req.file.path : "";
 
@@ -15,6 +15,7 @@ export const addProduct = async (req, res) => {
       quantity,
       unit,
       inStock,
+      packItems,
     });
 
     res.status(201).json({
@@ -94,6 +95,7 @@ export const updateProduct = async (req, res) => {
     product.quantity = req.body.quantity ?? product.quantity;
     product.unit = req.body.unit ?? product.unit;
     product.inStock = req.body.inStock ?? product.inStock;
+    product.packItems = req.body.packItems ?? product.packItems;
 
     if (req.file) {
       product.image = req.file.path;

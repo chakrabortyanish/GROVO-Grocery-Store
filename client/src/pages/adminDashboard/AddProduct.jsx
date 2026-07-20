@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 const AddProduct = () => {
   const [loading, setLoading] = useState(false);
-  const adminToken = localStorage.getItem("adminToken")
+  const adminToken = localStorage.getItem("adminToken");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -11,8 +11,9 @@ const AddProduct = () => {
     price: "",
     quantity: "1",
     unit: "",
+    packItems: "",
     image: null,
-     inStock: "",
+    inStock: "",
   });
 
   const handleChange = (e) => {
@@ -53,11 +54,18 @@ const AddProduct = () => {
     }
 
     if (!formData.inStock) {
-  return toast.error("Please select stock status");
-}
+      return toast.error("Please select stock status");
+    }
 
     try {
       setLoading(true);
+
+      const packItemsArray = formData.unit === "pack"
+      ? formData.packItems
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean)
+      : [];
 
       const form = new FormData();
 
@@ -68,6 +76,7 @@ const AddProduct = () => {
       form.append("unit", formData.unit);
       form.append("image", formData.image);
       form.append("inStock", formData.inStock);
+      form.append("packItems", JSON.stringify(packItemsArray));
 
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/products/add`,
@@ -77,7 +86,7 @@ const AddProduct = () => {
             Authorization: `Bearer ${adminToken}`,
           },
           body: form,
-        }
+        },
       );
 
       const data = await response.json();
@@ -96,8 +105,8 @@ const AddProduct = () => {
         unit: "",
         image: null,
         inStock: "",
+        packItems: "",
       });
-
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -135,9 +144,7 @@ const AddProduct = () => {
               onChange={handleChange}
             >
               <option value="">Select Category</option>
-              <option value="Fruits & Vegetables">
-                Fruits & Vegetables
-              </option>
+              <option value="Fruits & Vegetables">Fruits & Vegetables</option>
               <option value="Medicine">Medicine</option>
               <option value="Beauty">Beauty</option>
               <option value="Baby Care">Baby Care</option>
@@ -166,7 +173,9 @@ const AddProduct = () => {
               value={formData.quantity}
               onChange={handleChange}
             >
-              <option value="" selected>Select Quantity</option>
+              <option value="" selected>
+                Select Quantity
+              </option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -182,11 +191,7 @@ const AddProduct = () => {
           {/* Unit */}
           <div className="form-group">
             <label>Unit</label>
-            <select
-              name="unit"
-              value={formData.unit}
-              onChange={handleChange}
-            >
+            <select name="unit" value={formData.unit} onChange={handleChange}>
               <option value="">Select Unit</option>
               <option value="kg">KG</option>
               <option value="g">Gram</option>
@@ -200,19 +205,33 @@ const AddProduct = () => {
             </select>
           </div>
 
-          <div className="form-group">
-  <label>Stock Status</label>
+          {formData.unit === "pack" && (
+            <div className="form-group">
+              <label>Add items</label>
+              <input
+                type="text"
+                name="packItems"
+                placeholder="Enter items by comma separated"
+                value={formData.packItems}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
 
-  <select
-    name="inStock"
-    value={formData.inStock}
-    onChange={handleChange}
-  >
-    <option value="">Select Status</option>
-    <option value="In Stock">In Stock</option>
-    <option value="Out of Stock">Out of Stock</option>
-  </select>
-</div>
+          <div className="form-group">
+            <label>Stock Status</label>
+
+            <select
+              name="inStock"
+              value={formData.inStock}
+              onChange={handleChange}
+            >
+              <option value="">Select Status</option>
+              <option value="In Stock">In Stock</option>
+              <option value="Out of Stock">Out of Stock</option>
+            </select>
+          </div>
 
           {/* Image */}
           <div className="form-group">
@@ -226,16 +245,12 @@ const AddProduct = () => {
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            className="submit-btn"
-            disabled={loading}
-          >
+          <button type="submit" className="submit-btn" disabled={loading}>
             {loading ? "Adding..." : "Add Product"}
           </button>
         </form>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };
